@@ -1,0 +1,13 @@
+/* HomeStyles.css */
+.home-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-h{
+    flex:1;
+}
+.right-h{
+    width: 80%;
+    flex:3;
+}
