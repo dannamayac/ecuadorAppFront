@@ -1,38 +1,60 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import '../styles/HeaderStyles.css'
 import userProfileIcon from '../assets/user-profile-icon-free-vector.jpg'
 
 const Header = () => {
+    library.add(far);
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
+    };
+
+    const handleLogout = () => {
+        // Aquí maneja la lógica para cerrar sesión
+        console.log('Cerrar sesión');
+      };
 
     const handleNotifications = () => {
         // Aquí maneja la lógica para desplegar las notificaciones
         console.log('Mostrar notificaciones');
-      };
+    };
 
   return (
     <div className="header">
-      <ul className='header-info'>
-        <li className='return'><a href="/volver">&lt; Volver</a></li>
-        <li className='start'>Inicio</li>
-        <li className='home'>Home</li>
-      </ul>
-      <ul className='header-user'>
-        {/* Botón de notificaciones */}
-        <li className='notification-button' onClick={handleNotifications}>
-            <FontAwesomeIcon icon={faBell} style={{ backgroundColor: 'transparent' }} />
-        </li>
-        {/* Foto de perfil del usuario */}
-        <li className='user-photo'>
-          <img src={userProfileIcon} alt="Foto de perfil" />
-        </li>
-        {/* Información del usuario */}
-        <li className='user-info'>
-          <span className='name'>Nombre</span>
-          <span className='user'>@usuario</span>
-        </li>
-      </ul>
+        <ul className='header-info'>
+            <li className='return'><a href="/volver">&lt; Volver</a></li>
+            <li className='start'>Inicio</li>
+            <li className='home'>Home</li>
+        </ul>
+        <ul className='header-user'>
+            {/* Botón de notificaciones */}
+            <li className='notification-button' onClick={handleNotifications}>
+                <FontAwesomeIcon icon={['far', 'bell']} style={{ color: 'rgb(118, 117, 117)'}} />
+            </li>
+            {/* Foto de perfil del usuario */}
+            <li className='user-photo'>
+                <img src={userProfileIcon} alt="Foto de perfil" />
+            </li>
+            {/* Información del usuario y dropdown */}
+            <li className='user-info'>
+                <span className='name'>Nombre</span>
+                <span className='user'>@usuario</span>
+            </li>
+            <FontAwesomeIcon icon={faChevronDown} className='dropdown-icon' onClick={toggleDropdown} />
+                {showDropdown && (
+                    <div className='dropdown-menu'>
+                        <ul>
+                            <li onClick={handleLogout}>Cerrar sesión</li>
+                            {/* Otros elementos del menú desplegable */}
+                        </ul>
+                    </div>
+                )}
+        </ul>
     </div>
   );
 };

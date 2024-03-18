@@ -1,41 +1,38 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import '../styles/SideBarStyles.css';
 
-class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeOption: 'home'
-    };
-  }
-
-  setActiveOption = (option) => {
-    this.setState({ activeOption: option });
-  }
-
-  render() {
-    return (
-      <div className="sidebar">
-        <ul>
-          <li>
-            <a href="/" className="sidebar-link">
-              <span className="square"></span> Home
-            </a>
-          </li>
-          <li>
-            <a href="/visualizador-unidades" className="sidebar-link">
-              <span className="square"></span> Visualizador de Unidades
-            </a>
-          </li>
-          <li>
-            <a href="/dashboard" className="sidebar-link">
-              <span className="square"></span> Dashboard
-            </a>
-          </li>
-        </ul>
-      </div>
-    );
-  }
+const SideBar = () => {
+  return (
+    <div className="sidebar">
+      <ul>
+        <li>
+          <NavLink to="/" exact className="sidebar-link">
+            <span className="square"></span>
+            <div className="text-container">Home</div>
+            <span className="circle"></span>
+            <div className="active-overlay"></div>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/units-display" exact className="sidebar-link">
+            <span className="square"></span>
+            <div className="text-container">Visualizador de Unidades</div>
+            <span className="circle"></span>
+            <div className="active-overlay"></div>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/dashboard" exact className="sidebar-link">
+            <span className="square"></span>
+            <div className="text-container">Dashboard</div>
+            <span className="circle"></span>
+            <div className="active-overlay"></div>
+          </NavLink>
+        </li>
+      </ul>
+    </div>
+  );
 }
 
-export default Sidebar;
+export default SideBar;

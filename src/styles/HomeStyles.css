@@ -2,12 +2,125 @@
 .home-container{
     display: flex;
     justify-content: space-between;
+    background-color: white;
 }
 
-.left-h{
-    flex:1;
+.left-h {
+    flex: 1;
 }
-.right-h{
+
+.right-h {
     width: 80%;
-    flex:3;
+    flex: 3;
+}
+
+.left-in,
+.right-in {
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+    margin-top: 20px;
+}
+
+.left-in{
+    margin-left: 28px;
+}
+.button-container {
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para el botón "Gestión y Administración" */
+.gestion {
+    background: linear-gradient(to right, rgba(240, 240, 240, 0.8), rgba(204, 204, 204, 0.8));
+    font-weight: bold;
+    color: #333333;
+    height: 77%;
+    position: relative;
+}
+.gestion .button-text {
+    position: absolute;
+    bottom: 60px;
+}
+.gestion .sub-button {
+    position: absolute;
+    bottom: 25px;
+}
+
+/* Estilos para el botón "Facturación" */
+.facturacion {
+    background: linear-gradient(to right, rgba(27, 47, 142, 0.453), rgba(27, 47, 142, 0.8));
+    font-weight: bold;
+    color: #1b2f8e;
+    height: 23%;
+}
+
+/* Estilos para el botón "Nueva Venta (Nuevo préstamo)" */
+.nueva-venta {
+    background: linear-gradient(to right, rgba(220, 53, 70, 0.453), rgba(189, 33, 48, 0.8));
+    font-weight: bold;
+    color: white;
+    height: 25%;
+}
+
+/* Estilos para el botón "Aprobaciones" */
+.aprobaciones {
+    background: linear-gradient(to right, rgba(255, 193, 7, 0.453), rgba(211, 158, 0, 0.8));
+    font-weight: bold;
+    color: #333333;
+    height: 25%;
+}
+
+/* Estilos para el botón "Mapa" */
+.mapa {
+    background: linear-gradient(to right, rgba(40, 167, 70, 0.453), rgba(33, 136, 56, 0.8));
+    font-weight: bold; 
+    height: 25%;
+}
+
+/* Estilos para el botón "Configuración" */
+.configuracion {
+    background: linear-gradient(to right, rgba(108, 117, 125, 0.576), rgba(72, 79, 86, 0.8));
+    font-weight: bold;
+    color: #484f56e6;
+    height: 25%;
+}
+
+.custom-button {
+    display: block;
+    width: 95%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    margin: 8px auto;
+    text-align: left;
+    align-self: flex-end;
+    position: relative;
+}
+
+.custom-button:hover {
+    filter: brightness(85%);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.sub-button {
+    background-color: white;
+    color: #101010;
+    font-weight: bold;
+    width: 30%;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    align-self: flex-end;
+}
+
+.sub-button:hover {
+    filter: brightness(95%);
 }

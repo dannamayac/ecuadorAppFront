@@ -32,7 +32,8 @@
     align-items: center;
 }
 .notification-button {
-    margin-right: 10px;
+    margin-right: 15px;
+    cursor: pointer;
 }
 .user-info {
     display: flex;
@@ -42,10 +43,10 @@
 }
 .user-info .name{
     font-weight: bold;
-    font-size: 12px;
+    font-size: 10px;
 }
 .user-info .user {
-    font-size: 10px;
+    font-size: 8px;
     color: rgb(87, 87, 87);
 }
 .user-photo img {
@@ -57,4 +58,29 @@
 
 .user-info span {
     font-size: 15px;
+}
+.dropdown-icon {
+    cursor: pointer;
+    margin-right: 30px;
+    width: 8px; 
+    height: 8px;
+    color: rgb(118, 117, 117);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu li {
+    padding: 10px;
 }
