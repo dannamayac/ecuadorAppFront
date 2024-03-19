@@ -5,6 +5,17 @@
     background-color: white;
     align-items: center;
     height: 100px;
+    position: relative; /* Agrega posición relativa para el pseudo-elemento */
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 37px; /* Ajusta la posición izquierda para centrar la línea */
+    width: 93%; /* Ancho del 80% del encabezado */
+    height: 1px; /* Grosor de la línea */
+    background-color: #dddddd; /* Color del borde inferior */
 }
 
 .header-info{

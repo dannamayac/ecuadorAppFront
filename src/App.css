@@ -3,10 +3,9 @@
   --blue: #1b2f8e;
   --nonBlue: #f4f4fb;
   --ligthBlue: #8f98c0;
-  --darkGrey: #464D53;
-  --caloryCard: #656565;
-  --planCard: linear-gradient(210.41deg, #fa5042 1.14%, #ffa739 100.75%);
-  --appColor:  #3c3f45;
+  --aquamarine: #36DDE7;
+  --green: #1bb546;
+  --red: #cc1515;
 }
 
 .App {
