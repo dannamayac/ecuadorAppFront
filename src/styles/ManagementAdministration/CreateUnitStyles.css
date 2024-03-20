@@ -1,0 +1,46 @@
+/* CreateUnitStyles.css */
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-top: 25px;
+    margin-left: 33px;
+    margin-right: 30px;
+}
+
+.form-group {
+    flex-basis: calc(25% - 10px); 
+}
+
+.form-group label {
+    display: block; 
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.create-button {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.create-button:hover {
+    filter: brightness(90%);
+}
+.create{
+    background-color: #1bb546;
+}
+.cancel{
+    background-color: #cc1515;
+}
+
+

@@ -1,0 +1,82 @@
+/* ManagementAdministrationStyles.css */
+.adminPlat-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 93%;
+    color: white;
+    font-size: 18px;
+    padding: 30px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    text-align: left;
+    align-self: flex-end;
+    position: relative;
+    background: linear-gradient(to right, rgba(27, 47, 142, 0.9), rgba(27, 47, 142, 0.453));
+}
+.adminPlat-button:hover {
+    filter: brightness(90%);
+}
+
+.adminPlat-button .left-bu {
+    width: 95%;
+}
+
+.adminPlat-button .right-bu {
+    width: 5%;
+}
+
+.admin-button {
+    background-color: white;
+    color: #2a2a2a;
+    font-weight: bold;
+    font-size: 11px;
+    width: 100px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    align-self: flex-end;
+}
+.top {
+    height: 20%;
+}
+
+.bottom {
+    height: 80%;
+}
+
+.row {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.bottom-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.col {
+    flex-basis: calc(25% - 35px);
+    margin-bottom: 20px;
+    margin-right: 35px;
+    margin-left: 35px;
+}
+
+.small-box {
+    background-color: #f4f4fb;
+    color: var(--blue);
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    width: 200px;
+    margin-right: 10px;
+}

@@ -1,4 +1,6 @@
 import React from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserTie } from '@fortawesome/free-solid-svg-icons'
 import { faFileInvoice } from '@fortawesome/free-solid-svg-icons'
@@ -7,20 +9,27 @@ import { faFileCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { faGears } from '@fortawesome/free-solid-svg-icons'
 import '../styles/HomeStyles.css'
-import Sidebar from '../components/SideBar';
-import Header from '../components/Header';
+import Sidebar from '../components/SideBar'
+import Header from '../components/Header'
 
 const Home = () =>{
+    const [pageTitle] = useState('Home');
+    const navigate = useNavigate();
+
+    const handleGestionButtonClick = () => {
+        navigate('/management-administration');
+    }
+
     return (
         <div className="home-container">
             <div className="left-h">
                 <Sidebar/>
             </div>
             <div className="right-h">
-                <Header/>
+                <Header title={pageTitle}/>
                 <div className="left-in">
                     <div className="button-container">
-                        <button className="custom-button gestion">
+                        <button className="custom-button gestion" onClick={handleGestionButtonClick}>
                             <div className="left-bu">
                                 <span className="button-text">Gestión y Administración</span>
                                 <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
@@ -37,7 +46,7 @@ const Home = () =>{
                             <div className="right-bu">
                                 <FontAwesomeIcon icon={faFileInvoice} />
                             </div>
-                            </button>
+                        </button>
                     </div>
                 </div>
                 <div className="right-in">
@@ -85,4 +94,4 @@ const Home = () =>{
       );
     }
 
-export default Home
+export default Home;

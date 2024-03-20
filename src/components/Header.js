@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
@@ -6,7 +7,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import '../styles/HeaderStyles.css'
 import userProfileIcon from '../assets/user-profile-icon-free-vector.jpg'
 
-const Header = () => {
+const Header = ({ title, backButtonPath }) => {
     library.add(far);
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -27,9 +28,11 @@ const Header = () => {
   return (
     <div className="header">
         <ul className='header-info'>
-            <li className='return'><a href="/volver">&lt; Volver</a></li>
+            <li className='return'><Link to={backButtonPath}><span>&lt; Volver</span></Link></li>
             <li className='start'>Inicio</li>
-            <li className='home'>Home</li>
+            <div className="title-container">
+                <h1 className="header-title">{title}</h1>
+            </div>
         </ul>
         <ul className='header-user'>
             {/* Botón de notificaciones */}

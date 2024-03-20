@@ -5,22 +5,22 @@
     background-color: white;
     align-items: center;
     height: 100px;
-    position: relative; /* Agrega posición relativa para el pseudo-elemento */
+    position: relative; 
 }
 
 .header::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 37px; /* Ajusta la posición izquierda para centrar la línea */
-    width: 93%; /* Ancho del 80% del encabezado */
-    height: 1px; /* Grosor de la línea */
-    background-color: #dddddd; /* Color del borde inferior */
+    left: 37px;
+    width: 93%; 
+    height: 1px;
+    background-color: #dddddd; 
 }
 
 .header-info{
     list-style: none;
-    margin-top: 25px;
+    margin-top: 23px;
 }
 .return a {
     color: var(--ligthBlue);
@@ -31,8 +31,10 @@
     color: var(--blue);
     font-weight: bold;
     font-size: 15px;
+    margin-bottom: -12px;
 }
-.home{
+
+.header-title{
     font-weight: bold;
     font-size: 20px;
 }
@@ -54,10 +56,10 @@
 }
 .user-info .name{
     font-weight: bold;
-    font-size: 10px;
+    font-size: 13px;
 }
 .user-info .user {
-    font-size: 8px;
+    font-size: 10px;
     color: rgb(87, 87, 87);
 }
 .user-photo img {
