@@ -21,7 +21,7 @@ const ManagementAdministration = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/" />
+                <Header title={pageTitle} backButtonPath="/" startItem="Inicio"/>
                 <div className="top">
                     <div className="button-container">
                         <button className="adminPlat-button admin-platform" onClick={handleClick}>

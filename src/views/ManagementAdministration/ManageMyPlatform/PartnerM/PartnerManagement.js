@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../../components/SideBar'
-import Header from '../../../../components/Header'
+import SecondHeader from '../../../../components/SecondHeader'
 import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 
 const PartnerManagement = () => {
@@ -26,7 +26,7 @@ const PartnerManagement = () => {
                 <Sidebar/>
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/manage-platform"/>
+                <SecondHeader title={pageTitle} backButtonPath="/manage-platform"/>
                 <button className="create-button" onClick={handleCreatePartner}>Crear nuevo usuario</button>
                 {/* Tabla para listar usuarios */}
                 <table>

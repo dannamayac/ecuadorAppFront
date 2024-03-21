@@ -26,7 +26,7 @@ const Home = () =>{
                 <Sidebar/>
             </div>
             <div className="right-h">
-                <Header title={pageTitle}/>
+                <Header title={pageTitle} startItem="Inicio"/>
                 <div className="left-in">
                     <div className="button-container">
                         <button className="custom-button gestion" onClick={handleGestionButtonClick}>

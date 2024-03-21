@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SideBar from '../../../../components/SideBar'
-import Header from '../../../../components/Header'
+import SecondHeader from '../../../../components/SecondHeader'
 import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 
 
@@ -25,7 +25,7 @@ const UnitManagement = () => {
                 <SideBar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/manage-platform" />
+                <SecondHeader title={pageTitle} backButtonPath="/manage-platform" />
                  {/* Botón "Crear nueva unidad" */}
                 <button className="create-button" onClick={handleCreateUnitClick}>Crear nueva unidad</button>
                 {/* Tabla de gestión de unidades */}

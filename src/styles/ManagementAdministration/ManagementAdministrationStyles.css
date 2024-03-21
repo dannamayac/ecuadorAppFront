@@ -16,7 +16,7 @@
     text-align: left;
     align-self: flex-end;
     position: relative;
-    background: linear-gradient(to right, rgba(27, 47, 142, 0.9), rgba(27, 47, 142, 0.453));
+    background: linear-gradient(to right, rgba(27, 47, 142), rgba(27, 47, 142, 0.5));
 }
 .adminPlat-button:hover {
     filter: brightness(90%);

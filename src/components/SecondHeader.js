@@ -7,7 +7,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import '../styles/HeaderStyles.css'
 import userProfileIcon from '../assets/user-profile-icon-free-vector.jpg'
 
-const Header = ({ title, backButtonPath, startItem }) => {
+const SecondHeader = ({ title, backButtonPath }) => {
     library.add(far);
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -29,9 +29,8 @@ const Header = ({ title, backButtonPath, startItem }) => {
     <div className="header">
         <ul className='header-info'>
             <li className='return'><Link to={backButtonPath}><span>&lt; Volver</span></Link></li>
-            {startItem && <li className='start'>{startItem}</li>}
             <div className="title-container">
-                <h1 className="header-title">{title}</h1>
+                <li className="header-title">{title}</li>
             </div>
         </ul>
         <ul className='header-user'>
@@ -62,4 +61,4 @@ const Header = ({ title, backButtonPath, startItem }) => {
   );
 };
 
-export default Header
+export default SecondHeader;

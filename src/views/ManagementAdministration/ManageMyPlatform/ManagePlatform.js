@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../components/SideBar'
-import Header from '../../../components/Header'
+import SecondHeader from '../../../components/SecondHeader'
 import "../../../styles/ManagementAdministration/ManagementAdministrationStyles.css"
 
 
@@ -29,7 +29,7 @@ const ManagePlatform = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/management-administration" />
+                <SecondHeader title={pageTitle} backButtonPath="/management-administration" />
                 <div className="top-pl">
                     <div className="button-row">
                         <button className="small-box" onClick={handleUnitManagementClick}>Gestión Unidades

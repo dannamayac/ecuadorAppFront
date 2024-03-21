@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../../components/SideBar'
-import Header from '../../../../components/Header'
+import SecondHeader from '../../../../components/SecondHeader'
 import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 
 const UserManagement = () => {
@@ -26,8 +26,8 @@ const UserManagement = () => {
                 <Sidebar/>
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/manage-platform"/>
-                <button className="create-button" onClick={handleEditUser}>Crear nuevo usuario</button>
+                <SecondHeader title={pageTitle} backButtonPath="/manage-platform"/>
+                <button className="create-button" onClick={handleCreateUser}>Crear nuevo usuario</button>
                 {/* Tabla para listar usuarios */}
                 <table>
                     <thead>

@@ -63,8 +63,8 @@
     transform: translateY(-50%);
 }
 .gestion .right-bu svg {
-    font-size: 6.8rem;
-    color: #828181;
+    font-size: 8.8rem;
+    color: #a7a7a7;
 }
 /* Media query para ajustar estilos en dispositivos más pequeños */
 @media (max-width: 768px) {
@@ -81,7 +81,7 @@
 
 /* Estilos para el botón "Facturación" */
 .facturacion {
-    background: linear-gradient(to right, rgba(27, 47, 142, 0.453), rgba(27, 47, 142, 0.8));
+    background: linear-gradient(to right, rgba(27, 47, 142, 0.5), rgba(27, 47, 142, 0.9));
     font-weight: bold;
     color: #142165;
     height: 23%;
@@ -89,7 +89,7 @@
 
 /* Estilos para el botón "Nueva Venta (Nuevo préstamo)" */
 .nueva-venta {
-    background: linear-gradient(to right, rgba(220, 53, 70, 0.453), rgba(189, 33, 48, 0.8));
+    background: linear-gradient(to right, rgba(220, 53, 70, 0.5), rgba(189, 33, 48, 0.9));
     font-weight: bold;
     color: #620c0c;
     height: 25%;
@@ -97,7 +97,7 @@
 
 /* Estilos para el botón "Aprobaciones" */
 .aprobaciones {
-    background: linear-gradient(to right, rgba(255, 193, 7, 0.453), rgba(211, 158, 0, 0.8));
+    background: linear-gradient(to right, rgba(255, 193, 7, 0.5), rgba(211, 158, 0, 0.9));
     font-weight: bold;
     color: #594302;
     height: 25%;
@@ -105,7 +105,7 @@
 
 /* Estilos para el botón "Mapa" */
 .mapa {
-    background: linear-gradient(to right, rgba(40, 167, 70, 0.453), rgb(27, 181, 70, 0.8));
+    background: linear-gradient(to right, rgba(40, 167, 70, 0.5), rgb(27, 181, 70, 0.9));
     font-weight: bold;
     color: #0a441a;
     height: 25%;
@@ -113,7 +113,7 @@
 
 /* Estilos para el botón "Configuración" */
 .configuracion {
-    background: linear-gradient(to right, rgba(108, 117, 125, 0.576), rgba(72, 79, 86, 0.8));
+    background: linear-gradient(to right, rgba(108, 117, 125, 0.5), rgba(72, 79, 86, 0.9));
     font-weight: bold;
     color: #232629e6;
     height: 25%;
@@ -159,9 +159,9 @@
     filter: brightness(95%);
 }
 .custom-button .right-bu {
-    font-size: 3.8em;
+    font-size: 4.8em;
 }
 
 .left-in .custom-button .right-bu {
-    font-size: 3.8em;
+    font-size: 4.8em;
 }

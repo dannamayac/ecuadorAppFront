@@ -13,39 +13,39 @@ const CreateUnit = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title= {pageTitle} backButtonPath="/unit-management" />
+                <Header title= {pageTitle} backButtonPath="/unit-management" startItem="Unidades"/>
                 <div className="form-container">
                     <div className="form-group">
-                        <label htmlFor="nombreUnidad">Nombre unidad</label>
-                        <input type="text" id="nombreUnidad" placeholder="Ingrese el nombre de la unidad" />
+                        <label htmlFor="unitName">Nombre unidad</label>
+                        <input type="text" id="unitName" placeholder="Ingrese el nombre de la unidad" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="codigo">Código</label>
-                        <input type="text" id="codigo" placeholder="Ingrese el código" />
+                        <label htmlFor="code">Código</label>
+                        <input type="text" id="code" placeholder="Ingrese el código" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="ubicacion">Ubicación</label>
-                        <input type="text" id="ubicacion" placeholder="Ingrese la ubicación" />
+                        <label htmlFor="ubication">Ubicación</label>
+                        <input type="text" id="ubication" placeholder="Ingrese la ubicación" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="estado">Estado</label>
-                        <input type="text" id="estado" placeholder="Ingrese el estado" />
+                        <label htmlFor="state">Estado</label>
+                        <input type="text" id="state" placeholder="Ingrese el estado" />
                     </div>
                     <div className="form-group">
                         <label htmlFor="admin">Asignar administrador</label>
                         <input type="text" id="admin" placeholder="Ingrese el administrador" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="mora">Mora establecida</label>
-                        <input type="text" id="mora" placeholder="Ingrese la mora establecida" />
+                        <label htmlFor="arrears">Mora establecida</label>
+                        <input type="text" id="arrears" placeholder="Ingrese la mora establecida" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="socio">Socio</label>
-                        <input type="text" id="socio" placeholder="Ingrese el socio" />
+                        <label htmlFor="partner">Socio</label>
+                        <input type="text" id="partner" placeholder="Ingrese el socio" />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="accionario">%</label>
-                        <input type="text" id="accionario" placeholder="Ingrese el %" />
+                        <label htmlFor="shareHolder">%</label>
+                        <input type="text" id="shareHolder" placeholder="Ingrese el %" />
                     </div>
                 </div>
                 <button className="create-button cancel">Cancelar</button>
