@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../../components/SideBar'
 import SecondHeader from '../../../../components/SecondHeader'
@@ -8,15 +7,30 @@ import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 const ClientManagement = () => {
     const [pageTitle] = useState('Gestión de clientes');
     const navigate = useNavigate();
+    const [clients,setClient] = useState([]);
 
-    // Función para manejar la acción de crear un usuario
+    useEffect(() => {
+        const fetchClients = async () => {
+            try {
+                const response = await fetch('http://192.168.0.9:8000/api/GestionClientes/listData');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const clientsData = data["Gestion de Unidades"];
+                setClient(clientsData);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+
+        fetchClients();
+    }, []); 
+
     const handleCreateClient = () => {
-        // Redirige a la vista de edición de usuario
         navigate('/create-client');
     };
-    // Función para manejar la acción de editar un usuario
     const handleEditClient = () => {
-        // Redirige a la vista de edición de usuario
         navigate('/edit-client');
     };
 
@@ -28,7 +42,6 @@ const ClientManagement = () => {
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Clientes" showButtons={true} />
                 <button className="create-button" onClick={handleCreateClient}>Crear nuevo usuario</button>
-                {/* Tabla para listar usuarios */}
                 <table>
                     <thead>
                         <tr>
@@ -41,19 +54,18 @@ const ClientManagement = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Aquí se pueden mapear los datos de los usuarios */}
-                        {/* Cada usuario debe tener una fila en la tabla */}
-                        <tr>
-                            <td>Nombre de socio</td>
-                            <td>Unidad</td>
-                            <td>1094562321</td>
-                            <td>correo@ejemplo.com</td>
-                            <td>Disponible</td>
+                    {Array.isArray(clients) && clients.map(client => (
+                        <tr key={client.id}>
+                            <td>{client.user_name}</td>
+                            <td>{client.rol_name}</td>
+                            <td>{client.unit_name}</td>
+                            <td>{client.email}</td>
+                            <td>{client.celphone}</td>
                             <td>
                                 <button onClick={handleEditClient}>Editar</button>
                             </td>
                         </tr>
-                        {/* Se pueden agregar más filas para más usuarios */}
+                        ))}
                     </tbody>
                 </table>
             </div>

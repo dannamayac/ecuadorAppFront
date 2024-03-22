@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../../components/SideBar'
 import SecondHeader from '../../../../components/SecondHeader'
@@ -42,7 +42,6 @@ const UserManagement = () => {
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Usuarios" showSearch={true} />
                 <button className="create-button" onClick={handleCreateUser}>Crear nuevo usuario</button>
-                {/* Tabla para listar usuarios */}
                 <table>
                     <thead>
                         <tr>
