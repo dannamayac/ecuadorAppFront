@@ -31,21 +31,24 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch }) => {
 
   return (
     <div className="header">
-        <ul className='header-info'>
+        <ul className='header-info2'>
             <li className='return'><Link to={backButtonPath}><span>&lt; Volver</span></Link></li>
             {startItem && <li className='start'>{startItem}</li>}
             <div className="title-container">
                 <h1 className="header-title">{title}</h1>
             </div>
-            {showSearch && (
-                <div className={`search-container ${searchActive ? 'active' : ''}`}>
-                    <span>Buscar</span>
-                    <input type="text" placeholder="Escriba aquí para buscar" />
+        </ul>
+        <div className='search'>
+        {showSearch && (
+            <div className={`search-container ${searchActive ? 'active' : ''}`}>
+                <div className="search-wrapper">
+                    <input className="search-input" type="text" placeholder="Escriba aquí para buscar" />
                     <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={handleSearchToggle} />
                 </div>
+            </div>
             )}
-        </ul>
-        <ul className='header-user'>
+        </div>
+        <ul className='header-user2'>
             {/* Botón de notificaciones */}
             <li className='notification-button' onClick={handleNotifications}>
                 <FontAwesomeIcon icon={['far', 'bell']} style={{ color: 'rgb(118, 117, 117)'}} />
