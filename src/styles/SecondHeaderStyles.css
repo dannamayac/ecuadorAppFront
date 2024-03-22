@@ -60,3 +60,26 @@
     display: flex; 
     align-items: center;
 }
+
+.buttons-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.inactive-clients {
+    background-color: #36dbe5;
+    color: white;
+}
+
+.requests {
+    background-color: #d8d021;
+    color: white;
+}

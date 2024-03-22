@@ -7,7 +7,7 @@ import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import '../styles/SecondHeaderStyles.css'
 import userProfileIcon from '../assets/user-profile-icon-free-vector.jpg'
 
-const SecondHeader = ({ title, backButtonPath, startItem, showSearch }) => {
+const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButtons }) => {
     library.add(far);
     const [showDropdown, setShowDropdown] = useState(false);
     const [searchActive, setSearchActive] = useState(false);
@@ -47,6 +47,10 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch }) => {
                 </div>
             </div>
             )}
+            <div className="buttons-container" style={{ display: showButtons ? 'flex' : 'none' }}>
+                <button className="button inactive-clients">Clientes inactivos</button>
+                <button className="button requests">Solicitudes</button>
+            </div>
         </div>
         <ul className='header-user2'>
             {/* Botón de notificaciones */}
