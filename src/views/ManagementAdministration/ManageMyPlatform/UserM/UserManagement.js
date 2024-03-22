@@ -9,14 +9,10 @@ const UserManagement = () => {
     const [pageTitle] = useState('Gestión de usuarios');
     const navigate = useNavigate();
 
-    // Función para manejar la acción de crear un usuario
     const handleCreateUser = () => {
-        // Redirige a la vista de edición de usuario
         navigate('/create-user');
     };
-    // Función para manejar la acción de editar un usuario
     const handleEditUser = () => {
-        // Redirige a la vista de edición de usuario
         navigate('/edit-user');
     };
 
