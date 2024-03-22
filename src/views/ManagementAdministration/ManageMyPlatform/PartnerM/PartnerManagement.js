@@ -8,6 +8,7 @@ import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 const PartnerManagement = () => {
     const [pageTitle] = useState('Gestión de socios');
     const navigate = useNavigate();
+    const [userSwitch, setUserSwitch] = useState(false);
 
     // Función para manejar la acción de crear un usuario
     const handleCreatePartner = () => {
@@ -18,6 +19,10 @@ const PartnerManagement = () => {
     const handleEditPartner = () => {
         // Redirige a la vista de edición de usuario
         navigate('/edit-partner');
+    };
+    // Función para cambiar el estado del switch de la tabla
+    const toggleUserSwitch = () => {
+        setUserSwitch(!userSwitch);
     };
 
     return (
@@ -46,7 +51,18 @@ const PartnerManagement = () => {
                             <td>Nombre de socio</td>
                             <td>Unidad</td>
                             <td>correo@ejemplo.com</td>
-                            <td>Disponible</td>
+                            <td>
+                                {/* Switch de la tabla */}
+                                <label htmlFor="userActiveSwitch" className="switch2">
+                                    <input
+                                        type="checkbox"
+                                        id="userActiveSwitch"
+                                        checked={userSwitch}
+                                        onChange={toggleUserSwitch}
+                                    />
+                                    <span className="slider2 round2"></span>
+                                </label>
+                            </td>
                             <td>
                                 <button onClick={handleEditPartner}>Editar</button>
                             </td>
