@@ -16,6 +16,8 @@ import CreatePartner from '../views/ManagementAdministration/ManageMyPlatform/Pa
 import EditPartner from '../views/ManagementAdministration/ManageMyPlatform/PartnerM/EditPartner';
 import EditClient from '../views/ManagementAdministration/ManageMyPlatform/ClientM/EditClient';
 import CreateClient from '../views/ManagementAdministration/ManageMyPlatform/ClientM/CreateClient';
+import InactiveClients from '../views/ManagementAdministration/ManageMyPlatform/ClientM/InactiveClients';
+import PortfolioRequest from '../views/ManagementAdministration/ManageMyPlatform/ClientM/PortfolioRequest';
 
 
 function Navigation() {
@@ -41,6 +43,8 @@ function Navigation() {
           <Route path="/client-management" element={<ClientManagement />} />
           <Route path="/create-client" element={<CreateClient />} />
           <Route path="/edit-client" element={<EditClient />} />
+          <Route path="/inactive-clients" element={<InactiveClients />} />
+          <Route path="/portfolio-request" element={<PortfolioRequest />} />
           {/* Gestión socios */}
           <Route path="/partner-management" element={<PartnerManagement />}/>
           <Route path="/create-partner" element={<CreatePartner />} />

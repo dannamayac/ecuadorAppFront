@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
@@ -11,6 +11,7 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButton
     library.add(far);
     const [showDropdown, setShowDropdown] = useState(false);
     const [searchActive, setSearchActive] = useState(false);
+    const navigate = useNavigate();
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
@@ -27,6 +28,13 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButton
     };
     const handleSearchToggle = () => {
         setSearchActive(!searchActive);
+    };
+    const handleInactiveClients = () => {
+        navigate('/inactive-clients');
+    };
+
+    const handleRequests = () => {
+        navigate('/portfolio-request');
     };
 
   return (
@@ -48,8 +56,8 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButton
             </div>
             )}
             <div className="buttons-container" style={{ display: showButtons ? 'flex' : 'none' }}>
-                <button className="button inactive-clients">Clientes inactivos</button>
-                <button className="button requests">Solicitudes</button>
+                <button className="button inactive-clients" onClick={handleInactiveClients}>Clientes inactivos</button>
+                <button className="button requests" onClick={handleRequests}>Solicitudes</button>
             </div>
         </div>
         <ul className='header-user2'>

@@ -7,6 +7,7 @@ import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 const PartnerManagement = () => {
     const [pageTitle] = useState('Gestión de socios');
     const navigate = useNavigate();
+    const [userSwitch, setUserSwitch] = useState(false);
     const [partners,setPartner] = useState([]);
 
     useEffect(() => {
@@ -33,6 +34,10 @@ const PartnerManagement = () => {
     const handleEditPartner = () => {
         navigate('/edit-partner');
     };
+    // Función para cambiar el estado del switch de la tabla
+    const toggleUserSwitch = () => {
+        setUserSwitch(!userSwitch);
+    };
 
     return (
         <div className="home-container">
@@ -53,13 +58,13 @@ const PartnerManagement = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {Array.isArray(partners) && partners.map(partner => (
-                        <tr key={partner.id}>
-                            <td>{partner.partnert_name}</td>
-                            <td>{partner.unit_name}</td>
-                            <td>{partner.stock}</td>
-                            <td>{partner.email}</td>
-                            <td>{partner.state}</td>
+                        {/* Aquí se pueden mapear los datos de los usuarios */}
+                        {/* Cada usuario debe tener una fila en la tabla */}
+                        <tr>
+                            <td>Nombre de socio</td>
+                            <td>Unidad</td>
+                            <td>correo@ejemplo.com</td>
+                            <td>Disponible</td>
                             <td>
                                 <button onClick={handleEditPartner}>Editar</button>
                             </td>
