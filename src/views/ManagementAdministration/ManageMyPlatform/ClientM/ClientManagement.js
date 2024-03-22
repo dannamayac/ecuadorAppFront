@@ -34,7 +34,6 @@ const ClientManagement = () => {
     const handleEditClient = () => {
         navigate('/edit-client');
     };
-    // Función para cambiar el estado del switch de la tabla
     const toggleUserSwitch = () => {
         setUserSwitch(!userSwitch);
     };
@@ -47,7 +46,6 @@ const ClientManagement = () => {
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Clientes" showButtons={true} />
                 <button className="create-button" onClick={handleCreateClient}>Crear nuevo usuario</button>
-                {/* Tabla para listar usuarios */}
                 <table>
                     <thead>
                         <tr>
@@ -60,14 +58,13 @@ const ClientManagement = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Aquí se pueden mapear los datos de los usuarios */}
-                        {/* Cada usuario debe tener una fila en la tabla */}
-                        <tr>
-                            <td>Nombre de socio</td>
-                            <td>Unidad</td>
-                            <td>1094562321</td>
-                            <td>correo@ejemplo.com</td>
-                            <td>Disponible</td>
+                    {Array.isArray(clients) && clients.map(client => (
+                        <tr key={client.id}>
+                            <td>{client.user_name}</td>
+                            <td>{client.rol_name}</td>
+                            <td>{client.unit_name}</td>
+                            <td>{client.email}</td>
+                            <td>{client.celphone}</td>
                             <td>
                                 <button onClick={handleEditClient}>Editar</button>
                             </td>

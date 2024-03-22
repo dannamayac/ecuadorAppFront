@@ -7,7 +7,6 @@ import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 const PartnerManagement = () => {
     const [pageTitle] = useState('Gestión de socios');
     const navigate = useNavigate();
-    const [userSwitch, setUserSwitch] = useState(false);
     const [partners,setPartner] = useState([]);
 
     useEffect(() => {
@@ -19,14 +18,24 @@ const PartnerManagement = () => {
                 }
                 const data = await response.json();
                 const partnersData = data["Gestion de Unidades"];
-                setPartner(partnersData);
+    
+                const partnersWithState = partnersData.map(partner => {
+                    const isActive = partner.state === 1;
+                    return {
+                        ...partner,
+                        isActive: isActive
+                    };
+                });
+    
+                setPartner(partnersWithState);
             } catch (error) {
                 console.error('Error fetching data: ', error);
             }
         };
-
+    
         fetchPartners();
-    }, []); 
+    }, []);
+    
 
     const handleCreatePartner = () => {
         navigate('/create-partner');
@@ -34,10 +43,14 @@ const PartnerManagement = () => {
     const handleEditPartner = () => {
         navigate('/edit-partner');
     };
-    // Función para cambiar el estado del switch de la tabla
-    const toggleUserSwitch = () => {
-        setUserSwitch(!userSwitch);
+    const toggleUserSwitch = (partnerId) => {
+        setPartner(prevPartners =>
+            prevPartners.map(partner =>
+                partner.id === partnerId ? { ...partner, state: partner.state === 1 ? 0 : 1 } : partner
+            )
+        );
     };
+    
 
     return (
         <div className="home-container">
@@ -52,24 +65,38 @@ const PartnerManagement = () => {
                         <tr>
                             <th>Nombre</th>
                             <th>Unidad</th>
+                            <th>% Accionario</th>
                             <th>Correo</th>
                             <th>Estado</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Aquí se pueden mapear los datos de los usuarios */}
-                        {/* Cada usuario debe tener una fila en la tabla */}
-                        <tr>
-                            <td>Nombre de socio</td>
-                            <td>Unidad</td>
-                            <td>correo@ejemplo.com</td>
-                            <td>Disponible</td>
-                            <td>
-                                <button onClick={handleEditPartner}>Editar</button>
-                            </td>
-                        </tr>
-                        ))}
+                        {Array.isArray(partners) && partners.map(partner => {
+                            console.log("Datos del socio:", partner); // Agregar esta línea para imprimir los datos del socio en la consola
+                            return (
+                                <tr key={partner.id}>
+                                    <td>{partner.partnert_name}</td>
+                                    <td>{partner.unit_name}</td>
+                                    <td></td>
+                                    <td>{partner.email}</td>
+                                    <td>
+                                        <label htmlFor={`userActiveSwitch_${partner.id}`} className="switch2">
+                                            <input
+                                                type="checkbox"
+                                                id={`userActiveSwitch_${partner.id}`}
+                                                checked={partner.isActive}
+                                                onChange={() => toggleUserSwitch(partner.id)}
+                                            />
+                                            <span className="slider2 round2"></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <button onClick={handleEditPartner}>Editar</button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
             </div>
