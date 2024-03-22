@@ -1,19 +1,31 @@
-import React from 'react'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import SideBar from '../../../../components/SideBar'
-import SecondHeader from '../../../../components/SecondHeader'
-import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
-
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SideBar from '../../../../components/SideBar';
+import SecondHeader from '../../../../components/SecondHeader';
+import "../../../../styles/ManagementAdministration/UnitManagementStyles.css";
 
 const UnitManagement = () => {
     const [pageTitle] = useState('Gestión de unidades');
     const navigate = useNavigate();
-    const [units] = useState([
-        { id: 1, name: 'Unidad 1', location: 'Ubicación 1', status: 'Disponible', previousBox: '$100', finalBox: '$200', payments: 'Pagos', incomes: '$500', totalExpenses: '$300', lastMovement: '2024-03-15', device: 'Dispositivo 1' },
-        { id: 2, name: 'Unidad 2', location: 'Ubicación 2', status: 'Ocupado', previousBox: '$150', finalBox: '$250', payments: 'No pagos', incomes: '$600', totalExpenses: '$400', lastMovement: '2024-03-16', device: 'Dispositivo 2' },
-        // Agrega más unidades si es necesario
-    ]);
+    const [units, setUnits] = useState([]);
+
+    useEffect(() => {
+        const fetchUnits = async () => {
+            try {
+                const response = await fetch('http://192.168.0.9:8000/api/GestionUnidades/listData');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const unitsData = data["Gestion de Unidades"];
+                setUnits(unitsData);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+
+        fetchUnits();
+    }, []); 
 
     const handleCreateUnitClick = () => {
         navigate('/create-unit');
@@ -26,9 +38,7 @@ const UnitManagement = () => {
             </div>
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Unidades"/>
-                 {/* Botón "Crear nueva unidad" */}
                 <button className="create-button" onClick={handleCreateUnitClick}>Crear nueva unidad</button>
-                {/* Tabla de gestión de unidades */}
                 <table>
                     <thead>
                         <tr>
@@ -45,17 +55,17 @@ const UnitManagement = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {units.map(unit => (
+                        {Array.isArray(units) && units.map(unit => (
                             <tr key={unit.id}>
-                                <td>{unit.name}</td>
+                                <td>{unit.unit}</td>
                                 <td>{unit.location}</td>
-                                <td>{unit.status}</td>
-                                <td>{unit.previousBox}</td>
-                                <td>{unit.finalBox}</td>
+                                <td>{unit.id_state}</td>
+                                <td>{unit.previous_box}</td>
+                                <td>{unit.end_box}</td>
                                 <td>{unit.payments}</td>
-                                <td>{unit.incomes}</td>
-                                <td>{unit.totalExpenses}</td>
-                                <td>{unit.lastMovement}</td>
+                                <td>{unit.income}</td>
+                                <td>{unit.total_expenses}</td>
+                                <td>{unit.last_movement}</td>
                                 <td>{unit.device}</td>
                             </tr>
                         ))}
