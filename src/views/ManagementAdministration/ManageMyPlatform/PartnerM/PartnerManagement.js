@@ -26,7 +26,7 @@ const PartnerManagement = () => {
                 <Sidebar/>
             </div>
             <div className="right-h">
-                <SecondHeader title={pageTitle} backButtonPath="/manage-platform"/>
+                <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Socios"/>
                 <button className="create-button" onClick={handleCreatePartner}>Crear nuevo usuario</button>
                 {/* Tabla para listar usuarios */}
                 <table>

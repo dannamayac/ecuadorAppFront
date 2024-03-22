@@ -26,7 +26,7 @@ const UserManagement = () => {
                 <Sidebar/>
             </div>
             <div className="right-h">
-                <SecondHeader title={pageTitle} backButtonPath="/manage-platform"/>
+                <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Usuarios" showSearch={true} />
                 <button className="create-button" onClick={handleCreateUser}>Crear nuevo usuario</button>
                 {/* Tabla para listar usuarios */}
                 <table>

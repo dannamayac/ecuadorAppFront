@@ -28,7 +28,6 @@
     text-decoration: none;
 }
 .header-title{
-    color: var(--blue);
     font-weight: bold;
     font-size: 20px;
     margin-bottom: -12px;

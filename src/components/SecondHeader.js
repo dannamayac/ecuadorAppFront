@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import '../styles/HeaderStyles.css'
+import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import '../styles/SecondHeaderStyles.css'
 import userProfileIcon from '../assets/user-profile-icon-free-vector.jpg'
 
-const SecondHeader = ({ title, backButtonPath }) => {
+const SecondHeader = ({ title, backButtonPath, startItem, showSearch }) => {
     library.add(far);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [searchActive, setSearchActive] = useState(false);
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
@@ -24,14 +25,25 @@ const SecondHeader = ({ title, backButtonPath }) => {
         // Aquí maneja la lógica para desplegar las notificaciones
         console.log('Mostrar notificaciones');
     };
+    const handleSearchToggle = () => {
+        setSearchActive(!searchActive);
+    };
 
   return (
     <div className="header">
         <ul className='header-info'>
             <li className='return'><Link to={backButtonPath}><span>&lt; Volver</span></Link></li>
+            {startItem && <li className='start'>{startItem}</li>}
             <div className="title-container">
-                <li className="header-title">{title}</li>
+                <h1 className="header-title">{title}</h1>
             </div>
+            {showSearch && (
+                <div className={`search-container ${searchActive ? 'active' : ''}`}>
+                    <span>Buscar</span>
+                    <input type="text" placeholder="Escriba aquí para buscar" />
+                    <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={handleSearchToggle} />
+                </div>
+            )}
         </ul>
         <ul className='header-user'>
             {/* Botón de notificaciones */}

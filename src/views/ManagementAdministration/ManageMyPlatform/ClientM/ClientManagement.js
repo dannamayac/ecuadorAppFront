@@ -26,7 +26,7 @@ const ClientManagement = () => {
                 <Sidebar/>
             </div>
             <div className="right-h">
-                <SecondHeader title={pageTitle} backButtonPath="/manage-platform"/>
+                <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Clientes"/>
                 <button className="create-button" onClick={handleCreateClient}>Crear nuevo usuario</button>
                 {/* Tabla para listar usuarios */}
                 <table>

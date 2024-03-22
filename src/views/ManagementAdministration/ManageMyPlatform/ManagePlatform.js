@@ -29,7 +29,7 @@ const ManagePlatform = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <SecondHeader title={pageTitle} backButtonPath="/management-administration" />
+                <SecondHeader title={pageTitle} backButtonPath="/management-administration" startItem="Administrar"/>
                 <div className="top-pl">
                     <div className="button-row">
                         <button className="small-box" onClick={handleUnitManagementClick}>Gestión Unidades

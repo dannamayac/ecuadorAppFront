@@ -73,6 +73,7 @@
 .small-box {
     background-color: #f4f4fb;
     color: var(--blue);
+    border-color: white;
     text-align: center;
     padding: 20px;
     border-radius: 8px;
