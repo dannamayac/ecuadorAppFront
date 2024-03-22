@@ -1,93 +1,85 @@
-/* HeaderStyles.css */
-.header {
+.header-info2{
+    width: 25%;
+}
+.search{
+    width: 55%;
+}
+.header-user2{
+    width: 20%;
+}
+
+.search-container {
     display: flex;
-    justify-content: space-between; 
-    background-color: white;
     align-items: center;
-    height: 100px;
-    position: relative; 
 }
-
-.header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 37px;
-    width: 93%; 
-    height: 1px;
-    background-color: #dddddd; 
-}
-
-.header-info{
+.header-info2{
     list-style: none;
     margin-top: 23px;
 }
-.return a {
-    color: var(--ligthBlue);
-    font-size: 15px;
-    text-decoration: none;
+
+.search-wrapper {
+    position: relative;
+    background-color: #e1e5ea;
+    border-radius: 25px;
+    width: 85%;
+    margin-left: 20px;
 }
-.header-title{
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: -12px;
+
+.search-wrapper {
+    position: relative;
+    background-color: #e1e5ea;
+    border-radius: 30px;
 }
-.header-user{
+
+.search-input {
+    border: none;
+    background-color: #e1e5ea;
+    color: #666666;
+    width: calc(100% - 50px);
+    padding-right: 40px;
+    padding: 12px;
+    border-radius: 25px;
+    outline: none;
+}
+
+.search-input:focus {
+    border: none;
+}
+
+.search-icon {
+    position: absolute;
+    color:#666666;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.header-user2{
     list-style: none;
     margin-top: 25px;
     display: flex; 
     align-items: center;
 }
-.notification-button {
-    margin-right: 15px;
-    cursor: pointer;
-}
-.user-info {
+
+.buttons-container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-right: 20px;
+    justify-content: flex-end;
 }
-.user-info .name{
-    font-weight: bold;
-    font-size: 13px;
-}
-.user-info .user {
-    font-size: 10px;
-    color: rgb(87, 87, 87);
-}
-.user-photo img {
-    width: 30px; 
-    height: 30px;
-    border-radius: 50%;
+
+.button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
     margin-right: 10px;
-}
-
-.user-info span {
-    font-size: 15px;
-}
-.dropdown-icon {
     cursor: pointer;
-    margin-right: 30px;
-    width: 8px; 
-    height: 8px;
-    color: rgb(118, 117, 117);
 }
 
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: white;
-    border: 1px solid #ccc;
+.inactive-clients {
+    background-color: #36dbe5;
+    color: white;
 }
 
-.dropdown-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.dropdown-menu li {
-    padding: 10px;
+.requests {
+    background-color: #d8d021;
+    color: white;
 }
