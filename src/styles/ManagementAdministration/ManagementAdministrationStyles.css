@@ -72,12 +72,45 @@
 
 .small-box {
     background-color: #f4f4fb;
-    color: var(--blue);
+    color: black;
+    font-weight: bold;
     border-color: white;
-    text-align: center;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
     width: 200px;
-    margin-right: 10px;
+    margin-right: 1px;
 }
+
+.report-button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 93%;
+    color: black;
+    background-color: #f4f4fb;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 30px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    text-align: left;
+    align-self: flex-end;
+    position: relative;
+}
+.report-button:hover {
+    filter: brightness(90%);
+}
+
+.report-button .left-bu {
+    width: 95%;
+}
+
+.report-button .right-bu {
+    width: 5%;
+}
+
