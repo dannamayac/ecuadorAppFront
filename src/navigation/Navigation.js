@@ -18,6 +18,13 @@ import EditClient from '../views/ManagementAdministration/ManageMyPlatform/Clien
 import CreateClient from '../views/ManagementAdministration/ManageMyPlatform/ClientM/CreateClient';
 import InactiveClients from '../views/ManagementAdministration/ManageMyPlatform/ClientM/InactiveClients';
 import PortfolioRequest from '../views/ManagementAdministration/ManageMyPlatform/ClientM/PortfolioRequest';
+import Income from '../views/ManagementAdministration/Income/Income';
+import Expenses from '../views/ManagementAdministration/Income/Income.js'
+import Sales from '../views/ManagementAdministration/Sales/Sales';
+import CashManagement from '../views/ManagementAdministration/CashManagement/CashManagement.js';
+import KeyCreation from '../views/ManagementAdministration/KeyCreation/KeyCreation';
+import OpeningOfBoxes from '../views/ManagementAdministration/OpeningOfBoxes/OpeningOfBoxes';
+import CleaningPayment from '../views/ManagementAdministration/CleaningPayment/CleaningPayment';
 
 
 function Navigation() {
@@ -32,6 +39,13 @@ function Navigation() {
           {/* Gestión y administración */}
           <Route path="/management-administration" element={<ManagementAdministration />} />
           <Route path="/manage-platform" element={<ManagePlatform />} />
+          <Route path="/income" element={<Income />} />
+          <Route path="/expenses" element={<Expenses />} />
+          <Route path="/sales" element={<Sales />} />
+          <Route path="/cash-management" element={<CashManagement />} />
+          <Route path="/key-creation" element={<KeyCreation />} />
+          <Route path="/opening-of-boxes" element={<OpeningOfBoxes />} />
+          <Route path="/cleaning-payment" element={<CleaningPayment />} />
           {/* Gestión unidades */}
           <Route path="/unit-management" element={<UnitManagement />} />
           <Route path="/create-unit" element={<CreateUnit />} />

@@ -14,6 +14,27 @@ const ManagementAdministration = () => {
     const handleClick = () => {
         navigate('/manage-platform');
     }
+    const handleIncomeClick = () => {
+        navigate('/income');
+    }
+    const handleExpensesClick = () => {
+        navigate('/expenses');
+    }
+    const handleSalesClick = () => {
+        navigate('/sales');
+    }
+    const handleCashManagementClick = () => {
+        navigate('/cash-management');
+    }
+    const handleKeyCreationClick = () => {
+        navigate('/key-creation');
+    }
+    const handleOpeningOfBoxesClick = () => {
+        navigate('/opening-of-boxes');
+    }
+    const handleCleaningPaymentClick = () => {
+        navigate('/cleaning-payment');
+    }
 
     return (
         <div className="home-container">
@@ -39,22 +60,22 @@ const ManagementAdministration = () => {
                     <div className="top-buttons">
                         <div className="row">
                             <div className="col">
-                                <button className="small-box">Ingresos
+                                <button className="small-box" onClick={handleIncomeClick}>Ingresos
                                     <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                                 </button>
                             </div>
                             <div className="col">
-                                <button className="small-box">Gastos
+                                <button className="small-box" onClick={handleExpensesClick}>Gastos
                                     <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                                 </button>
                             </div>
                             <div className="col">
-                                <button className="small-box">Ventas
+                                <button className="small-box" onClick={handleSalesClick}>Ventas
                                     <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                                 </button>
                             </div>
                             <div className="col">
-                                <button className="small-box">Gestión de caja
+                                <button className="small-box" onClick={handleCashManagementClick}>Gestión de caja
                                     <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                                 </button>
                             </div>
@@ -63,17 +84,17 @@ const ManagementAdministration = () => {
                     <div className="bottom-buttons">
                         <div className="row">
                             <div className="col">
-                                <button className="small-box">Creación de llaves
+                                <button className="small-box" onClick={handleKeyCreationClick}>Creación de llaves
                                     <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                                 </button>
                             </div>
                             <div className="col">
-                                <button className="small-box">Apertura masiva cajas
+                                <button className="small-box" onClick={handleOpeningOfBoxesClick}>Apertura masiva cajas
                                     <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                                 </button>
                             </div>
                             <div className="col">
-                                <button className="small-box">Limpieza de cobro
+                                <button className="small-box" onClick={handleCleaningPaymentClick}>Limpieza de cobro
                                     <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                                 </button>
                             </div>
