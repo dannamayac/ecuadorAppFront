@@ -43,31 +43,27 @@ const UnitManagement = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>Unidad</th>
-                            <th>Ubicación</th>
+                            <th>Nombre Unidad</th>
+                            <th>Codigo</th>
+                            <th>Ubicacion</th>
                             <th>Estado</th>
-                            <th>Caja anterior</th>
-                            <th>Caja final</th>
-                            <th>Pagos/No pagos</th>
-                            <th>Ingresos</th>
-                            <th>Total egresos</th>
-                            <th>Último movimiento</th>
-                            <th>Dispositivo</th>
+                            <th>Asignar Administrador</th>
+                            <th>Mora Establecida</th>
+                            <th>Socio</th>
+                            <th>Porcentajes</th>
                         </tr>
                     </thead>
                     <tbody>
                         {Array.isArray(units) && units.map(unit => (
                             <tr key={unit.id}>
                                 <td>{unit.unit}</td>
+                                <td>{unit.code}</td>
                                 <td>{unit.location}</td>
                                 <td>{unit.id_state}</td>
-                                <td>{unit.previous_box}</td>
-                                <td>{unit.end_box}</td>
-                                <td>{unit.payments}</td>
-                                <td>{unit.income}</td>
-                                <td>{unit.total_expenses}</td>
-                                <td>{unit.last_movement}</td>
-                                <td>{unit.device}</td>
+                                <td>{unit.id_user_management}</td>
+                                <td>{unit.established_default}</td>
+                                <td>{unit.id_partner_management}</td>
+                                <td>{unit.percentage}</td>
                             </tr>
                         ))}
                     </tbody>
