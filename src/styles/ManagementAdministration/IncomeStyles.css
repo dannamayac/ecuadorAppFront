@@ -1,0 +1,87 @@
+/* IncomeStyles.css */
+
+.home-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-h {
+    flex-basis: 20%;
+}
+
+.right-h {
+    flex-basis: 75%;
+}
+
+.income-header {
+    text-align: right;
+    margin-top: 20px;
+    margin-right: 30px;
+}
+
+.income-form {
+    margin-top: 20px;
+}
+
+.income-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.income-field {
+    margin-bottom: 10px;
+    margin-right: 30px;
+    margin-left: 33px;
+    flex-basis: calc(30% - 33px);
+}
+
+.income-field label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.income-field input{
+    width: 94%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;  
+}
+.income-field select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.income-buttons {
+    margin-top: 20px;
+}
+
+.income-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.history-button {
+    color: white;
+    background-color: #2a2a2a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 20 px;
+}
+
+.save-button {
+    background-color: #1bb546;
+}
+
+.cancel-button {
+    background-color: #cc1515;
+}
+
+.history-button {
+    background-color: var(--blue);
+}

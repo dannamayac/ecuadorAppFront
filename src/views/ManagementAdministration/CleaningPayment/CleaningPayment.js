@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
-import "../../../styles/ManagementAdministration/ManagementAdministrationStyles.css"
+import "../../../styles/ManagementAdministration/CreateUnitStyles.css"
 
 const CleaningPayment = () => {
     const [pageTitle] = useState('Limpieza de cobro');
