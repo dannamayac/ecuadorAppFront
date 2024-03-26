@@ -19,7 +19,7 @@ import CreateClient from '../views/ManagementAdministration/ManageMyPlatform/Cli
 import InactiveClients from '../views/ManagementAdministration/ManageMyPlatform/ClientM/InactiveClients';
 import PortfolioRequest from '../views/ManagementAdministration/ManageMyPlatform/ClientM/PortfolioRequest';
 import Income from '../views/ManagementAdministration/Income/Income';
-import Expenses from '../views/ManagementAdministration/Income/Income.js'
+import Expenses from '../views/ManagementAdministration/Expenses/Expenses'
 import Sales from '../views/ManagementAdministration/Sales/Sales';
 import CashManagement from '../views/ManagementAdministration/CashManagement/CashManagement.js';
 import KeyCreation from '../views/ManagementAdministration/KeyCreation/KeyCreation';
