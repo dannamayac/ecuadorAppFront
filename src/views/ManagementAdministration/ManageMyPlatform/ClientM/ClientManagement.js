@@ -66,6 +66,18 @@ const ClientManagement = () => {
                             <td>{client.email}</td>
                             <td>{client.celphone}</td>
                             <td>
+                                {/* Switch de la tabla */}
+                                <label htmlFor="userActiveSwitch" className="switch2">
+                                    <input
+                                        type="checkbox"
+                                        id="userActiveSwitch"
+                                        checked={userSwitch}
+                                        onChange={toggleUserSwitch}
+                                    />
+                                    <span className="slider2 round2"></span>
+                                </label>
+                            </td>
+                            <td>
                                 <button onClick={handleEditClient}>Editar</button>
                             </td>
                         </tr>
