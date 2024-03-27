@@ -1,0 +1,67 @@
+.income-header2 {
+    display: flex;
+    margin-top: 25px;
+    margin-left: 33px;
+    margin-right: 30px;
+    position: relative;
+}
+
+.filter-fields2 {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.filter-field{
+    font-size: 1.05em;
+    font-weight: bold;
+}
+
+
+.selectType-container {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 2px;
+}
+.selectType-container::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 33px;
+    width: 30%; 
+    height: 1.5px;
+    background-color: #dddddd; 
+}
+
+.select-type {
+    margin-bottom: 10px;
+}
+
+.select-type .sub-title {
+    font-size: 1.05em;
+    font-weight: bold;
+    margin-left: 33px;
+}
+
+.type-options {
+    margin-top: 8px;
+    margin-left: 33px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.income-buttonsK {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 25px; 
+    margin-left: 33px; /* Ajusta el margen izquierdo según sea necesario */
+}
+
+.income-fields2 {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}

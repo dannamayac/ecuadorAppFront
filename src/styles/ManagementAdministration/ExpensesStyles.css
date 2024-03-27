@@ -1,0 +1,44 @@
+/*ExpensesStyles.css*/
+.movementType-container {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 2px;
+}
+.movementType-container::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left:33px;
+    width: 30%; 
+    height: 1.5px;
+    background-color: #dddddd; 
+}
+
+.movement-type {
+    margin-bottom: 10px;
+}
+
+.movement-type .sub-title {
+    font-size: 1.05em;
+    font-weight: bold;
+    margin-left: 33px;
+}
+
+.movement-options {
+    margin-top: 8px;
+    margin-left: 33px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.movement-options input[type="radio"] {
+    margin-right: 10px;
+}
+
+.movement-options label {
+    margin-right: 20px;
+    cursor: pointer;
+    font-weight: 500;
+}

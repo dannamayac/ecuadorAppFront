@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
-import "../../../styles/ManagementAdministration/IncomeStyles.css"
+import "../../../styles/ManagementAdministration/ExpensesStyles.css"
 
 const Expenses = () => {
     const [pageTitle] = useState('Gastos');
@@ -34,7 +34,7 @@ const Expenses = () => {
                             </div>
                         </div>
                         <div className="title-container">
-                            <h1 className="header-title">Nuevo Ingreso</h1>
+                            <h1 className="header-title">Nuevo gasto</h1>
                         </div>
                     </div>
                     <div className="right-history">
@@ -44,6 +44,17 @@ const Expenses = () => {
                     </div>
                 </div>
                 <div className="income-form">
+                    <div className="movement-type">
+                        <div className="movementType-container">
+                            <h2 className="sub-title">Tipo de movimiento</h2>
+                        </div>
+                        <div className="movement-options">
+                            <input type="radio" id="gasto" name="movementType" value="gasto" />
+                            <label htmlFor="gasto">Gasto</label>
+                            <input type="radio" id="retiro" name="movementType" value="retiro" />
+                            <label htmlFor="retiro">Retiro</label>
+                        </div>
+                    </div>
                     <div className="income-fields">
                         <div className="income-field">
                             <label htmlFor="ugiDiaria">UGI Diaria</label>
