@@ -2,17 +2,13 @@
 .create-button {
     margin-top: 20px;
     margin-right: 30px;
-    background-color: #007bff;
+    background-color: var(--blue);
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     float: right;
-}
-
-.create-button:hover {
-    background-color: #0056b3;
 }
 
 table {

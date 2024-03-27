@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import "../../../styles/ManagementAdministration/IncomeStyles.css"
@@ -15,7 +17,31 @@ const Income = () => {
             <div className="right-h">
                 <Header title={pageTitle} backButtonPath="/management-administration" startItem="General"/>
                 <div className="income-header">
-                    <button className="history-button">Historial de ingresos</button>
+                    <div className="left-title">
+                        <div className="filter-fields">
+                            <div className="filter-field">
+                                <select id="filterByIdOrField" className="filter-select">
+                                    <option value="" disabled selected hidden>Filtrar por:</option>
+                                    <option value="id">ID</option>
+                                    <option value="field">Campo</option>
+                                </select>
+                            </div>
+                            <div className="filter-field">
+                                <select id="filterByUnit" className="filter-select">
+                                    <option value="" disabled selected hidden>Todas las unidades:</option>
+                                    {/* Opciones para filtrar por unidad */}
+                                </select>
+                            </div>
+                        </div>
+                        <div className="title-container">
+                            <h1 className="header-title">Nuevo Ingreso</h1>
+                        </div>
+                    </div>
+                    <div className="right-history">
+                        <button className="history-button">Historial de ingresos
+                            <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                        </button>
+                    </div>
                 </div>
                 <div className="income-form">
                     <div className="income-fields">
@@ -51,8 +77,13 @@ const Income = () => {
                         </div>
                     </div>
                     <div className="income-buttons-container">
+                        <div className="attach-files">
+                            <button className="attach-button">
+                                <FontAwesomeIcon icon={faUpload} /> Adjuntar archivos<span>+</span>
+                            </button>
+                        </div>
                         <div className="income-buttons">
-                            <button className="create-button create">Guardar Ingreso</button>
+                            <button className="create-button create">Guardar ingreso</button>
                             <button className="create-button cancel">Cancelar</button>
                         </div>
                     </div>
