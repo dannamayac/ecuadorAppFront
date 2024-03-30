@@ -8,8 +8,8 @@
 }
 
 .date-inputs {
-    display: flex;
-    font-size: 1em;
+    display: flex; 
+    font-size: 0.9em;
     font-weight: 500;
 }
 

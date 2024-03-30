@@ -9,10 +9,11 @@
 .income-headerBoxes::after {
     content: '';
     position: absolute;
-    bottom: -15px;
+    bottom: -1px;
     width: 100%; 
     height: 1.5px;
     background-color: #dddddd; 
+    z-index: 0;
 }
 
 .date-buttonsBoxes {
@@ -34,15 +35,57 @@
 
 .custom-field {
     margin-left: 20px;
-    margin-top: 26px;
+    margin-top: 13px;
 }
 
 .custom-field label {
+    font-size: 1.05em;
+    font-weight: 500;
     margin-right: 10px;
+    margin-bottom: 11px;
 }
 
 .custom-field select {
     flex-grow: 1;
     width: auto;
     padding: 12px 20px;
+    background-color: #e1e5ea;
+    border: 1px solid #e1e5ea;
+}
+
+.left-title .action-button {
+    background-color: #ffffff;
+    color: #272727;
+    border: none;
+    padding: 5px 20px;
+    border-radius: 5px 5px 0 0;
+    height: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 35px;
+}
+
+.left-title .action-button.selected {
+    background-color: var(--blue);
+    color: #ffffff;
+}
+
+.left-title .action-button:last-child {
+    border-left: none;
+}
+
+.date-buttonsBoxes.closed {
+    display: none;
+}
+
+.custom-field.hidden {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.closed{
+    margin-left: 0px;
 }

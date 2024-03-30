@@ -11,6 +11,7 @@ const CashManagement = () => {
     const [pageTitle] = useState('Gestión de cajas');
     const [startDatePickerActive, setStartDatePickerActive] = useState(false);
     const [startDate, setStartDate] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleStartDatePickerToggle = () => {
         setStartDatePickerActive(!startDatePickerActive);
@@ -19,6 +20,14 @@ const CashManagement = () => {
     const handleStartDateChange = (date) => {
         setStartDate(date);
         setStartDatePickerActive(false);
+    };
+
+    const handleOpenButtonClick = () => {
+        setIsOpen(true);
+    };
+
+    const handleCloseButtonClick = () => {
+        setIsOpen(false);
     };
 
     return (
@@ -30,7 +39,8 @@ const CashManagement = () => {
                 <Header title={pageTitle} backButtonPath="/management-administration" startItem="General" />
                 <div className="income-headerBoxes">
                     <div className="left-title">
-                        
+                        <button className={`action-button ${isOpen ? 'selected' : ''}`} onClick={handleOpenButtonClick}>Abrir caja</button>
+                        <button className={`action-button ${!isOpen ? 'selected' : ''}`} onClick={handleCloseButtonClick}>Cerrar caja</button>
                     </div>
                     <div className="right-history">
                         <button className="history-button">Resumen
@@ -41,7 +51,7 @@ const CashManagement = () => {
                 <div className="income-form">
                     <div className="date-buttonsBoxes">
                         <div className="date-inputs">
-                            <div className="date-input">
+                            <div className={`date-input ${isOpen ? '' : 'hidden'}`}>
                                 <p>Fecha de apertura de CNS & UGIS</p>
                                 <button className="date-button" onClick={handleStartDatePickerToggle}>
                                     {startDate ? `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}` : 'Fecha'}
@@ -56,17 +66,17 @@ const CashManagement = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="income-field custom-field">
+                            <div className={`income-field custom-field ${isOpen ? '' : 'closed'}`}>
                                 <label htmlFor="unit">Unidad</label>
                                 <select id="unit">
-                                <option value="" disabled selected hidden>Seleccionar unidad</option>
+                                    <option value="" disabled selected hidden>Seleccionar unidad</option>
                                     {/* opciones de UGI Diaria */}
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div className="income-buttonsK">
-                        <button className="create-button create">Abrir caja</button>
+                        <button className="create-button create">{isOpen ? 'Abrir caja' : 'Cerrar caja'}</button>
                     </div>
                 </div>
             </div>
