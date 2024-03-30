@@ -12,12 +12,12 @@ const UserManagement = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('http://192.168.0.9:8000/api/GestionUsuarios/listData');
+                const response = await fetch('http://192.168.240.103:8000/api/GestionUsuarios/listData');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                const usersData = data["Gestion de Unidades"];
+                const usersData = data["Gestion de Usuarios"];
                 setUsers(usersData);
             } catch (error) {
                 console.error('Error fetching data: ', error);

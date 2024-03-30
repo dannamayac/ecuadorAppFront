@@ -12,7 +12,7 @@ const UnitManagement = () => {
     useEffect(() => {
         const fetchUnits = async () => {
             try {
-                const response = await fetch('http://192.168.0.9:8000/api/GestionUnidades/listData');
+                const response = await fetch('http://192.168.240.103:8000/api/GestionUnidades/listData');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
