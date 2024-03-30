@@ -21,7 +21,7 @@ const Expenses = () => {
                         <div className="filter-fields">
                             <div className="filter-field">
                                 <select id="filterByIdOrField" className="filter-select">
-                                    <option value="" disabled selected hidden>Filtrar por:</option>
+                                    <option value="" disabled selected hidden>/1/ - CN de la sociedad 234235</option>
                                     <option value="id">ID</option>
                                     <option value="field">Campo</option>
                                 </select>
