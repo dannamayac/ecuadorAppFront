@@ -12,7 +12,7 @@ const UnitManagement = () => {
     useEffect(() => {
         const fetchUnits = async () => {
             try {
-                const response = await fetch('http://192.168.240.103:8000/api/GestionUnidades/listData');
+                const response = await fetch('http://192.168.0.5:8000/api/GestionUnidades/listData');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -38,7 +38,6 @@ const UnitManagement = () => {
             </div>
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Unidades" showSearch={true}/>
-                 {/* Botón "Crear nueva unidad" */}
                 <button className="create-button" onClick={handleCreateUnitClick}>Crear nueva unidad</button>
                 <table>
                     <thead>

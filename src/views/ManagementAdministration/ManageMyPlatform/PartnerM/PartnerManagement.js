@@ -12,12 +12,12 @@ const PartnerManagement = () => {
     useEffect(() => {
         const fetchPartners = async () => {
             try {
-                const response = await fetch('http://192.168.0.9:8000/api/GestionSocios/listData');
+                const response = await fetch('http://192.168.0.5:8000/api/GestionSocios/listData');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                const partnersData = data["Gestion de Unidades"];
+                const partnersData = data.Socios;
     
                 const partnersWithState = partnersData.map(partner => {
                     const isActive = partner.state === 1;

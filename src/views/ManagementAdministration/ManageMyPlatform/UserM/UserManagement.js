@@ -12,7 +12,7 @@ const UserManagement = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('http://192.168.240.103:8000/api/GestionUsuarios/listData');
+                const response = await fetch('http://192.168.0.5:8000/api/GestionUsuarios/listData');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -30,8 +30,8 @@ const UserManagement = () => {
     const handleCreateUser = () => {
         navigate('/create-user');
     };
-    const handleEditUser = () => {
-        navigate('/edit-user');
+    const handleEditUser = (userId) => {
+        navigate(`/edit-user/${userId}`);
     };
 
     return (
@@ -62,7 +62,7 @@ const UserManagement = () => {
                             <td>{user.email}</td>
                             <td>{user.celphone}</td>
                             <td>
-                                <button onClick={handleEditUser}>Editar</button>
+                            <button onClick={() => handleEditUser(user.id)}>Editar</button>
                             </td>
                         </tr>
                          ))}

@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../../../../components/SideBar'
 import Header from '../../../../components/Header'
 import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
@@ -7,11 +6,81 @@ import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
 const CreateClient = () => {
     const [pageTitle] = useState('Crear cliente');
     const [isActive, setIsActive] = useState(false);
-
-    // Función para cambiar el estado de isActive
+    const [formData, setFormData] = useState({
+        id_unit_management: '',
+        name: '',
+        nickname:'',
+        id_document_type:'',
+        document_number:'',
+        address:'',
+        phone:'',
+        city:'',
+        email:'',
+        birthdate:'',
+        neighborhood:'',
+        celphone:'',
+        economic_activity:'',
+        id_user_management:'',
+        payment_frequency:'',
+        payment_terms:'',
+        established_arrears:'',
+        state: '0'
+    });
+    const [units, setUnits] = useState([]);
+    useEffect(() => {
+        const fetchUnits = async () => {
+            try {
+                const response = await fetch('http://192.168.0.5:8000/api/GestionUnidades/listData');
+                const data = await response.json();
+                setUnits(data['Gestion de Unidades']);
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
+        };
+        fetchUnits();
+    }, []);
+    const [documentTypes, setdocumentType] = useState([]);
+    useEffect(() => {
+        const fetchDocumentType = async () => {
+            try {
+                const response = await fetch('http://192.168.0.5:8000/api/TipoDocumento/listData');
+                const data = await response.json();
+                setdocumentType(data['Tipos de Documentos']);
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
+        };
+        fetchDocumentType();
+    }, []);
     const toggleActive = () => {
         setIsActive(!isActive);
+        setFormData({
+            ...formData,
+            state: !isActive ? '1' : '0'
+        });
     }
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.id]: e.target.value
+        });
+    };
+
+    const handleSubmit = async () => {
+        try {
+            const response = await fetch('http://192.168.0.5:8000/api/GestionClientes/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            console.log(data); 
+        } catch (error) {
+            console.error('Error creating client:', error);
+        }
+    };
 
     return (
         <div className="home-container">
@@ -20,96 +89,97 @@ const CreateClient = () => {
             </div>
             <div className="right-h">
                 <Header title={pageTitle} backButtonPath="/client-management" startItem="Gestión de clientes"/>
-                <div className="form-container">
-                    <div className="form-group">
-                        <label htmlFor="clientUnit">Unidad</label>
-                        <input type="text" id="clientUnit" placeholder="Ingrese el nombre de la unidad" />
+                <form className="form-container" onSubmit={handleSubmit}>
+                <div className="form-group">
+                        <label htmlFor="id_unit_management">Unidad Asignada</label>
+                        <select id="id_unit_management" name="id_unit_management" onChange={handleChange} value={formData.id_unit_management}>
+                            <option value="">Seleccione Unidad</option>
+                            {units.map(unit => (
+                                <option key={unit.id} value={unit.id}>{unit.unit}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="clientName">Nombre completo</label>
-                        <input type="text" id="clientName" placeholder="Ingrese el nombre completo" />
+                        <label htmlFor="name">Nombre completo</label>
+                        <input type="text" id="name" name="name" placeholder="Ingrese el nombre completo" onChange={handleChange} value={formData.name}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="nickname">Apodo</label>
-                        <input type="text" id="nickname" placeholder="Ingrese el apodo" />
+                        <input type="text" id="nickname" name="nickname" placeholder="Ingrese el apodo" onChange={handleChange} value={formData.nickname}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="documentType">Tipo de documento</label>
-                        <input type="text" id="documentType" placeholder="Ingrese el tipo de documento" />
+                        <label htmlFor="id_document_type">Tipo Documento</label>
+                        <select id="id_document_type" name="id_document_type" onChange={handleChange} value={formData.id_document_type}>
+                            <option value="">Seleccione Tipo Documento</option>
+                            {documentTypes.map(documentType => (
+                                <option key={documentType.id} value={documentType.id}>{documentType.name}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="idNumber">Número de documento</label>
-                        <input type="text" id="idNumber" placeholder="Ingrese el número de documento" />
+                        <label htmlFor="document_number">Número de documento</label>
+                        <input type="text" id="document_number" name="document_number" placeholder="Ingrese el número de documento" onChange={handleChange} value={formData.document_number}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="address">Dirección</label>
-                        <input type="text" id="address" placeholder="Ingrese la dirección" />
+                        <input type="text" id="address" name="address" placeholder="Ingrese la dirección" onChange={handleChange} value={formData.address}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="telephone">Teléfono</label>
-                        <input type="text" id="telephone" placeholder="Ingrese el número de teléfono" />
+                        <label htmlFor="phone">Teléfono</label>
+                        <input type="text" id="phone" name="phone" placeholder="Ingrese el número de teléfono" onChange={handleChange} value={formData.phone}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="city">Ciudad</label>
-                        <input type="text" id="city" placeholder="Ingrese la ciudad" />
+                        <input type="text" id="city" name="city" placeholder="Ingrese la ciudad" onChange={handleChange} value={formData.city}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="e-mail">Correo electrónico</label>
-                        <input type="text" id="e-mail" placeholder="Ingrese el correo electrónico" />
+                        <label htmlFor="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="Ingrese el correo electrónico" onChange={handleChange} value={formData.email}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="birthdate">Fecha de nacimiento</label>
-                        <input type="text" id="birthdate" placeholder="Ingrese la fecha de nacimiento" />
+                        <input type="date" id="birthdate" name="birthdate" placeholder="Ingrese la fecha de nacimiento" onChange={handleChange} value={formData.birthdate}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="neighborhood">Barrio</label>
-                        <input type="text" id="neighborhood" placeholder="Ingrese el barrio" />
+                        <input type="text" id="neighborhood" name="neighborhood" placeholder="Ingrese el barrio" onChange={handleChange} value={formData.neighborhood}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="cellphone">Celular</label>
-                        <input type="text" id="cellphone" placeholder="Ingrese el número de celular" />
+                        <input type="text" id="cellphone" name="cellphone" placeholder="Ingrese el número de celular" onChange={handleChange} value={formData.cellphone}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="economicActivity">Actividad económica</label>
-                        <input type="text" id="economicActivity" placeholder="Ingrese la actividad económica" />
+                        <label htmlFor="economic_activity">Actividad económica</label>
+                        <input type="text" id="economic_activity" name="economic_activity" placeholder="Ingrese la actividad económica" onChange={handleChange} value={formData.economic_activity}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="address">Dirección</label>
-                        <input type="text" id="address" placeholder="Ingrese la dirección" />
+                        <label htmlFor="payment_frequency">Frecuencia de pago</label>
+                        <input type="text" id="payment_frequency" name="payment_frequency" placeholder="Ingrese la frecuencia de pago" onChange={handleChange} value={formData.payment_frequency}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="telephone">Teléfono</label>
-                        <input type="text" id="telephone" placeholder="Ingrese el número de teléfono" />
+                        <label htmlFor="payment_terms">Plazos de pago</label>
+                        <input type="text" id="payment_terms" name="payment_terms" placeholder="Ingrese los plazos de pago" onChange={handleChange} value={formData.payment_terms}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="reference">Info de usuario de referencia</label>
-                        <input type="text" id="reference" placeholder="Ingrese el usuario de referencia" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="paymentFrequency">Frecuencia de pago</label>
-                        <input type="text" id="paymentFrequency" placeholder="Ingrese la frecuencia de pago" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="paymentTerms">Plazos de pago</label>
-                        <input type="text" id="paymentTerms" placeholder="Ingrese los plazos de pago" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="establishedArrears">Mora establecida</label>
-                        <input type="text" id="establishedArrears" placeholder="Ingrese el usuario de referencia" />
+                        <label htmlFor="established_arrears">Mora establecida</label>
+                        <input type="text" id="established_arrears" name="established_arrears" placeholder="Ingrese la mora establecida" onChange={handleChange} value={formData.established_arrears}/>
                     </div>
                     <div className="form-group center">
-                    <span className="switch-label">Estado</span>
+                        <span className="switch-label">Estado</span>
                         <label htmlFor="activeSwitch" className="switch">
-                            <input type="checkbox" id="activeSwitch" checked={isActive} onChange={toggleActive} />
+                            <input type="checkbox" id="activeSwitch" name="state" checked={isActive} onChange={toggleActive} />
                             <span className="slider round"></span>
                         </label>
                     </div>
-                </div>
-                <button className="create-button cancel">Cancelar</button>
-                <button className="create-button create">Crear nuevo cliente</button>
+                    <div className="form-buttons">
+                        <button type="button" className="create-button cancel">Cancelar</button>
+                        <button type="submit" className="create-button create">Crear nuevo cliente</button>
+                    </div>
+                </form>
             </div>
         </div>
     );
+    
 }
 
 export default CreateClient;

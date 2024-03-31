@@ -19,7 +19,7 @@ const CreateUnit = () => {
     useEffect(() => {
         const fetchStates = async () => {
             try {
-                const response = await fetch('http://192.168.240.103:8000/api/Estado/listData');
+                const response = await fetch('http://192.168.0.5:8000/api/Estado/listData');
                 const data = await response.json();
                 setStates(data.Estados);
             } catch (error) {

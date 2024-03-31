@@ -8,25 +8,25 @@ const ClientManagement = () => {
     const [pageTitle] = useState('Gestión de clientes');
     const navigate = useNavigate();
     const [userSwitch, setUserSwitch] = useState(false);
-    const [clients,setClient] = useState([]);
+    const [customers,setCustomer] = useState([]);
 
     useEffect(() => {
-        const fetchClients = async () => {
+        const fetchCustomers = async () => {
             try {
-                const response = await fetch('http://192.168.0.9:8000/api/GestionClientes/listData');
+                const response = await fetch('http://192.168.0.5:8000/api/GestionClientes/listData');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                const clientsData = data["Gestion de Unidades"];
-                setClient(clientsData);
+                const customersData = data["Gestion de Clientes"];
+                setCustomer(customersData)
             } catch (error) {
                 console.error('Error fetching data: ', error);
             }
         };
-
-        fetchClients();
-    }, []); 
+    
+        fetchCustomers();
+    }, []);
 
     const handleCreateClient = () => {
         navigate('/create-client');
@@ -58,15 +58,14 @@ const ClientManagement = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {Array.isArray(clients) && clients.map(client => (
-                        <tr key={client.id}>
-                            <td>{client.user_name}</td>
-                            <td>{client.rol_name}</td>
-                            <td>{client.unit_name}</td>
-                            <td>{client.email}</td>
-                            <td>{client.celphone}</td>
+                    {Array.isArray(customers) && customers.map(customer => (
+                        <tr key={customer.id}>
+                            <td>{customer.name}</td>
+                            <td>{customer.document_number}</td>
+                            <td>{customer.id_unit_management}</td>
+                            <td>{customer.email}</td>
+                            <td>{customer.state}</td>
                             <td>
-                                {/* Switch de la tabla */}
                                 <label htmlFor="userActiveSwitch" className="switch2">
                                     <input
                                         type="checkbox"

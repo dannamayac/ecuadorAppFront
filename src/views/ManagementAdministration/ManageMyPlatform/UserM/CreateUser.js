@@ -60,7 +60,7 @@ const CreateUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://192.168.240.103:8000/api/GestionUsuarios/create', {
+            const response = await fetch('http://192.168.0.5:8000/api/GestionUsuarios/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

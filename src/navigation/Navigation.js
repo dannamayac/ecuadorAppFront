@@ -52,7 +52,7 @@ function Navigation() {
           {/* Gestión usuarios */}
           <Route path="/user-management" element={<UserManagement />} />
           <Route path="/create-user" element={<CreateUser />} />
-          <Route path="/edit-user" element={<EditUser />} />
+          <Route path="/edit-user/:id" element={<EditUser />} />
           {/* Gestión clientes */}
           <Route path="/client-management" element={<ClientManagement />} />
           <Route path="/create-client" element={<CreateClient />} />
