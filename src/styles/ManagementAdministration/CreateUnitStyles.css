@@ -27,9 +27,27 @@
     border-radius: 5px;
 }
 
+/* Estilos para el select */
+.management-select {
+  width: 97%;
+  padding: 7.5px;
+  border: 1px solid #757575;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.management-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: -30px;
+}
+
 .create-button {
     color: white;
     border: none;
+    height: 40px;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
@@ -44,6 +62,7 @@
 .cancel{
     background-color: #cc1515;
 }
+
 .switch {
   position: relative;
   display: inline-block;
@@ -175,5 +194,3 @@ input2:checked + .slider2:before {
 .slider2.round:before {
   border-radius: 50%;
 }
-
-

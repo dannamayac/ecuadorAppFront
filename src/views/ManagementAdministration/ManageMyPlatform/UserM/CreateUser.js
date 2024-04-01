@@ -91,13 +91,15 @@ const CreateUser = () => {
                         <input type="text" id="name" name="name" placeholder="Ingrese el nombre" onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="id_rol">Tipo de Usuario</label>
-                        <select id="id_rol" name="id_rol" onChange={handleChange} value={formData.id_rol}>
-                            <option value="">Seleccione un estado</option>
-                            {roles.map(rol => (
-                                <option key={rol.id} value={rol.id}>{rol.name}</option>
-                            ))}
-                        </select>
+                        <div className="income-fields">
+                            <label htmlFor="id_rol">Tipo de Usuario</label>
+                            <select id="id_rol" name="id_rol" className="management-select" onChange={handleChange} value={formData.id_rol}>
+                                <option value="">Seleccione un estado</option>
+                                {roles.map(rol => (
+                                    <option key={rol.id} value={rol.id}>{rol.name}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div> 
                     <div className="form-group">
                         <label htmlFor="userEmail">Correo</label>
@@ -108,13 +110,15 @@ const CreateUser = () => {
                         <input type="text" id="celphone" name="celphone" placeholder="Ingrese el número de celular" onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="id_unit_management">Unidad Asignada</label>
-                        <select id="id_unit_management" name="id_unit_management" onChange={handleChange} value={formData.id_unit_management}>
-                            <option value="">Seleccione una unidad</option>
-                            {units.map(unit => (
-                                <option key={unit.id} value={unit.id}>{unit.unit}</option>
-                            ))}
-                        </select>
+                        <div className="income-fields">
+                            <label htmlFor="id_unit_management">Unidad Asignada</label>
+                            <select id="id_unit_management" name="id_unit_management" className="management-select" onChange={handleChange} value={formData.id_unit_management}>
+                                <option value="">Seleccione una unidad</option>
+                                {units.map(unit => (
+                                    <option key={unit.id} value={unit.id}>{unit.unit}</option>
+                                ))}
+                            </select>
+                        </div>    
                     </div> 
                     <div className="form-group">
                         <span className="switch-label">Estado</span>
@@ -123,9 +127,11 @@ const CreateUser = () => {
                             <span className="slider round"></span>
                         </label>
                     </div>
-                    <button type="submit" className="create-button create">Crear nuevo usuario</button>
+                    <div className="management-buttons">
+                        <button type="submit" className="create-button create">Guardar ingreso</button>
+                        <button className="create-button cancel">Cancelar</button>
+                    </div>
                 </form>
-                <button className="create-button cancel">Cancelar</button>
             </div>
         </div>
     );
