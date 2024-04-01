@@ -73,7 +73,6 @@ const PartnerManagement = () => {
                     </thead>
                     <tbody>
                         {Array.isArray(partners) && partners.map(partner => {
-                            console.log("Datos del socio:", partner);
                             return (
                                 <tr key={partner.id}>
                                     <td>{partner.partnert_name}</td>
