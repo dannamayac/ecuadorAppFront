@@ -30,6 +30,7 @@ import OpeningOfBoxesHistory from '../views/ManagementAdministration/OpeningOfBo
 import CleaningPayment from '../views/ManagementAdministration/CleaningPayment/CleaningPayment';
 import ExpenseHistory from '../views/ManagementAdministration/Expenses/ExpenseHistory.js';
 import IncomeHistory from '../views/ManagementAdministration/Income/IncomeHistory.js';
+import ReportsAndMetrics from '../views/ManagementAdministration/ManageMyPlatform/ReportsAndMetrics.js';
 
 
 function Navigation() {
@@ -62,6 +63,8 @@ function Navigation() {
               <Route path="/partner-management" element={<PartnerManagement />}/>
               <Route path="/create-partner" element={<CreatePartner />} />
               <Route path="/edit-partner" element={<EditPartner />} />
+              {/* Reportes y métricas */}
+              <Route path="/reports-metrics" element={<ReportsAndMetrics />}/>
             {/* Ingresos */}
             <Route path="/income" element={<Income />} />
             <Route path="/income-history" element={<IncomeHistory />} />

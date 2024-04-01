@@ -39,7 +39,7 @@ const CleaningPayment = () => {
                     <div className="right-history">
                         <button className="history-button">Exportar Excel
                             <FontAwesomeIcon icon={faFileExcel} className="excel-icon"/>
-                            <div className="sub-button" style={{ width: '75px', marginBottom:'5px' }}>Exportar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                            <div className="sub-button" style={{ width: '75px' }}>Exportar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>
                 </div>

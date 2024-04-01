@@ -22,6 +22,9 @@ const ManagePlatform = () => {
     const handlePartnerManagementClick = () => {
         navigate('/partner-management');
     }
+    const handleReportsAndMetricsClick = () => {
+        navigate('/reports-metrics');
+    }
 
     return (
         <div className="home-container">
@@ -49,7 +52,7 @@ const ManagePlatform = () => {
                 <div className="bottom-pl">
                     {/* Contenido de la parte inferior */}
                     <div className="bottom-buttons">
-                        <button className="report-button">
+                        <button className="report-button" onClick={handleReportsAndMetricsClick}>
                             <div className="left-bu">Reportes y métricas</div>
                             <div className="right-bu">
                                 <div className="sub-button">Ver más &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
