@@ -31,6 +31,7 @@ import CleaningPayment from '../views/ManagementAdministration/CleaningPayment/C
 import ExpenseHistory from '../views/ManagementAdministration/Expenses/ExpenseHistory.js';
 import IncomeHistory from '../views/ManagementAdministration/Income/IncomeHistory.js';
 import ReportsAndMetrics from '../views/ManagementAdministration/ManageMyPlatform/ReportsAndMetrics.js';
+import Billing from '../views/Billing/Billing.js';
 
 
 function Navigation() {
@@ -84,7 +85,9 @@ function Navigation() {
             <Route path="/opening-of-boxes-history" element={<OpeningOfBoxesHistory />} />
             {/* Limpieza de cobro */}
             <Route path="/cleaning-payment" element={<CleaningPayment />} />
-            
+          {/* Facturación */}
+          <Route path="/billing" element={<Billing />} />
+
         </Routes>
       </div>
     </Router>
