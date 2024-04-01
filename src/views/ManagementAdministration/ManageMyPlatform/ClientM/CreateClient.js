@@ -32,7 +32,7 @@ const CreateClient = () => {
     useEffect(() => {
         const fetchUnits = async () => {
             try {
-                const response = await fetch('http://192.168.0.5:8000/api/GestionUnidades/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_UNITS_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setUnits(data['Gestion de Unidades']);
             } catch (error) {
@@ -46,7 +46,7 @@ const CreateClient = () => {
     useEffect(() => {
         const fetchDocumentType = async () => {
             try {
-                const response = await fetch('http://192.168.0.5:8000/api/TipoDocumento/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_DOCUMENTS_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setdocumentType(data['Tipos de Documentos']);
             } catch (error) {
@@ -84,7 +84,7 @@ const CreateClient = () => {
             console.error('Por favor, complete todos los campos obligatorios.');
             return;
             }
-            const response = await fetch('http://192.168.0.5:8000/api/GestionClientes/create', {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_CUSTOMER_ENDPOINT}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

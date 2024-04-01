@@ -1,9 +1,11 @@
 import React, { useState, useEffect  } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../../../components/SideBar'
 import Header from '../../../../components/Header'
 import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
 
 const CreateUnit = () => {
+    const navigate = useNavigate();
     const [pageTitle] = useState('Crear nueva unidad');
     const [formData, setFormData] = useState({
         unit: '',
@@ -19,7 +21,7 @@ const CreateUnit = () => {
     useEffect(() => {
         const fetchStates = async () => {
             try {
-                const response = await fetch('http://192.168.0.5:8000/api/Estado/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_STATE_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setStates(data.Estados);
             } catch (error) {
@@ -33,7 +35,7 @@ const CreateUnit = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('http://192.168.0.9:8000/api/GestionUsuarios/listAdmin');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_LIST_ADMIN_USERS_ENDPOINT}`);
                 const data = await response.json();
                 setUsers(data.Administradores);
             } catch (error) {
@@ -47,7 +49,7 @@ const CreateUnit = () => {
     useEffect(() => {
         const fetchPartners = async () => {
             try {
-                const response = await fetch('http://192.168.0.9:8000/api/GestionSocios/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_PARTNERS_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setPartners(data.Socios);
             } catch (error) {
@@ -64,10 +66,13 @@ const CreateUnit = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
+        if (!formData.unit || !formData.code || !formData.location || !formData.id_state || !formData.id_user_management || !formData.established_default || !formData.id_partner_management || !formData.percentage) {
+            alert('Por favor complete todos los campos');
+            return;
+        }
         try {
-            const response = await fetch('http://192.168.0.9:8000/api/GestionUnidades/create', {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_UNIT_ENDPOINT}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -77,6 +82,7 @@ const CreateUnit = () => {
             const data = await response.json();
             if (data.status === 200) {
                 alert('Unidad creada exitosamente');
+                navigate('/unit-management'); 
             } else {
                 alert('Error al crear la unidad');
             }
@@ -85,6 +91,7 @@ const CreateUnit = () => {
             alert('Error al enviar el formulario');
         }
     };
+    
 
     return (
         <div className="home-container">
@@ -148,8 +155,8 @@ const CreateUnit = () => {
                         <input type="text" id="percentage" name="percentage" placeholder="Ingrese el %" onChange={handleChange} />
                     </div>
                     <div className="management-buttons">
-                        <button type="submit" className="create-button create">Guardar ingreso</button>
-                        <button className="create-button cancel">Cancelar</button>
+                    <button type="button" className="create-button create" onClick={handleSubmit}>Guardar ingreso</button>
+                    <button className="create-button cancel" onClick={() => navigate('/unit-management')}>Cancelar</button>
                     </div>
                 </form>
             </div>

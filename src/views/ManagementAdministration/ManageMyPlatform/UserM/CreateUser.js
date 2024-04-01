@@ -18,7 +18,7 @@ const CreateUser = () => {
     useEffect(() => {
         const fetchRoles = async () => {
             try {
-                const response = await fetch('http://192.168.240.103:8000/api/Roles/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_ROLES_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setRoles(data.Roles);
             } catch (error) {
@@ -32,7 +32,7 @@ const CreateUser = () => {
     useEffect(() => {
         const fetchUnits = async () => {
             try {
-                const response = await fetch('http://192.168.240.103:8000/api/GestionUnidades/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_UNITS_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setUnits(data['Gestion de Unidades']);
             } catch (error) {
@@ -60,7 +60,7 @@ const CreateUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://192.168.0.5:8000/api/GestionUsuarios/create', {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_USER_ENDPOINT}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

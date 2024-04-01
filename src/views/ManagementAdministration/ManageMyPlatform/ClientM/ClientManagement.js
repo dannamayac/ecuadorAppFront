@@ -13,7 +13,7 @@ const ClientManagement = () => {
     useEffect(() => {
         const fetchCustomers = async () => {
             try {
-                const response = await fetch('http://192.168.0.5:8000/api/GestionClientes/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CUSTOMERS_LIST_ENDPOINT}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

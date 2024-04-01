@@ -21,7 +21,7 @@ const EditUser = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch(`http://192.168.0.5:8000/api/GestionUsuarios/infoUser/${id}`);
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_INFO_USER_ENDPOINT}/${id}`)
                 if (!response.ok) {
                     throw new Error('No se pudo obtener la información del usuario');
                 }
@@ -36,7 +36,7 @@ const EditUser = () => {
 
         const fetchRoles = async () => {
             try {
-                const response = await fetch('http://192.168.240.103:8000/api/Roles/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_ROLES_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setRoles(data.Roles);
             } catch (error) {
@@ -47,7 +47,7 @@ const EditUser = () => {
 
         const fetchUnits = async () => {
             try {
-                const response = await fetch('http://192.168.240.103:8000/api/GestionUnidades/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_UNITS_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setUnits(data['Gestion de Unidades']);
             } catch (error) {
@@ -81,7 +81,7 @@ const EditUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://192.168.240.103:8000/api/GestionUsuarios/edit/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_EDIT_USER_ENDPOINT}/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
