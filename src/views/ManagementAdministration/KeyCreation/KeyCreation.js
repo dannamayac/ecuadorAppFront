@@ -1,11 +1,17 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import "../../../styles/ManagementAdministration/KeyCreationStyles.css"
 
 const KeyCreation = () => {
     const [pageTitle] = useState('Creación de llaves');
+    const navigate = useNavigate();
+
+    const handleKeyCreationHistoryClick = () => {
+        navigate('/key-creation-history');
+    }
 
     return (
         <div className="home-container">
@@ -28,7 +34,7 @@ const KeyCreation = () => {
                         </div>
                     </div>
                     <div className="right-history">
-                        <button className="history-button">Historico de aprobación
+                        <button className="history-button" onClick={handleKeyCreationHistoryClick}>Historico de aprobación
                             <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>

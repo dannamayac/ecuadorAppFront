@@ -8,29 +8,9 @@ import "../../../styles/ManagementAdministration/OpeningOfBoxesStyles.css"
 
 const CleaningPayment = () => {
     const [pageTitle] = useState('Limpieza de cobro');
-    const [isOpen, setIsOpen] = useState(false);
     const [searchActive, setSearchActive] = useState(false);
     const [userSwitch, setUserSwitch] = useState(false);
-    const [isActiveAll, setIsActiveAll] = useState(false);
-    const [userStates, setUserStates] = useState([
-        { id: 1, isActive: false },
-        { id: 2, isActive: false }
-    ]);
-
-    // Función para cambiar el estado de isActiveAll y de todos los switches de la tabla
-    const toggleAllSwitches = () => {
-        const newState = !isActiveAll;
-        setIsActiveAll(newState);
-        setUserStates(userStates.map(user => ({ ...user, isActive: newState })));
-    };
-
-    const handleOpenButtonClick = () => {
-        setIsOpen(true);
-    };
-
-    const handleCloseButtonClick = () => {
-        setIsOpen(false);
-    };
+    const [activeButton, setActiveButton] = useState('Ventas activas');
 
     const handleSearchToggle = () => {
         setSearchActive(!searchActive);
@@ -38,6 +18,10 @@ const CleaningPayment = () => {
 
     const toggleUserSwitch = () => {
         setUserSwitch(!userSwitch);
+    };
+
+    const handleActiveButtonClick = (button) => {
+        setActiveButton(button);
     };
 
     return (
@@ -49,8 +33,8 @@ const CleaningPayment = () => {
                 <Header title={pageTitle} backButtonPath="/management-administration" startItem="General" />
                 <div className="income-headerBoxes">
                     <div className="left-title">
-                        <button className={`action-button ${isOpen ? 'selected' : ''}`} onClick={handleOpenButtonClick}>Ventas activas</button>
-                        <button className={`action-button ${!isOpen ? 'selected' : ''}`} onClick={handleCloseButtonClick}>Ventas inactivas</button>
+                        <button className={`action-button ${activeButton === 'Ventas activas' ? 'selected' : ''}`} onClick={() => handleActiveButtonClick('Ventas activas')}>Ventas activas</button>
+                        <button className={`action-button ${activeButton === 'Ventas inactivas' ? 'selected' : ''}`} onClick={() => handleActiveButtonClick('Ventas inactivas')}>Ventas inactivas</button>
                     </div>
                     <div className="right-history">
                         <button className="history-button">Exportar Excel
@@ -60,7 +44,7 @@ const CleaningPayment = () => {
                     </div>
                 </div>
                 <div className="income-form">
-                <div className='filters'>
+                    <div className='filters'>
                         <div className='search'>
                             <div className="search-container">
                                 <div className="search-wrapper">
@@ -70,60 +54,76 @@ const CleaningPayment = () => {
                             </div>
                         </div>
                         <div className="filter-field">
-                                <select id="filterByIdOrField" className="filter-select">
-                                    <option value="" disabled selected hidden>/1/ - CN de la sociedad 234235</option>
-                                    <option value="id">ID</option>
-                                    <option value="field">Campo</option>
-                                </select>
-                            </div>
-                            <div className="filter-field">
-                                <select id="filterByUnit" className="filter-select">
-                                    <option value="" disabled selected hidden>Todas las unidades:</option>
-                                    {/* Opciones para filtrar por unidad */}
-                                </select>
-                            </div>
+                            <select id="filterByIdOrField" className="filter-select">
+                                <option value="" disabled selected hidden>/1/ - CN de la sociedad 234235</option>
+                                <option value="id">ID</option>
+                                <option value="field">Campo</option>
+                            </select>
+                        </div>
+                        <div className="filter-field">
+                            <select id="filterByUnit" className="filter-select">
+                                <option value="" disabled selected hidden>Todas las unidades:</option>
+                                {/* Opciones para filtrar por unidad */}
+                            </select>
+                        </div>
+                        {activeButton === 'Ventas activas' && (
                             <div className="filter-field">
                                 <select id="filterByUnit" className="filter-select">
                                     <option value="" disabled selected hidden>Días de mora:</option>
-                                    {/* Opciones para filtrar por unidad */}
+                                    <option value="id">8</option>
+                                    <option value="field">20</option>
                                 </select>
                             </div>
-                        </div>
+                        )}
+                    </div>
                     <table>
-                    <thead>
-                        <tr>
-                            <th>/1/ - CN de la sociedad 234235</th>
-                            <th>
-                            <label htmlFor="userActiveSwitch" className="switch2">
-                                <input type="checkbox" id="userActiveSwitch" checked={isActiveAll} onChange={toggleAllSwitches} />
-                                <span className="slider2 round2"></span>
-                            </label>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                                <tr>
-                                    <td>12 - Unidad - Nombre - Socio %</td>
-                                    <td>
-                                        {/* Switch de la tabla */}
-                                        <label htmlFor="userActiveSwitch" className="switch2">
-                                            <input
-                                                type="checkbox"
-                                                id="userActiveSwitch"
-                                                checked={userSwitch}
-                                                onChange={toggleUserSwitch}
-                                            />
-                                            <span className="slider2 round2"></span>
-                                        </label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
+                        <thead>
+                            <tr>
+                                <th>Centro negocios</th>
+                                <th>Número unidad</th>
+                                <th>Número venta</th>
+                                <th>Nombre</th>
+                                <th>Número documento</th>
+                                <th>Total venta</th>
+                                <th>Saldo pendiente</th>
+                                <th>Fecha venta</th>
+                                <th>Días mora</th>
+                                <th>Fecha pago</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Centro de negocio</td>
+                                <td>123</td>
+                                <td>456</td>
+                                <td>Nombre</td>
+                                <td>12345678</td>
+                                <td>10.000.000</td>
+                                <td>5.000.000</td>
+                                <td>01/23/24</td>
+                                <td>30</td>
+                                <td>31/04/2024</td>
+                                <td>
+                                    {/* Switch de la tabla */}
+                                    <label htmlFor="userActiveSwitch" className="switch2">
+                                        <input
+                                            type="checkbox"
+                                            id="userActiveSwitch"
+                                            checked={userSwitch}
+                                            onChange={toggleUserSwitch}
+                                        />
+                                        <span className="slider2 round2"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     );
 }
+
 
 export default CleaningPayment;
