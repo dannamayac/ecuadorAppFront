@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../../../components/SideBar'
 import Header from '../../../../components/Header'
 import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
 
 const CreateClient = () => {
+    const navigate = useNavigate();
     const [pageTitle] = useState('Crear cliente');
     const [isActive, setIsActive] = useState(false);
     const [formData, setFormData] = useState({
@@ -18,7 +20,7 @@ const CreateClient = () => {
         email:'',
         birthdate:'',
         neighborhood:'',
-        celphone:'',
+        cellphone:'',
         economic_activity:'',
         id_user_management:'',
         payment_frequency:'',
@@ -39,6 +41,7 @@ const CreateClient = () => {
         };
         fetchUnits();
     }, []);
+
     const [documentTypes, setdocumentType] = useState([]);
     useEffect(() => {
         const fetchDocumentType = async () => {
@@ -52,6 +55,7 @@ const CreateClient = () => {
         };
         fetchDocumentType();
     }, []);
+
     const toggleActive = () => {
         setIsActive(!isActive);
         setFormData({
@@ -60,14 +64,26 @@ const CreateClient = () => {
         });
     }
     const handleChange = (e) => {
+        const { id, value } = e.target;
+        let newValue = value;
+    
+        if (id === 'name' || id === 'nickname' || id === 'city' || id === 'neighborhood' || id === 'economic_activity') {
+            newValue = value.replace(/[^A-Za-z\s]/g, ''); 
+        } else if (id === 'phone' || id === 'cellphone' || id === 'document_number') {
+            newValue = value.replace(/\D/g, '');
+        }
         setFormData({
             ...formData,
-            [e.target.id]: e.target.value
+            [id]: newValue
         });
     };
 
     const handleSubmit = async () => {
         try {
+            if (!formData.name || !formData.id_unit_management || !formData.id_document_type || !formData.document_number) {
+            console.error('Por favor, complete todos los campos obligatorios.');
+            return;
+            }
             const response = await fetch('http://192.168.0.5:8000/api/GestionClientes/create', {
                 method: 'POST',
                 headers: {
@@ -76,7 +92,7 @@ const CreateClient = () => {
                 body: JSON.stringify(formData)
             });
             const data = await response.json();
-            console.log(data); 
+            console.log(data);
         } catch (error) {
             console.error('Error creating client:', error);
         }
@@ -172,8 +188,8 @@ const CreateClient = () => {
                         </label>
                     </div>
                     <div className="form-buttons">
-                        <button type="button" className="create-button cancel">Cancelar</button>
-                        <button type="submit" className="create-button create">Crear nuevo cliente</button>
+                        <button type="button" className="create-button cancel" onClick={() => navigate('/client-management')}>Cancelar</button>
+                        <button type="submit" className="create-button create" onClick={() => navigate('/client-management')}>Crear nuevo cliente</button>
                     </div>
                 </form>
             </div>
