@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
@@ -8,6 +9,11 @@ import "../../../styles/ManagementAdministration/ExpensesStyles.css"
 
 const Expenses = () => {
     const [pageTitle] = useState('Gastos');
+    const navigate = useNavigate();
+
+    const handleExpenseHistoryClick = () => {
+        navigate('/expense-history');
+    }
 
     return (
         <div className="home-container">
@@ -38,7 +44,7 @@ const Expenses = () => {
                         </div>
                     </div>
                     <div className="right-history">
-                        <button className="history-button">Historial de ingresos
+                        <button className="history-button" onClick={handleExpenseHistoryClick}>Historial de ingresos
                             <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>

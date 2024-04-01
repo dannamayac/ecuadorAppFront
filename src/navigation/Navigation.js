@@ -19,12 +19,17 @@ import CreateClient from '../views/ManagementAdministration/ManageMyPlatform/Cli
 import InactiveClients from '../views/ManagementAdministration/ManageMyPlatform/ClientM/InactiveClients';
 import PortfolioRequest from '../views/ManagementAdministration/ManageMyPlatform/ClientM/PortfolioRequest';
 import Income from '../views/ManagementAdministration/Income/Income';
-import Expenses from '../views/ManagementAdministration/Expenses/Expenses'
+import Expenses from '../views/ManagementAdministration/Expenses/Expenses.js'
 import Sales from '../views/ManagementAdministration/Sales/Sales';
 import CashManagement from '../views/ManagementAdministration/CashManagement/CashManagement.js';
-import KeyCreation from '../views/ManagementAdministration/KeyCreation/KeyCreation';
-import OpeningOfBoxes from '../views/ManagementAdministration/OpeningOfBoxes/OpeningOfBoxes';
+import BoxSummary from '../views/ManagementAdministration/CashManagement/BoxSummary.js';
+import KeyCreation from '../views/ManagementAdministration/KeyCreation/KeyCreation.js';
+import KeyCreationHistory from '../views/ManagementAdministration/KeyCreation/KeyCreationHistory.js';
+import OpeningOfBoxes from '../views/ManagementAdministration/OpeningOfBoxes/OpeningOfBoxes.js';
+import OpeningOfBoxesHistory from '../views/ManagementAdministration/OpeningOfBoxes/OpeningOfBoxesHistory.js';
 import CleaningPayment from '../views/ManagementAdministration/CleaningPayment/CleaningPayment';
+import ExpenseHistory from '../views/ManagementAdministration/Expenses/ExpenseHistory.js';
+import IncomeHistory from '../views/ManagementAdministration/Income/IncomeHistory.js';
 
 
 function Navigation() {
@@ -38,33 +43,45 @@ function Navigation() {
           
           {/* Gestión y administración */}
           <Route path="/management-administration" element={<ManagementAdministration />} />
-          <Route path="/manage-platform" element={<ManagePlatform />} />
-          <Route path="/income" element={<Income />} />
-          <Route path="/expenses" element={<Expenses />} />
-          <Route path="/sales" element={<Sales />} />
-          <Route path="/cash-management" element={<CashManagement />} />
-          <Route path="/key-creation" element={<KeyCreation />} />
-          <Route path="/opening-of-boxes" element={<OpeningOfBoxes />} />
-          <Route path="/cleaning-payment" element={<CleaningPayment />} />
-          {/* Gestión unidades */}
-          <Route path="/unit-management" element={<UnitManagement />} />
-          <Route path="/create-unit" element={<CreateUnit />} />
-          {/* Gestión usuarios */}
-          <Route path="/user-management" element={<UserManagement />} />
-          <Route path="/create-user" element={<CreateUser />} />
-          <Route path="/edit-user/:id" element={<EditUser />} />
-          {/* Gestión clientes */}
-          <Route path="/client-management" element={<ClientManagement />} />
-          <Route path="/create-client" element={<CreateClient />} />
-          <Route path="/edit-client" element={<EditClient />} />
-          <Route path="/inactive-clients" element={<InactiveClients />} />
-          <Route path="/portfolio-request" element={<PortfolioRequest />} />
-          {/* Gestión socios */}
-          <Route path="/partner-management" element={<PartnerManagement />}/>
-          <Route path="/create-partner" element={<CreatePartner />} />
-          <Route path="/edit-partner" element={<EditPartner />} />
-          
-          
+            {/* Administrar mi plataforma */}
+            <Route path="/manage-platform" element={<ManagePlatform />} />
+              {/* Gestión unidades */}
+              <Route path="/unit-management" element={<UnitManagement />} />
+              <Route path="/create-unit" element={<CreateUnit />} />
+              {/* Gestión usuarios */}
+              <Route path="/user-management" element={<UserManagement />} />
+              <Route path="/create-user" element={<CreateUser />} />
+              <Route path="/edit-user/:id" element={<EditUser />} />
+              {/* Gestión clientes */}
+              <Route path="/client-management" element={<ClientManagement />} />
+              <Route path="/create-client" element={<CreateClient />} />
+              <Route path="/edit-client" element={<EditClient />} />
+              <Route path="/inactive-clients" element={<InactiveClients />} />
+              <Route path="/portfolio-request" element={<PortfolioRequest />} />
+              {/* Gestión socios */}
+              <Route path="/partner-management" element={<PartnerManagement />}/>
+              <Route path="/create-partner" element={<CreatePartner />} />
+              <Route path="/edit-partner" element={<EditPartner />} />
+            {/* Ingresos */}
+            <Route path="/income" element={<Income />} />
+            <Route path="/income-history" element={<IncomeHistory />} />
+            {/* Gastos */}
+            <Route path="/expenses" element={<Expenses />} />
+            <Route path="/expense-history" element={<ExpenseHistory />} />
+            {/* Ventas */}
+            <Route path="/sales" element={<Sales />} />
+            {/* Gestión de cajas */}
+            <Route path="/cash-management" element={<CashManagement />} />
+            <Route path="/box-summary" element={<BoxSummary />} />
+            {/* Creación de llaves */}
+            <Route path="/key-creation" element={<KeyCreation />} />
+            <Route path="/key-creation-history" element={<KeyCreationHistory />} />
+            {/* Apertura masiva de cajas */}
+            <Route path="/opening-of-boxes" element={<OpeningOfBoxes />} />
+            <Route path="/opening-of-boxes-history" element={<OpeningOfBoxesHistory />} />
+            {/* Limpieza de cobro */}
+            <Route path="/cleaning-payment" element={<CleaningPayment />} />
+            
         </Routes>
       </div>
     </Router>

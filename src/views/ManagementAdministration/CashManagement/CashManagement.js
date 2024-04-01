@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import Calendar from 'react-calendar'
@@ -12,6 +13,11 @@ const CashManagement = () => {
     const [startDatePickerActive, setStartDatePickerActive] = useState(false);
     const [startDate, setStartDate] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const handleBoxSummaryClick = () => {
+        navigate('/box-summary');
+    }
 
     const handleStartDatePickerToggle = () => {
         setStartDatePickerActive(!startDatePickerActive);
@@ -43,7 +49,7 @@ const CashManagement = () => {
                         <button className={`action-button ${!isOpen ? 'selected' : ''}`} onClick={handleCloseButtonClick}>Cerrar caja</button>
                     </div>
                     <div className="right-history">
-                        <button className="history-button">Resumen
+                        <button className="history-button" onClick={handleBoxSummaryClick}>Resumen
                             <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import Calendar from 'react-calendar'
@@ -12,12 +13,16 @@ const OpeningOfBoxes = () => {
     const [startDatePickerActive, setStartDatePickerActive] = useState(false);
     const [startDate, setStartDate] = useState(null);
     const [userSwitch, setUserSwitch] = useState(false);
-
     const [isActiveAll, setIsActiveAll] = useState(false);
     const [userStates, setUserStates] = useState([
         { id: 1, isActive: false },
         { id: 2, isActive: false }
     ]);
+    const navigate = useNavigate();
+
+    const handleOpeningOfBoxesHistoryClick = () => {
+        navigate('/opening-of-boxes-history');
+    }
 
     // Función para cambiar el estado de isActiveAll y de todos los switches de la tabla
     const toggleAllSwitches = () => {
@@ -66,7 +71,7 @@ const OpeningOfBoxes = () => {
                         </div>
                     </div>
                     <div className="right-history">
-                        <button className="history-button">Historico de aperturas masivas
+                        <button className="history-button" onClick={handleOpeningOfBoxesHistoryClick}>Historico de aperturas masivas
                             <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>
