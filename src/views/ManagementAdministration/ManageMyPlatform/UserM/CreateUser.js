@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import Sidebar from '../../../../components/SideBar'
-import Header from '../../../../components/Header'
-import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Sidebar from '../../../../components/SideBar';
+import Header from '../../../../components/Header';
+import "../../../../styles/ManagementAdministration/CreateUnitStyles.css";
 
 const CreateUser = () => {
+    const navigate = useNavigate();
     const [pageTitle] = useState('Crear usuario');
     const [isActive, setIsActive] = useState(false);
     const [formData, setFormData] = useState({
@@ -15,6 +17,8 @@ const CreateUser = () => {
         state: '0'
     });
     const [roles, setRoles] = useState([]);
+    const [units, setUnits] = useState([]);
+
     useEffect(() => {
         const fetchRoles = async () => {
             try {
@@ -22,21 +26,18 @@ const CreateUser = () => {
                 const data = await response.json();
                 setRoles(data.Roles);
             } catch (error) {
-                console.error('Error fetching states:', error);
+                console.error('Error fetching roles:', error);
             }
         };
         fetchRoles();
-    }, []);
 
-    const [units, setUnits] = useState([]);
-    useEffect(() => {
         const fetchUnits = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_UNITS_LIST_ENDPOINT}`);
                 const data = await response.json();
                 setUnits(data['Gestion de Unidades']);
             } catch (error) {
-                console.error('Error fetching states:', error);
+                console.error('Error fetching units:', error);
             }
         };
         fetchUnits();
@@ -48,7 +49,7 @@ const CreateUser = () => {
             ...formData,
             state: !isActive ? '1' : '0'
         });
-    }
+    };
 
     const handleChange = (e) => {
         setFormData({
@@ -59,6 +60,10 @@ const CreateUser = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!formData.name || !formData.id_rol || !formData.email || !formData.celphone || !formData.id_unit_management) {
+            alert('Por favor complete todos los campos');
+            return;
+        }
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_USER_ENDPOINT}`, {
                 method: 'POST',
@@ -70,6 +75,7 @@ const CreateUser = () => {
             const data = await response.json();
             if (data.status === 200) {
                 alert('Usuario creado exitosamente');
+                navigate('/user-management');
             } else {
                 alert('Error al crear el usuario');
             }
@@ -78,6 +84,11 @@ const CreateUser = () => {
             alert('Error al enviar el formulario');
         }
     };
+
+    const handleCancel = () => {
+        navigate('/user-management');
+    };
+
     return (
         <div className="home-container">
             <div className="left-h">
@@ -87,14 +98,14 @@ const CreateUser = () => {
                 <Header title={pageTitle} backButtonPath="/user-management" startItem="Gestión de usuarios"/>
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="userName">Nombre</label>
+                        <label htmlFor="name">Nombre</label>
                         <input type="text" id="name" name="name" placeholder="Ingrese el nombre" onChange={handleChange}/>
                     </div>
                     <div className="form-group">
                         <div className="income-fields">
                             <label htmlFor="id_rol">Tipo de Usuario</label>
                             <select id="id_rol" name="id_rol" className="management-select" onChange={handleChange} value={formData.id_rol}>
-                                <option value="">Seleccione un estado</option>
+                                <option value="">Seleccione un rol</option>
                                 {roles.map(rol => (
                                     <option key={rol.id} value={rol.id}>{rol.name}</option>
                                 ))}
@@ -102,11 +113,11 @@ const CreateUser = () => {
                         </div>
                     </div> 
                     <div className="form-group">
-                        <label htmlFor="userEmail">Correo</label>
+                        <label htmlFor="email">Correo</label>
                         <input type="text" id="email" name="email" placeholder="Ingrese el correo" onChange={handleChange}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="userPhoneNumber">Número de celular</label>
+                        <label htmlFor="celphone">Número de celular</label>
                         <input type="text" id="celphone" name="celphone" placeholder="Ingrese el número de celular" onChange={handleChange}/>
                     </div>
                     <div className="form-group">
@@ -129,12 +140,12 @@ const CreateUser = () => {
                     </div>
                     <div className="management-buttons">
                         <button type="submit" className="create-button create">Guardar ingreso</button>
-                        <button className="create-button cancel">Cancelar</button>
+                        <button type="button" className="create-button cancel" onClick={handleCancel}>Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
     );
-}
+};
 
 export default CreateUser;

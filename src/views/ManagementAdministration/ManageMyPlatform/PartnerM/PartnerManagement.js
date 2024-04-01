@@ -12,7 +12,7 @@ const PartnerManagement = () => {
     useEffect(() => {
         const fetchPartners = async () => {
             try {
-                const response = await fetch('http://192.168.0.5:8000/api/GestionSocios/listData');
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_PARTNERS_LIST_ENDPOINT}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -78,7 +78,7 @@ const PartnerManagement = () => {
                                 <tr key={partner.id}>
                                     <td>{partner.partnert_name}</td>
                                     <td>{partner.unit_name}</td>
-                                    <td></td>
+                                    <td>{partner.share_percentage}</td>
                                     <td>{partner.email}</td>
                                     <td>
                                         <label htmlFor={`userActiveSwitch_${partner.id}`} className="switch2">

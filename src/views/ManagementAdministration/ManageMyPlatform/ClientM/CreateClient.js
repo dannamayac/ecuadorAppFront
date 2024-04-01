@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../../../../components/SideBar'
-import Header from '../../../../components/Header'
-import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
+import Sidebar from '../../../../components/SideBar';
+import Header from '../../../../components/Header';
+import "../../../../styles/ManagementAdministration/CreateUnitStyles.css";
 
 const CreateClient = () => {
     const navigate = useNavigate();
@@ -29,6 +29,8 @@ const CreateClient = () => {
         state: '0'
     });
     const [units, setUnits] = useState([]);
+    const [documentTypes, setDocumentTypes] = useState([]);
+
     useEffect(() => {
         const fetchUnits = async () => {
             try {
@@ -36,24 +38,21 @@ const CreateClient = () => {
                 const data = await response.json();
                 setUnits(data['Gestion de Unidades']);
             } catch (error) {
-                console.error('Error fetching states:', error);
+                console.error('Error fetching units:', error);
             }
         };
         fetchUnits();
-    }, []);
 
-    const [documentTypes, setdocumentType] = useState([]);
-    useEffect(() => {
-        const fetchDocumentType = async () => {
+        const fetchDocumentTypes = async () => {
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_DOCUMENTS_LIST_ENDPOINT}`);
                 const data = await response.json();
-                setdocumentType(data['Tipos de Documentos']);
+                setDocumentTypes(data['Tipos de Documentos']);
             } catch (error) {
-                console.error('Error fetching states:', error);
+                console.error('Error fetching document types:', error);
             }
         };
-        fetchDocumentType();
+        fetchDocumentTypes();
     }, []);
 
     const toggleActive = () => {
@@ -62,7 +61,8 @@ const CreateClient = () => {
             ...formData,
             state: !isActive ? '1' : '0'
         });
-    }
+    };
+
     const handleChange = (e) => {
         const { id, value } = e.target;
         let newValue = value;
@@ -78,12 +78,13 @@ const CreateClient = () => {
         });
     };
 
-    const handleSubmit = async () => {
-        try {
-            if (!formData.name || !formData.id_unit_management || !formData.id_document_type || !formData.document_number) {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!formData.name || !formData.id_unit_management || !formData.id_document_type || !formData.document_number) {
             console.error('Por favor, complete todos los campos obligatorios.');
             return;
-            }
+        }
+        try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_CUSTOMER_ENDPOINT}`, {
                 method: 'POST',
                 headers: {
@@ -93,10 +94,16 @@ const CreateClient = () => {
             });
             const data = await response.json();
             console.log(data);
+            navigate('/client-management'); // Redirige a la vista general luego de crear el cliente
         } catch (error) {
             console.error('Error creating client:', error);
         }
     };
+
+    const handleCancel = () => {
+        navigate('/client-management'); // Redirige a la vista general al presionar "Cancelar"
+    };
+
 
     return (
         <div className="home-container">
@@ -192,9 +199,9 @@ const CreateClient = () => {
                         </label>
                     </div>
                     <div className="form-buttons">
-                        <button type="button" className="create-button cancel" onClick={() => navigate('/client-management')}>Cancelar</button>
-                        <button type="submit" className="create-button create" onClick={() => navigate('/client-management')}>Crear nuevo cliente</button>
-                    </div>
+                        <button type="button" className="create-button cancel" onClick={handleCancel}>Cancelar</button>
+                        <button type="submit" className="create-button create">Crear nuevo cliente</button>
+                   </div>
                 </form>
             </div>
         </div>
