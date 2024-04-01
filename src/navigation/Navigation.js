@@ -32,7 +32,11 @@ import ExpenseHistory from '../views/ManagementAdministration/Expenses/ExpenseHi
 import IncomeHistory from '../views/ManagementAdministration/Income/IncomeHistory.js';
 import ReportsAndMetrics from '../views/ManagementAdministration/ManageMyPlatform/ReportsAndMetrics.js';
 import Billing from '../views/Billing/Billing.js';
-
+import Approvals from '../views/Approvals/Approvals.js';
+import KeyApprovals from '../views/Approvals/KeyApprovals/KeyApprovals.js';
+import ExpensesApprovals from '../views/Approvals/ExpensesApprovals/ExpensesApprovals.js';
+import SalesApprovals from '../views/Approvals/SalesApprovals/SalesApprovals.js';
+import InsuranceApprovals from '../views/Approvals/InsuranceApprovals/InsuranceApprovals.js';
 
 function Navigation() {
   return (
@@ -87,7 +91,16 @@ function Navigation() {
             <Route path="/cleaning-payment" element={<CleaningPayment />} />
           {/* Facturación */}
           <Route path="/billing" element={<Billing />} />
-
+          {/* Aprobaciones */}
+          <Route path="/approvals" element={<Approvals />} />
+            {/* Aprobación de llaves */}
+            <Route path="/key-approvals" element={<KeyApprovals />} /> 
+            {/* Aprobaciones */}
+            <Route path="/expenses-approvals" element={<ExpensesApprovals />} />
+            {/* Aprobaciones */}
+            <Route path="/sales-approvals" element={<SalesApprovals />} />
+            {/* Aprobaciones */}
+            <Route path="/insurance-approval" element={<InsuranceApprovals />} />
         </Routes>
       </div>
     </Router>

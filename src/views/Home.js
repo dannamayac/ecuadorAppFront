@@ -22,6 +22,9 @@ const Home = () =>{
     const handleBillingButtonClick = () => {
         navigate('/billing');
     }
+    const handleApprovalsButtonClick = () => {
+        navigate('/approvals');
+    }
 
     return (
         <div className="home-container">
@@ -63,7 +66,7 @@ const Home = () =>{
                                 <FontAwesomeIcon icon={faFileCirclePlus} />
                             </div>
                         </button>
-                        <button className="custom-button aprobaciones">
+                        <button className="custom-button aprobaciones" onClick={handleApprovalsButtonClick}>
                             <div className="left-bu">
                                 Aprobaciones
                                 <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>

@@ -75,10 +75,11 @@
     color: black;
     font-weight: bold;
     border-color: white;
-    padding: 40px;
+    padding: 40px 50px;
     border-radius: 8px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
-    width: 200px;
+    width: 100%;
+    height: 100%;
 }
 
 .report-button{

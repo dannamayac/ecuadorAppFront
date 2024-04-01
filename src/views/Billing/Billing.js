@@ -28,7 +28,7 @@ const Billing = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/management-administration" startItem="General" />
+                <Header title={pageTitle} backButtonPath="/" startItem="General" />
                 <div className="income-header">
                     <div className="left-title">
                         <div className="filter-fields">
