@@ -19,6 +19,9 @@ const Home = () =>{
     const handleGestionButtonClick = () => {
         navigate('/management-administration');
     }
+    const handleBillingButtonClick = () => {
+        navigate('/billing');
+    }
 
     return (
         <div className="home-container">
@@ -38,7 +41,7 @@ const Home = () =>{
                                 <FontAwesomeIcon icon={faUserTie} />
                             </div>
                         </button>
-                        <button className="custom-button facturacion">
+                        <button className="custom-button facturacion" onClick={handleBillingButtonClick}>
                             <div className="left-bu">
                                 Facturación
                                 <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
