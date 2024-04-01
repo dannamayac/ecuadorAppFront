@@ -89,3 +89,10 @@
 .closed{
     margin-left: 0px;
 }
+
+.excel-icon {
+    margin-right: 5px;
+    margin-left: 8px;
+    width: 20px;
+    height: 20px;
+}

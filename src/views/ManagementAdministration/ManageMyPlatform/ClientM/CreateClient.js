@@ -107,13 +107,15 @@ const CreateClient = () => {
                 <Header title={pageTitle} backButtonPath="/client-management" startItem="Gestión de clientes"/>
                 <form className="form-container" onSubmit={handleSubmit}>
                 <div className="form-group">
+                    <div className="income-fields">
                         <label htmlFor="id_unit_management">Unidad Asignada</label>
-                        <select id="id_unit_management" name="id_unit_management" onChange={handleChange} value={formData.id_unit_management}>
+                        <select id="id_unit_management" name="id_unit_management" className="management-select" onChange={handleChange} value={formData.id_unit_management}>
                             <option value="">Seleccione Unidad</option>
                             {units.map(unit => (
                                 <option key={unit.id} value={unit.id}>{unit.unit}</option>
                             ))}
                         </select>
+                    </div>    
                     </div>
                     <div className="form-group">
                         <label htmlFor="name">Nombre completo</label>
@@ -124,13 +126,15 @@ const CreateClient = () => {
                         <input type="text" id="nickname" name="nickname" placeholder="Ingrese el apodo" onChange={handleChange} value={formData.nickname}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="id_document_type">Tipo Documento</label>
-                        <select id="id_document_type" name="id_document_type" onChange={handleChange} value={formData.id_document_type}>
-                            <option value="">Seleccione Tipo Documento</option>
-                            {documentTypes.map(documentType => (
-                                <option key={documentType.id} value={documentType.id}>{documentType.name}</option>
-                            ))}
-                        </select>
+                        <div className="income-fields">
+                            <label htmlFor="id_document_type">Tipo Documento</label>
+                            <select id="id_document_type" name="id_document_type" className="management-select" onChange={handleChange} value={formData.id_document_type}>
+                                <option value="">Seleccione Tipo Documento</option>
+                                {documentTypes.map(documentType => (
+                                    <option key={documentType.id} value={documentType.id}>{documentType.name}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="document_number">Número de documento</label>

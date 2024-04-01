@@ -1,25 +1,27 @@
 import React from 'react';
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarAlt, faFileExcel } from '@fortawesome/free-solid-svg-icons'
-import Calendar from 'react-calendar'
+import { faSearch, faFileExcel } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import "../../../styles/ManagementAdministration/OpeningOfBoxesStyles.css"
 
 const CleaningPayment = () => {
     const [pageTitle] = useState('Limpieza de cobro');
-    const [startDatePickerActive, setStartDatePickerActive] = useState(false);
-    const [startDate, setStartDate] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [searchActive, setSearchActive] = useState(false);
+    const [userSwitch, setUserSwitch] = useState(false);
+    const [isActiveAll, setIsActiveAll] = useState(false);
+    const [userStates, setUserStates] = useState([
+        { id: 1, isActive: false },
+        { id: 2, isActive: false }
+    ]);
 
-    const handleStartDatePickerToggle = () => {
-        setStartDatePickerActive(!startDatePickerActive);
-    };
-
-    const handleStartDateChange = (date) => {
-        setStartDate(date);
-        setStartDatePickerActive(false);
+    // Función para cambiar el estado de isActiveAll y de todos los switches de la tabla
+    const toggleAllSwitches = () => {
+        const newState = !isActiveAll;
+        setIsActiveAll(newState);
+        setUserStates(userStates.map(user => ({ ...user, isActive: newState })));
     };
 
     const handleOpenButtonClick = () => {
@@ -28,6 +30,14 @@ const CleaningPayment = () => {
 
     const handleCloseButtonClick = () => {
         setIsOpen(false);
+    };
+
+    const handleSearchToggle = () => {
+        setSearchActive(!searchActive);
+    };
+
+    const toggleUserSwitch = () => {
+        setUserSwitch(!userSwitch);
     };
 
     return (
@@ -44,41 +54,72 @@ const CleaningPayment = () => {
                     </div>
                     <div className="right-history">
                         <button className="history-button">Exportar Excel
-                            <FontAwesomeIcon icon={faFileExcel} />
-                            <div className="sub-button" style={{ width: '75px' }}>Exportar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                            <FontAwesomeIcon icon={faFileExcel} className="excel-icon"/>
+                            <div className="sub-button" style={{ width: '75px', marginBottom:'5px' }}>Exportar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>
                 </div>
                 <div className="income-form">
-                    <div className="date-buttonsBoxes">
-                        <div className="date-inputs">
-                            <div className={`date-input ${isOpen ? '' : 'hidden'}`}>
-                                <p>Fecha de apertura de CNS & UGIS</p>
-                                <button className="date-button" onClick={handleStartDatePickerToggle}>
-                                    {startDate ? `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}` : 'Fecha'}
-                                    <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
-                                </button>
-                                {startDatePickerActive && (
-                                    <div className="calendar-wrapper">
-                                        <Calendar
-                                            onChange={handleStartDateChange}
-                                            value={startDate}
-                                        />
-                                    </div>
-                                )}
+                <div className='filters'>
+                        <div className='search'>
+                            <div className="search-container">
+                                <div className="search-wrapper">
+                                    <input className="search-input" type="text" placeholder="Escriba aquí para buscar" />
+                                    <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={handleSearchToggle} />
+                                </div>
                             </div>
-                            <div className={`income-field custom-field ${isOpen ? '' : 'closed'}`}>
-                                <label htmlFor="unit">Unidad</label>
-                                <select id="unit">
-                                    <option value="" disabled selected hidden>Seleccionar unidad</option>
-                                    {/* opciones de UGI Diaria */}
+                        </div>
+                        <div className="filter-field">
+                                <select id="filterByIdOrField" className="filter-select">
+                                    <option value="" disabled selected hidden>/1/ - CN de la sociedad 234235</option>
+                                    <option value="id">ID</option>
+                                    <option value="field">Campo</option>
+                                </select>
+                            </div>
+                            <div className="filter-field">
+                                <select id="filterByUnit" className="filter-select">
+                                    <option value="" disabled selected hidden>Todas las unidades:</option>
+                                    {/* Opciones para filtrar por unidad */}
+                                </select>
+                            </div>
+                            <div className="filter-field">
+                                <select id="filterByUnit" className="filter-select">
+                                    <option value="" disabled selected hidden>Días de mora:</option>
+                                    {/* Opciones para filtrar por unidad */}
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div className="income-buttonsK">
-                        <button className="create-button create">{isOpen ? 'Abrir caja' : 'Cerrar caja'}</button>
-                    </div>
+                    <table>
+                    <thead>
+                        <tr>
+                            <th>/1/ - CN de la sociedad 234235</th>
+                            <th>
+                            <label htmlFor="userActiveSwitch" className="switch2">
+                                <input type="checkbox" id="userActiveSwitch" checked={isActiveAll} onChange={toggleAllSwitches} />
+                                <span className="slider2 round2"></span>
+                            </label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                                <tr>
+                                    <td>12 - Unidad - Nombre - Socio %</td>
+                                    <td>
+                                        {/* Switch de la tabla */}
+                                        <label htmlFor="userActiveSwitch" className="switch2">
+                                            <input
+                                                type="checkbox"
+                                                id="userActiveSwitch"
+                                                checked={userSwitch}
+                                                onChange={toggleUserSwitch}
+                                            />
+                                            <span className="slider2 round2"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                 </div>
             </div>
         </div>
