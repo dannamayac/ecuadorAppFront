@@ -65,18 +65,21 @@ const Expenses = () => {
                         <div className="income-field">
                             <label htmlFor="ugiDiaria">UGI Diaria</label>
                             <select id="ugiDiaria">
+                                <option value="" disabled selected hidden>Seleccione UGI diaria</option>
                                 {/* opciones de UGI Diaria */}
                             </select>
                         </div>
                         <div className="income-field">
                             <label htmlFor="trabajador">Trabajador</label>
                             <select id="trabajador">
+                                <option value="" disabled selected hidden>Seleccione trabajador</option>
                                 {/* opciones de Trabajador */}
                             </select>
                         </div>
                         <div className="income-field">
                             <label htmlFor="tipoIngreso">Tipo de egreso</label>
                             <select id="tipoIngreso">
+                                <option value="" disabled selected hidden>Seleccione tipo de egreso</option>
                                 {/* opciones de Tipo de Ingreso */}
                             </select>
                         </div>

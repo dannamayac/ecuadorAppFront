@@ -100,7 +100,7 @@ function Navigation() {
             {/* Aprobaciones */}
             <Route path="/sales-approvals" element={<SalesApprovals />} />
             {/* Aprobaciones */}
-            <Route path="/insurance-approval" element={<InsuranceApprovals />} />
+            <Route path="/insurance-approvals" element={<InsuranceApprovals />} />
         </Routes>
       </div>
     </Router>

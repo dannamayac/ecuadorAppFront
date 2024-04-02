@@ -36,6 +36,7 @@
 .right-history{
     justify-content: flex-end;
     width: 30%;
+    margin-top: -5px;
 }
 
 .filter-fields {
