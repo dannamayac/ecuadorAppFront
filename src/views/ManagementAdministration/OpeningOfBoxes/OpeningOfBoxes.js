@@ -71,7 +71,7 @@ const OpeningOfBoxes = () => {
                         </div>
                     </div>
                     <div className="right-history">
-                        <button className="history-button" onClick={handleOpeningOfBoxesHistoryClick}>Historico de aperturas masivas
+                        <button className="history-button" onClick={handleOpeningOfBoxesHistoryClick} style={{marginLeft:'-50px'}}>Historico de aperturas masivas
                             <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>

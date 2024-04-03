@@ -97,7 +97,7 @@ const Sales = () => {
                         <div className='search'>
                             <div className="search-container">
                                 <div className="search-wrapper">
-                                    <input className="search-input" type="text" placeholder="Escriba aquí para buscar" />
+                                    <input className="search-input2" type="text" placeholder="Escriba aquí para buscar" />
                                     <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={handleSearchToggle} />
                                 </div>
                             </div>

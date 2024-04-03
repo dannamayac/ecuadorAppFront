@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import "../../../styles/Approvals/ApprovalsStyle.css"
@@ -34,7 +34,7 @@ const KeyApprovals = () => {
                         </div>
                     </div>
                     <div className="right-history">
-                        <button className="history-button" onClick={handleExpenseHistoryClick}>Histórico de aprobación
+                        <button className="history-button" onClick={handleExpenseHistoryClick} style={{ marginTop: '-10px' }}>Histórico de aprobación
                             <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>
@@ -44,12 +44,12 @@ const KeyApprovals = () => {
                         <div className='search'>
                             <div className="search-container">
                                 <div className="search-wrapper">
-                                    <input className="search-input" type="text" placeholder="Escriba aquí para buscar" />
+                                    <input className="search-input2" type="text" placeholder="Escriba aquí para buscar" />
                                     <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={handleSearchToggle} />
                                 </div>
                             </div>
                         </div>
-                        <div className="filter-field" style={{ marginLeft:'-30px'}}>
+                        <div className="filter-field" style={{ marginLeft:'-20px'}}>
                             <select id="filterByIdOrField" className="filter-select">
                                 <option value="" disabled selected hidden>/1/ - CN de la sociedad 234235</option>
                                 <option value="id">ID</option>
@@ -57,12 +57,15 @@ const KeyApprovals = () => {
                             </select>
                         </div>
                         <div className="filter-field">
-                            <select id="filterByUnit" className="filter-select" style={{ width:'200px'}}>
+                            <select id="filterByUnit" className="filter-select" >
                                 <option value="" disabled selected hidden>Todas las unidades:</option>
                                 {/* Opciones para filtrar por unidad */}
                             </select>
                         </div>
-                        <button className="createKey-button" onClick={handleExpenseHistoryClick}>Crear llave &nbsp;&nbsp;&nbsp;+</button>
+                        <button className="createKey-button" onClick={handleExpenseHistoryClick}>
+                            <div className="left-bu">Crear llave</div>
+                            <div className="right-bu">&nbsp;&nbsp;&nbsp;&nbsp;+</div>
+                            </button>
                     </div>
                 </div>
                 <table>
@@ -94,7 +97,14 @@ const KeyApprovals = () => {
                             <td>30</td>
                             <td>31/04/2024</td>
                             <td>
-                                Acción
+                                <input type="checkbox" id="checkboxGreen" className="checkbox-green" />
+                                <label htmlFor="checkboxGreen" className="checkbox-label">
+                                    <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                                </label>
+                                <input type="checkbox" id="checkboxRed" className="checkbox-red" />
+                                <label htmlFor="checkboxRed" className="checkbox-label">
+                                    <FontAwesomeIcon icon={faTimes} className="times-icon" />
+                                </label>
                             </td>
                         </tr>
                     </tbody>
