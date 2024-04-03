@@ -59,7 +59,10 @@ const PartnerManagement = () => {
             </div>
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Socios" showSearch={true}/>
-                <button className="create-button" onClick={handleCreatePartner}>Crear nuevo usuario</button>
+                <button className="create-button" onClick={handleCreatePartner}>
+                    <div className="left-bu">Crear nuevo socio </div>
+                    <div className="right-bu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+</div>
+                </button>
                 <table>
                     <thead>
                         <tr>
@@ -91,7 +94,7 @@ const PartnerManagement = () => {
                                         </label>
                                     </td>
                                     <td>
-                                        <button onClick={handleEditPartner}>Editar</button>
+                                        <button className='edit-button' onClick={handleEditPartner}>Editar</button>
                                     </td>
                                 </tr>
                             );

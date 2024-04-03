@@ -1,5 +1,5 @@
-import React, { useState, useEffect  } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../../components/SideBar'
 import Header from '../../../../components/Header'
 import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
@@ -82,7 +82,7 @@ const CreateUnit = () => {
             const data = await response.json();
             if (data.status === 200) {
                 alert('Unidad creada exitosamente');
-                navigate('/unit-management'); 
+                navigate('/unit-management');
             } else {
                 alert('Error al crear la unidad');
             }
@@ -91,7 +91,7 @@ const CreateUnit = () => {
             alert('Error al enviar el formulario');
         }
     };
-    
+
 
     return (
         <div className="home-container">
@@ -99,33 +99,29 @@ const CreateUnit = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title= {pageTitle} backButtonPath="/unit-management" startItem="Unidades"/>
+                <Header title={pageTitle} backButtonPath="/unit-management" startItem="Unidades" />
                 <form className="form-container" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="unit">Nombre unidad</label>
-                        <input type="text" id="unit" name="unit" placeholder="Ingrese el nombre de la unidad" onChange={handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="code">Código</label>
-                        <input type="text" id="code" name="code" placeholder="Ingrese el código" onChange={handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="location">Ubicación</label>
-                        <input type="text" id="location" name="location" placeholder="Ingrese la ubicación" onChange={handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <div className="income-fields">
+                    <div className="income-header">
+                        <div className="form-group">
+                            <label htmlFor="unit">Nombre unidad</label>
+                            <input type="text" id="unit" name="unit" placeholder="Ingrese el nombre de la unidad" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="code">Código</label>
+                            <input type="text" id="code" name="code" placeholder="Ingrese el código" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="location">Ubicación</label>
+                            <input type="text" id="location" name="location" placeholder="Ingrese la ubicación" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
                             <label htmlFor="id_state">Estado</label>
                             <select id="id_state" name="id_state" className="management-select" onChange={handleChange} value={formData.id_state}>
                                 <option value="">Seleccione un estado</option>
-                                {states.map(state => (
-                                    <option key={state.id} value={state.id}>{state.name}</option>
-                                ))}
+                                {/* Renderizar opciones de estado */}
                             </select>
                         </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="income-fields">
+                        <div className="form-group">
                             <label htmlFor="id_user_management">Asignar administrador</label>
                             <select id="id_user_management" name="id_user_management" className="management-select" onChange={handleChange} value={formData.id_user_management}>
                                 <option value="">Seleccione un Administrador</option>
@@ -133,14 +129,14 @@ const CreateUnit = () => {
                                     <option key={user.id} value={user.id}>{user.name}</option>
                                 ))}
                             </select>
-                        </div>           
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="established_default">Mora establecida</label>
+                            <input type="text" id="established_default" name="established_default" placeholder="Ingrese la mora establecida" onChange={handleChange} />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="established_default">Mora establecida</label>
-                        <input type="text" id="established_default" name="established_default" placeholder="Ingrese la mora establecida" onChange={handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <div className="income-fields">
+                    <div className="income-header">
+                        <div className="form-group">
                             <label htmlFor="id_partner_management">Socio</label>
                             <select id="id_partner_management" name="id_partner_management" className="management-select" onChange={handleChange} value={formData.id_partner_management}>
                                 <option value="">Seleccione un Socio</option>
@@ -148,15 +144,15 @@ const CreateUnit = () => {
                                     <option key={partner.id} value={partner.id}>{partner.partnert_name}</option>
                                 ))}
                             </select>
-                            </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="percentage">%</label>
-                        <input type="text" id="percentage" name="percentage" placeholder="Ingrese el %" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="percentage">%</label>
+                            <input type="text" id="percentage" name="percentage" placeholder="Ingrese el %" onChange={handleChange} />
+                        </div>
                     </div>
                     <div className="management-buttons">
-                    <button type="button" className="create-button create" onClick={handleSubmit}>Guardar ingreso</button>
-                    <button className="create-button cancel" onClick={() => navigate('/unit-management')}>Cancelar</button>
+                        <button type="submit" className="create-button2 create" onClick={handleSubmit}>Guardar ingreso</button>
+                        <button type="button" className="create-button2 cancel" onClick={() => navigate('/unit-management')}>Cancelar</button>
                     </div>
                 </form>
             </div>

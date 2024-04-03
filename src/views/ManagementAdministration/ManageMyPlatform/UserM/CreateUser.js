@@ -95,14 +95,14 @@ const CreateUser = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/user-management" startItem="Gestión de usuarios"/>
+                <Header title={pageTitle} backButtonPath="/user-management" startItem="Gestión de usuarios" />
                 <form className="form-container" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name">Nombre</label>
-                        <input type="text" id="name" name="name" placeholder="Ingrese el nombre" onChange={handleChange}/>
-                    </div>
-                    <div className="form-group">
-                        <div className="income-fields">
+                    <div className="income-header">
+                        <div className="form-group">
+                            <label htmlFor="name">Nombre</label>
+                            <input type="text" id="name" name="name" placeholder="Ingrese el nombre" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
                             <label htmlFor="id_rol">Tipo de Usuario</label>
                             <select id="id_rol" name="id_rol" className="management-select" onChange={handleChange} value={formData.id_rol}>
                                 <option value="">Seleccione un rol</option>
@@ -111,17 +111,17 @@ const CreateUser = () => {
                                 ))}
                             </select>
                         </div>
-                    </div> 
-                    <div className="form-group">
-                        <label htmlFor="email">Correo</label>
-                        <input type="text" id="email" name="email" placeholder="Ingrese el correo" onChange={handleChange}/>
+                        <div className="form-group">
+                            <label htmlFor="email">Correo</label>
+                            <input type="text" id="email" name="email" placeholder="Ingrese el correo" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="celphone">Número de celular</label>
+                            <input type="text" id="celphone" name="celphone" placeholder="Ingrese el número de celular" onChange={handleChange} />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="celphone">Número de celular</label>
-                        <input type="text" id="celphone" name="celphone" placeholder="Ingrese el número de celular" onChange={handleChange}/>
-                    </div>
-                    <div className="form-group">
-                        <div className="income-fields">
+                    <div className="income-header">
+                        <div className="form-group">
                             <label htmlFor="id_unit_management">Unidad Asignada</label>
                             <select id="id_unit_management" name="id_unit_management" className="management-select" onChange={handleChange} value={formData.id_unit_management}>
                                 <option value="">Seleccione una unidad</option>
@@ -129,18 +129,18 @@ const CreateUser = () => {
                                     <option key={unit.id} value={unit.id}>{unit.unit}</option>
                                 ))}
                             </select>
-                        </div>    
-                    </div> 
-                    <div className="form-group">
-                        <span className="switch-label">Estado</span>
-                        <label htmlFor="userActiveSwitch" className="switch">
-                            <input type="checkbox" id="userActiveSwitch" checked={isActive} onChange={toggleActive} />
-                            <span className="slider round"></span>
-                        </label>
+                        </div>
+                        <div className="form-group">
+                            <span className="switch-label">Estado</span>
+                            <label htmlFor="userActiveSwitch" className="switch">
+                                <input type="checkbox" id="userActiveSwitch" checked={isActive} onChange={toggleActive} />
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
                     </div>
                     <div className="management-buttons">
-                        <button type="submit" className="create-button create">Guardar ingreso</button>
-                        <button type="button" className="create-button cancel" onClick={handleCancel}>Cancelar</button>
+                        <button type="submit" className="create-button2 create">Guardar ingreso</button>
+                        <button type="button" className="create-button2 cancel" onClick={handleCancel}>Cancelar</button>
                     </div>
                 </form>
             </div>

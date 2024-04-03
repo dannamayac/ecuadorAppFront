@@ -65,7 +65,7 @@ const KeyApprovals = () => {
                         <button className="createKey-button" onClick={handleExpenseHistoryClick}>
                             <div className="left-bu">Crear llave</div>
                             <div className="right-bu">&nbsp;&nbsp;&nbsp;&nbsp;+</div>
-                            </button>
+                        </button>
                     </div>
                 </div>
                 <table>

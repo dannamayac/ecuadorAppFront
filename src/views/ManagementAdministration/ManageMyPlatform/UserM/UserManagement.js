@@ -41,7 +41,10 @@ const UserManagement = () => {
             </div>
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Usuarios" showSearch={true} />
-                <button className="create-button" onClick={handleCreateUser}>Crear nuevo usuario</button>
+                <button className="create-button" onClick={handleCreateUser}>
+                    <div className="left-bu">Crear nuevo usuario </div>
+                    <div className="right-bu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+</div>
+                </button>
                 <table>
                     <thead>
                         <tr>
@@ -62,7 +65,7 @@ const UserManagement = () => {
                             <td>{user.email}</td>
                             <td>{user.celphone}</td>
                             <td>
-                            <button onClick={() => handleEditUser(user.id)}>Editar</button>
+                            <button className='edit-button' onClick={() => handleEditUser(user.id)}>Editar</button>
                             </td>
                         </tr>
                          ))}

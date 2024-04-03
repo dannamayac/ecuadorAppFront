@@ -75,11 +75,17 @@
 }
 
 .inactive-clients {
-    background-color: #36dbe5;
+    background-color: var(--aquamarine);
     color: white;
+}
+.inactive-clients:hover {
+    filter: brightness(90%);
 }
 
 .requests {
-    background-color: #d8d021;
+    background-color: var(--yellow);
     color: white;
+}
+.requests:hover {
+    filter: brightness(90%);
 }

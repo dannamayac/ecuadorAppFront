@@ -19,35 +19,40 @@ const EditPartner = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/partner-management" startItem="Gestión de socios"/>
+                <Header title={pageTitle} backButtonPath="/partner-management" startItem="Gestión de socios" />
                 <div className="form-container">
-                    {/* Agrega los campos restantes aquí */}
-                    <div className="form-group">
-                        <label htmlFor="partnerName">Nombre</label>
-                        <input type="text" id="partnerName" placeholder="Ingrese el nombre" />
+                    <div className="income-header">
+                        <div className="form-group">
+                            <label htmlFor="partnerName">Nombre</label>
+                            <input type="text" id="partnerName" placeholder="Ingrese el nombre" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="partnerEmail">Correo</label>
+                            <input type="text" id="partnerEmail" placeholder="Ingrese el correo" />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="assignedUnit">Unidad asignada</label>
-                        <input type="text" id="assignedUnit" placeholder="Ingrese la unidad asignada" />
+                    <div className="income-header">
+                        <div className="form-group">
+                            <label htmlFor="assignedUnit">Unidad asignada</label>
+                            <input type="text" id="assignedUnit" placeholder="Ingrese la unidad asignada" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="percentageOwnership">Porcentaje accionario</label>
+                            <input type="text" id="percentageOwnership" placeholder="Ingrese el porcentaje accionario" />
+                        </div>
+                        <div className="form-group">
+                            <span className="switch-label">Estado</span>
+                            <label htmlFor="partnerActiveSwitch" className="switch">
+                                <input type="checkbox" id="partnerActiveSwitch" checked={isActive} onChange={toggleActive} />
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="percentageOwnership">Porcentaje accionario</label>
-                        <input type="text" id="percentageOwnership" placeholder="Ingrese el porcentaje accionario" />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="partnerEmail">Correo</label>
-                        <input type="text" id="partnerEmail" placeholder="Ingrese el correo" />
-                    </div>
-                    <div className="form-group">
-                        <span className="switch-label">Estado</span>
-                        <label htmlFor="partnerActiveSwitch" className="switch">
-                            <input type="checkbox" id="partnerActiveSwitch" checked={isActive} onChange={toggleActive} />
-                            <span className="slider round"></span>
-                        </label>
+                    <div className="management-buttons">
+                        <button type="submit" className="create-button2 create" >Guardar ingreso</button>
+                        <button type="button" className="create-button2 cancel" >Cancelar</button>
                     </div>
                 </div>
-                <button className="create-button cancel">Cancelar</button>
-                <button className="create-button create">Guardar cambios</button>
             </div>
         </div>
     );

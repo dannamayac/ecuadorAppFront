@@ -47,7 +47,7 @@ const CreatePartner = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.name || !formData.share_percentage || !formData.email ) {
+        if (!formData.name || !formData.share_percentage || !formData.email) {
             alert('Por favor complete todos los campos');
             return;
         }
@@ -80,14 +80,20 @@ const CreatePartner = () => {
         <div className="home-container">
             <Sidebar />
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/partner-management" startItem="Gestión de socios"/>
+                <Header title={pageTitle} backButtonPath="/partner-management" startItem="Gestión de socios" />
                 <form className="form-container" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name">Nombre</label>
-                        <input type="text" id="name" name="name" placeholder="Ingrese el nombre" onChange={handleChange}/>
+                    <div className="income-header">
+                        <div className="form-group">
+                            <label htmlFor="name">Nombre</label>
+                            <input type="text" id="name" name="name" placeholder="Ingrese el nombre" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email">Correo</label>
+                            <input type="text" id="email" name="email" placeholder="Ingrese el correo" onChange={handleChange} />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <div className="income-fields">
+                    <div className="income-header">
+                        <div className="form-group">
                             <label htmlFor="id_unit_management">Unidad Asignada</label>
                             <select id="id_unit_management" name="id_unit_management" className="management-select" onChange={handleChange} value={formData.id_unit_management}>
                                 <option value="">Seleccione una unidad</option>
@@ -95,26 +101,22 @@ const CreatePartner = () => {
                                     <option key={unit.id} value={unit.id}>{unit.unit}</option>
                                 ))}
                             </select>
-                        </div>    
-                    </div> 
-                    <div className="form-group">
-                        <label htmlFor="share_percentage">Porcentaje accionario</label>
-                        <input type="text" id="share_percentage" name="share_percentage" placeholder="Ingrese el porcentaje accionario" onChange={handleChange}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Correo</label>
-                        <input type="text" id="email" name="email" placeholder="Ingrese el correo" onChange={handleChange}/>
-                    </div>
-                    <div className="form-group">
-                        <span className="switch-label">Estado</span>
-                        <label htmlFor="partnerActiveSwitch" className="switch">
-                            <input type="checkbox" id="partnerActiveSwitch" checked={isActive} onChange={toggleActive} />
-                            <span className="slider round"></span>
-                        </label>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="share_percentage">Porcentaje accionario</label>
+                            <input type="text" id="share_percentage" name="share_percentage" placeholder="Ingrese el porcentaje accionario" onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <span className="switch-label">Estado</span>
+                            <label htmlFor="partnerActiveSwitch" className="switch">
+                                <input type="checkbox" id="partnerActiveSwitch" checked={isActive} onChange={toggleActive} />
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
                     </div>
                     <div className="management-buttons">
-                        <button type="submit" className="create-button create">Guardar ingreso</button>
-                        <button type="button" className="create-button cancel" onClick={handleCancel}>Cancelar</button>
+                        <button type="submit" className="create-button2 create">Guardar ingreso</button>
+                        <button type="button" className="create-button2 cancel" onClick={handleCancel}>Cancelar</button>
                     </div>
                 </form>
             </div>

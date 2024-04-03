@@ -38,7 +38,10 @@ const UnitManagement = () => {
             </div>
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Unidades" showSearch={true}/>
-                <button className="create-button" onClick={handleCreateUnitClick}>Crear nueva unidad</button>
+                <button className="create-button" onClick={handleCreateUnitClick}>
+                    <div className="left-bu">Crear nueva unidad </div>
+                    <div className="right-bu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+</div>
+                </button>
                 <table>
                     <thead>
                         <tr>

@@ -31,7 +31,7 @@ const EditUser = () => {
                 console.error('Error al obtener la información del usuario:', error);
             }
         };
-    
+
         fetchUserData();
 
         const fetchRoles = async () => {
@@ -106,46 +106,53 @@ const EditUser = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/user-management" startItem="Gestión de usuarios"/>
+                <Header title={pageTitle} backButtonPath="/user-management" startItem="Gestión de usuarios" />
                 <form className="form-container" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="userName">Nombre</label>
-                        <input type="text" id="name" name="name" placeholder="Ingrese el nombre" value={userData.name} onChange={handleChange}/>
+                    <div className="income-header">
+                        <div className="form-group">
+                            <label htmlFor="userName">Nombre</label>
+                            <input type="text" id="name" name="name" placeholder="Ingrese el nombre" value={userData.name} onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="id_rol">Tipo de Usuario</label>
+                            <select id="id_rol" name="id_rol" className="management-select" onChange={handleChange} value={userData.id_rol}>
+                                <option value="">Seleccione un tipo de usuario</option>
+                                {roles.map(rol => (
+                                    <option key={rol.id} value={rol.id}>{rol.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="userEmail">Correo</label>
+                            <input type="text" id="email" name="email" placeholder="Ingrese el correo" value={userData.email} onChange={handleChange} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="userPhoneNumber">Número de celular</label>
+                            <input type="text" id="celphone" name="celphone" placeholder="Ingrese el número de celular" value={userData.celphone} onChange={handleChange} />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="id_rol">Tipo de Usuario</label>
-                        <select id="id_rol" name="id_rol" onChange={handleChange} value={userData.id_rol}>
-                            <option value="">Seleccione un tipo de usuario</option>
-                            {roles.map(rol => (
-                                <option key={rol.id} value={rol.id}>{rol.name}</option>
-                            ))}
-                        </select>
-                    </div> 
-                    <div className="form-group">
-                        <label htmlFor="userEmail">Correo</label>
-                        <input type="text" id="email" name="email" placeholder="Ingrese el correo" value={userData.email} onChange={handleChange}/>
+                    <div className="income-header">
+                        <div className="form-group">
+                            <label htmlFor="id_unit_management">Unidad Asignada</label>
+                            <select id="id_unit_management" name="id_unit_management" className="management-select" onChange={handleChange} value={userData.id_unit_management}>
+                                <option value="">Seleccione una unidad asignada</option>
+                                {units.map(unit => (
+                                    <option key={unit.id} value={unit.id}>{unit.unit}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <span className="switch-label">Estado</span>
+                            <label htmlFor="userActiveSwitch" className="switch">
+                                <input type="checkbox" id="userActiveSwitch" checked={isActive} onChange={toggleActive} />
+                                <span className="slider round"></span>
+                            </label>
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="userPhoneNumber">Número de celular</label>
-                        <input type="text" id="celphone" name="celphone" placeholder="Ingrese el número de celular" value={userData.celphone} onChange={handleChange}/>
+                    <div className="management-buttons">
+                        <button type="submit" className="create-button2 create">Guardar ingreso</button>
+                        <button type="button" className="create-button2 cancel">Cancelar</button>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="id_unit_management">Unidad Asignada</label>
-                        <select id="id_unit_management" name="id_unit_management" onChange={handleChange} value={userData.id_unit_management}>
-                            <option value="">Seleccione una unidad asignada</option>
-                            {units.map(unit => (
-                                <option key={unit.id} value={unit.id}>{unit.unit}</option>
-                            ))}
-                        </select>
-                    </div> 
-                    <div className="form-group">
-                        <span className="switch-label">Estado</span>
-                        <label htmlFor="userActiveSwitch" className="switch">
-                            <input type="checkbox" id="userActiveSwitch" checked={isActive} onChange={toggleActive} />
-                            <span className="slider round"></span>
-                        </label>
-                    </div>
-                    <button type="submit" className="create-button create">Guardar cambios</button>
                 </form>
             </div>
         </div>

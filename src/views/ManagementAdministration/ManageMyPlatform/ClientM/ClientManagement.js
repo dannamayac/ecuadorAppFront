@@ -45,7 +45,10 @@ const ClientManagement = () => {
             </div>
             <div className="right-h">
                 <SecondHeader title={pageTitle} backButtonPath="/manage-platform" startItem="Clientes" showButtons={true} />
-                <button className="create-button" onClick={handleCreateClient}>Crear nuevo usuario</button>
+                <button className="create-button" onClick={handleCreateClient}>
+                    <div className="left-bu">Crear nuevo cliente </div>
+                    <div className="right-bu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+</div>
+                </button>
                 <table>
                     <thead>
                         <tr>
@@ -77,7 +80,7 @@ const ClientManagement = () => {
                                 </label>
                             </td>
                             <td>
-                                <button onClick={handleEditClient}>Editar</button>
+                                <button className='edit-button' onClick={handleEditClient}>Editar</button>
                             </td>
                         </tr>
                         ))}
