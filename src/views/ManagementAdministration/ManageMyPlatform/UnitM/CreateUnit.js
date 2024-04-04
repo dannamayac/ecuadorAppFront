@@ -5,6 +5,7 @@ import Header from '../../../../components/Header'
 import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
 
 const CreateUnit = () => {
+    const [errorMessages, setErrorMessages] = useState([]);
     const navigate = useNavigate();
     const [pageTitle] = useState('Crear nueva unidad');
     const [formData, setFormData] = useState({
@@ -66,11 +67,40 @@ const CreateUnit = () => {
         });
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setErrorMessages([]);
+
+        const validatePercentage = (value) => {
+            const percentage = parseFloat(value);
+            return !isNaN(percentage) && percentage >= 0 && percentage <= 100;
+        };
+
+        const isNumeric = (value) => {
+            return !isNaN(value);
+        };
+
         if (!formData.unit || !formData.code || !formData.location || !formData.id_state || !formData.id_user_management || !formData.established_default || !formData.id_partner_management || !formData.percentage) {
-            alert('Por favor complete todos los campos');
+            setErrorMessages(['Por favor complete todos los campos']);
             return;
         }
+
+        if (!isNumeric(formData.code)) {
+            setErrorMessages(['El código debe ser un valor numérico']);
+            return;
+        }
+
+        if (!isNumeric(formData.established_default)) {
+            setErrorMessages(['La Mora Establecida debe ser un valor numérico']);
+            return;
+        }
+
+        if (!validatePercentage(formData.percentage)) {
+            setErrorMessages(['El porcentaje debe ser un número entre 0 y 100']);
+            return;
+        }
+
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_UNIT_ENDPOINT}`, {
                 method: 'POST',
@@ -156,6 +186,13 @@ const CreateUnit = () => {
                         <button type="submit" className="create-button2 create" onClick={handleSubmit}>Guardar ingreso</button>
                         <button type="button" className="create-button2 cancel" onClick={() => navigate('/unit-management')}>Cancelar</button>
                     </div>
+                    {errorMessages.length > 0 && (
+                        <div className="error-messages">
+                            {errorMessages.map((message, index) => (
+                                <p key={index}>{message}</p>
+                            ))}
+                        </div>
+                    )}
                 </form>
             </div>
         </div>
