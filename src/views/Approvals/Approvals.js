@@ -16,7 +16,7 @@ const Approvals = () => {
         navigate('/expenses-approvals');
     }
     const handleSalesApprovalsClick = () => {
-        navigate('sales-approvals');
+        navigate('/sales-approvals');
     }
     const handleInsuranceApprovalsClick = () => {
         navigate('/insurance-approvals');

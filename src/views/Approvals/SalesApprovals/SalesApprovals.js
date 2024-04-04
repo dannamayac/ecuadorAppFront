@@ -1,23 +1,137 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
-import "../../../styles/ManagementAdministration/IncomeStyles.css"
+import "../../../styles/Approvals/ApprovalsStyle.css"
 
 const SalesApprovals = () => {
-    const [pageTitle] = useState('Aprobación de pre-ventas');
+    const [pageTitle] = useState('Aprobación pre-ventas');
+    const [searchActive, setSearchActive] = useState(false);
+    const [user, setUser] = useState({ id: 1, isActive: false });
+    const navigate = useNavigate();
+    
+
+    const toggleUserSwitch = (userId, action) => {
+        if (action === 'check') {
+            setUser(prevUser => ({ ...prevUser, isActive: true }));
+        } else if (action === 'times') {
+            setUser(prevUser => ({ ...prevUser, isActive: false }));
+        }
+    };
+
+    const handleExpenseHistoryClick = () => {
+        navigate('/income-history');
+    }
+
+    const handleSearchToggle = () => {
+        setSearchActive(!searchActive);
+    };
 
     return (
         <div className="home-container">
             <div className="left-h">
-                <Sidebar/>
+                <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/approvals" startItem="General"/>
-                
+                <Header title={pageTitle} backButtonPath="/approvals" startItem="General" />
+                <div className="income-header">
+                    <div className="left-title">
+                        <div className="title-container">
+                            <h1 className="header-title">Aprobación pre-ventas</h1>
+                        </div>
+                    </div>
+                    <div className="right-history">
+                        <button className="history-button" onClick={handleExpenseHistoryClick} style={{ marginTop: '-10px' }}>
+                            <span className="history-button-text">Histórico de aprobación</span>
+                            <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                        </button>
+                    </div>
+                </div>
+                <div className="income-form">
+                    <div className='filters' style={{ marginLeft: '15px', marginTop: '30px', width:'80%' }}>
+                        <div className='search'>
+                            <div className="search-container">
+                                <div className="search-wrapper">
+                                    <input className="search-input2" type="text" placeholder="Escriba aquí para buscar" />
+                                    <FontAwesomeIcon icon={faSearch} className="search-icon" onClick={handleSearchToggle} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="filter-field" style={{ marginLeft:'-20px'}}>
+                            <select id="filterByIdOrField" className="filter-select">
+                                <option value="" disabled selected hidden>/1/ - CN de la sociedad 234235</option>
+                                <option value="id">ID</option>
+                                <option value="field">Campo</option>
+                            </select>
+                        </div>
+                        <div className="filter-field">
+                            <select id="filterByUnit" className="filter-select" >
+                                <option value="" disabled selected hidden>Todas las unidades:</option>
+                                {/* Opciones para filtrar por unidad */}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div className="table-container">
+                    <table className="sales-table">
+                        <thead>
+                            <tr>
+                                <th>Unidad</th>
+                                <th>ID cliente</th>
+                                <th>Documento identidad</th>
+                                <th>Apodo</th>
+                                <th>Fecha creación</th>
+                                <th>Cantidad</th>
+                                <th>Número pagos</th>
+                                <th>Tasa interés</th>
+                                <th>Frecuencia pago</th>
+                                <th>Día cobro</th>
+                                <th>Tipo venta</th>
+                                <th>Fotos</th>
+                                <th>Contrato</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>3923/
+                                    Unidad</td>
+                                <td>6432</td>
+                                <td>12345678</td>
+                                <td>Daniel</td>
+                                <td>01/23/24</td>
+                                <td>5.000.000</td>
+                                <td>3</td>
+                                <td>3%</td>
+                                <td>Mensual</td>
+                                <td>01</td>
+                                <td>Prestamo</td>
+                                <td>Foto</td>
+                                <td>Contrato</td>
+                                <td>
+                                    <button
+                                        className={`checkbox-button ${user.isActive ? 'active-check' : ''}`}
+                                        onClick={() => toggleUserSwitch(user.id, 'check')}
+                                    >
+                                        <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                                    </button>
+                                    <button
+                                        className={`checkbox-button ${!user.isActive ? 'active-times' : ''}`}
+                                        onClick={() => toggleUserSwitch(user.id, 'times')}
+                                    >
+                                        <FontAwesomeIcon icon={faTimes} className="times-icon" />
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-      );
-    }
+    );
+}
 
 export default SalesApprovals;

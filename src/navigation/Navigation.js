@@ -97,9 +97,9 @@ function Navigation() {
           <Route path="/approvals" element={<Approvals />} />
             {/* Aprobación de llaves */}
             <Route path="/key-approvals" element={<KeyApprovals />} /> 
-            {/* Aprobaciones */}
+            {/* Aprobaciones pre-gastos */}
             <Route path="/expenses-approvals" element={<ExpensesApprovals />} />
-            {/* Aprobaciones */}
+            {/* Aprobaciones  pre-ventas*/}
             <Route path="/sales-approvals" element={<SalesApprovals />} />
             {/* Aprobaciones */}
             <Route path="/insurance-approvals" element={<InsuranceApprovals />} />

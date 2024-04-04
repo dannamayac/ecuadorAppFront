@@ -40,11 +40,12 @@ const ExpensesApprovals = () => {
                 <div className="income-header">
                     <div className="left-title">
                         <div className="title-container">
-                            <h1 className="header-title">Aprobación de llaves</h1>
+                            <h1 className="header-title">Aprobación pre-gastos</h1>
                         </div>
                     </div>
                     <div className="right-history">
-                        <button className="history-button" onClick={handleExpenseHistoryClick} style={{ marginTop: '-10px' }}>Histórico de aprobación pre-gastos
+                        <button className="history-button" onClick={handleExpenseHistoryClick} style={{ marginTop: '-10px' }}>
+                            <span className="history-button-text">Histórico de aprobación pre-gastos</span>
                             <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
                     </div>
