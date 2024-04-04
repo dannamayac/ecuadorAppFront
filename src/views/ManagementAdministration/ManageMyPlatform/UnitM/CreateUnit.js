@@ -118,7 +118,9 @@ const CreateUnit = () => {
                             <label htmlFor="id_state">Estado</label>
                             <select id="id_state" name="id_state" className="management-select" onChange={handleChange} value={formData.id_state}>
                                 <option value="">Seleccione un estado</option>
-                                {/* Renderizar opciones de estado */}
+                                {states.map(state => (
+                                    <option key={state.id} value={state.id}>{state.name}</option>
+                                ))}
                             </select>
                         </div>
                         <div className="form-group">
