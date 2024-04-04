@@ -20,63 +20,36 @@
 }
 
 /* Estilos para los checkboxes */
-.checkbox-green, .checkbox-red {
-    display: none;
+.checkbox-button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+margin-right: 3px;
+width: 24px;
+height: 24px;
+border: 2px solid transparent; /* Cambiado a transparente */
+border-radius: 4px;
+background-color: #9b9b9b; /* Fondo gris claro predeterminado */
+cursor: pointer;
+transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.checkbox-label {
-    cursor: pointer;
-    position: relative;
-    margin-right: 20px;
-    margin-left: 15px;
+.checkbox-button.active-check {
+background-color: #1bb546; /* Fondo verde cuando activo */
+border-color: #1bb546; /* Borde verde cuando activo */
 }
 
-.checkbox-green::before, .checkbox-red::before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 3px;
-    border: 2px solid #ccc;
+.checkbox-button.active-times {
+background-color: #cc1515; /* Fondo rojo cuando inactivo */
+border-color: #cc1515; /* Borde rojo cuando inactivo */
 }
 
-.checkbox-green .check-icon, .checkbox-red .times-icon {
-    display: none;
+.checkbox-button:hover {
+    filter: brightness(90%);
 }
 
-.checkbox-green:checked + .checkbox-label::before {
-    background-color: #1bb546;
-    border-color: #1bb546; /* Cambia el color del borde cuando está seleccionado */
-}
-
-.checkbox-green:checked + .checkbox-label .check-icon {
-    display: block;
-    color: white;
-    border-radius: 5px;
-    background-color: #1bb546;
-    position: absolute;
-    padding: 5px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.checkbox-red:checked + .checkbox-label::before {
-    background-color: #cc1515;
-    border-color: #cc1515; /* Cambia el color del borde cuando está seleccionado */
-}
-
-.checkbox-red:checked + .checkbox-label .times-icon {
-    display: block;
-    color: white;
-    border-radius: 5px;
-    background-color: #cc1515;
-    position: absolute;
-    padding: 5px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.check-icon,
+.times-icon {
+color: white;
+font-size: 14px;
 }

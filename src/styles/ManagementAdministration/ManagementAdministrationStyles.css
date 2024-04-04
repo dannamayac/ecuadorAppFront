@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     width: 93%;
+    width: calc(100% - 60px);
     color: white;
     font-size: 18px;
     padding: 30px 30px;
@@ -23,11 +24,27 @@
 }
 
 .adminPlat-button .left-bu {
-    width: 95%;
+    width: calc(100% - 60px);
 }
 
 .adminPlat-button .right-bu {
-    width: 5%;
+    width: auto;
+    margin-left: 400px;
+    align-items: flex-end;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+.iconHome-container{
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.iconHome{
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .admin-button {

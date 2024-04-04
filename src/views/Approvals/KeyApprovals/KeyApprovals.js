@@ -10,7 +10,17 @@ import "../../../styles/Approvals/ApprovalsStyle.css"
 const KeyApprovals = () => {
     const [pageTitle] = useState('Aprobación de llaves');
     const [searchActive, setSearchActive] = useState(false);
+    const [user, setUser] = useState({ id: 1, isActive: false });
     const navigate = useNavigate();
+    
+
+    const toggleUserSwitch = (userId, action) => {
+        if (action === 'check') {
+            setUser(prevUser => ({ ...prevUser, isActive: true }));
+        } else if (action === 'times') {
+            setUser(prevUser => ({ ...prevUser, isActive: false }));
+        }
+    };
 
     const handleExpenseHistoryClick = () => {
         navigate('/income-history');
@@ -97,14 +107,18 @@ const KeyApprovals = () => {
                             <td>30</td>
                             <td>31/04/2024</td>
                             <td>
-                                <input type="checkbox" id="checkboxGreen" className="checkbox-green" />
-                                <label htmlFor="checkboxGreen" className="checkbox-label">
+                                <button
+                                    className={`checkbox-button ${user.isActive ? 'active-check' : ''}`}
+                                    onClick={() => toggleUserSwitch(user.id, 'check')}
+                                >
                                     <FontAwesomeIcon icon={faCheck} className="check-icon" />
-                                </label>
-                                <input type="checkbox" id="checkboxRed" className="checkbox-red" />
-                                <label htmlFor="checkboxRed" className="checkbox-label">
+                                </button>
+                                <button
+                                    className={`checkbox-button ${!user.isActive ? 'active-times' : ''}`}
+                                    onClick={() => toggleUserSwitch(user.id, 'times')}
+                                >
                                     <FontAwesomeIcon icon={faTimes} className="times-icon" />
-                                </label>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

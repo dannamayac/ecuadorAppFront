@@ -37,6 +37,7 @@ import KeyApprovals from '../views/Approvals/KeyApprovals/KeyApprovals.js';
 import ExpensesApprovals from '../views/Approvals/ExpensesApprovals/ExpensesApprovals.js';
 import SalesApprovals from '../views/Approvals/SalesApprovals/SalesApprovals.js';
 import InsuranceApprovals from '../views/Approvals/InsuranceApprovals/InsuranceApprovals.js';
+import UserType from '../views/ManagementAdministration/ManageMyPlatform/UserM/UserType.js';
 
 function Navigation() {
   return (
@@ -56,6 +57,7 @@ function Navigation() {
               <Route path="/create-unit" element={<CreateUnit />} />
               {/* Gestión usuarios */}
               <Route path="/user-management" element={<UserManagement />} />
+              <Route path="/user-type" element={<UserType />} />
               <Route path="/create-user" element={<CreateUser />} />
               <Route path="/edit-user/:id" element={<EditUser />} />
               {/* Gestión clientes */}

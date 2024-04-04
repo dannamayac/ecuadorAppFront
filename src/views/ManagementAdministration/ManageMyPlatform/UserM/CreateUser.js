@@ -6,7 +6,7 @@ import "../../../../styles/ManagementAdministration/CreateUnitStyles.css";
 
 const CreateUser = () => {
     const navigate = useNavigate();
-    const [pageTitle] = useState('Crear usuario');
+    const [pageTitle] = useState('Crear nuevo usuario');
     const [isActive, setIsActive] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
@@ -95,7 +95,7 @@ const CreateUser = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/user-management" startItem="Gestión de usuarios" />
+                <Header title={pageTitle} backButtonPath="/user-type" startItem="Gestión de usuarios" />
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="income-header">
                         <div className="form-group">

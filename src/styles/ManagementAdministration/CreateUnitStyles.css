@@ -164,15 +164,15 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-input2:checked + .slider2 {
+input:checked + .slider2 {
   background-color: #1bb546;
 }
 
-input2:focus + .slider2 {
+input:focus + .slider2 {
   box-shadow: 0 0 1px #1bb546;
 }
 
-input2:checked + .slider2:before {
+input:checked + .slider2:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);

@@ -51,7 +51,9 @@ const ManagementAdministration = () => {
                                 <div className="admin-button">Administrar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                             </div>
                             <div className="right-bu">
-                                <FontAwesomeIcon icon={faHouse} />
+                                <div className='iconHome-container'>
+                                    <FontAwesomeIcon  className= "iconHome" icon={faHouse} />
+                                </div>
                             </div>
                         </button>
                     </div>

@@ -16,10 +16,10 @@
 .income-header {
     display: flex;
     flex-wrap: wrap;
+    position: relative;
     margin-top: 25px;
     margin-left: 33px;
     margin-right: 28px;
-    position: relative;
 }
 .income-header::after {
     content: '';
@@ -31,12 +31,12 @@
 }
 
 .left-title{
-    width: 70%;
+    width:65%;
 }
 
 .right-history{
     justify-content: flex-end;
-    width: 30%;
+    width: 35%;
     margin-top: -5px;
 }
 
@@ -67,6 +67,7 @@
 .history-button {
     color: white;
     border: none;
+    width: 100%;
     white-space: nowrap;
     padding: 8px 40px;
     border-radius: 10px;
@@ -93,7 +94,7 @@
 
 /* Estilos personalizados para el sub-botón */
 .right-history .history-button .sub-button {
-   width:30%;
+   width:20%;
 }
 
 .income-form {
