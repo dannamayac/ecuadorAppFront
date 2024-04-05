@@ -7,19 +7,31 @@ import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 const InactiveClients = () => {
     const [pageTitle] = useState('Historial de clientes inactivos');
     const [isActiveAll, setIsActiveAll] = useState(false);
-    const [userStates, setUserStates] = useState([
-        { id: 1, isActive: false },
-        { id: 2, isActive: false }
-    ]);
 
-    // Función para cambiar el estado de isActiveAll y de todos los switches de la tabla
+    useEffect(() => {
+        const fetchCustomers = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CUSTOMER_INACTIVE_LIST_ENDPOINT}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const customersData = data["Clientes Inactivos"];
+                setCustomer(customersData)
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+    
+        fetchCustomers();
+    }, []);
+
     const toggleAllSwitches = () => {
         const newState = !isActiveAll;
         setIsActiveAll(newState);
         setUserStates(userStates.map(user => ({ ...user, isActive: newState })));
     };
 
-    // Función para cambiar el estado de un switch individual en la tabla
     const toggleUserSwitch = (userId) => {
         setUserStates(userStates.map(user => {
             if (user.id === userId) {
@@ -42,7 +54,6 @@ const InactiveClients = () => {
                         <span className="slider2 round2"></span>
                     </label>
                 </button>
-                {/* Tabla para listar usuarios */}
                 <table>
                     <thead>
                         <tr>
@@ -58,24 +69,23 @@ const InactiveClients = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Map sobre los datos de los usuarios para renderizar filas */}
-                        {userStates.map(user => (
-                            <tr key={user.id}>
-                                <td>123</td>
-                                <td>Unidad</td>
-                                <td>10.000.000</td>
-                                <td>30/03/2024</td>
-                                <td>28/02/2024</td>
-                                <td>Si</td>
-                                <td>Daniel</td>
-                                <td>Descripción</td>
+                    {Array.isArray(customers) && customers.map(customer => (
+                            <tr key={customer.id}>
+                                <td>{customer.id}</td>
+                                <td>{customer.id_unit_management}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{customer.name}</td>
+                                <td></td>
                                 <td>
-                                    <label htmlFor={`userActiveSwitch-${user.id}`} className="switch2">
+                                    <label htmlFor={`userActiveSwitch-${customer.id}`} className="switch2">
                                         <input
                                             type="checkbox"
-                                            id={`userActiveSwitch-${user.id}`}
-                                            checked={user.isActive}
-                                            onChange={() => toggleUserSwitch(user.id)}
+                                            id={`userActiveSwitch-${customer.id}`}
+                                            checked={customer.isActive}
+                                            onChange={() => toggleUserSwitch(customer.id)}
                                         />
                                         <span className="slider2 round2"></span>
                                     </label>
