@@ -17,6 +17,7 @@ const EditUser = () => {
     });
     const [roles, setRoles] = useState([]);
     const [units, setUnits] = useState([]);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -80,6 +81,19 @@ const EditUser = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const newErrors = {};
+
+        // Validar que el campo "Número de celular" contenga solo números
+        const celphonePattern = /^\d+$/;
+        if (!celphonePattern.test(userData.celphone)) {
+            newErrors.celphone = 'Este campo solo puede contener números';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_EDIT_USER_ENDPOINT}/${id}`, {
                 method: 'POST',
@@ -121,14 +135,17 @@ const EditUser = () => {
                                     <option key={rol.id} value={rol.id}>{rol.name}</option>
                                 ))}
                             </select>
+                            {errors.id_rol && <span className="error-message">{errors.id_rol}</span>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="userEmail">Correo</label>
                             <input type="text" id="email" name="email" placeholder="Ingrese el correo" value={userData.email} onChange={handleChange} />
+                            {errors.email && <span className="error-message">{errors.email}</span>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="userPhoneNumber">Número de celular</label>
                             <input type="text" id="celphone" name="celphone" placeholder="Ingrese el número de celular" value={userData.celphone} onChange={handleChange} />
+                            {errors.celphone && <span className="error-message">{errors.celphone}</span>}
                         </div>
                     </div>
                     <div className="income-header">
@@ -140,6 +157,7 @@ const EditUser = () => {
                                     <option key={unit.id} value={unit.id}>{unit.unit}</option>
                                 ))}
                             </select>
+                            {errors.id_unit_management && <span className="error-message">{errors.id_unit_management}</span>}
                         </div>
                         <div className="form-group">
                             <span className="switch-label">Estado</span>

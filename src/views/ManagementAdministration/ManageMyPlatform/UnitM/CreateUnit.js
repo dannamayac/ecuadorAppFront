@@ -70,34 +70,61 @@ const CreateUnit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setErrorMessages([]);
+        const newErrors = {};
 
-        const validatePercentage = (value) => {
-            const percentage = parseFloat(value);
-            return !isNaN(percentage) && percentage >= 0 && percentage <= 100;
+        if (!formData.unit) {
+            newErrors.unit = 'Por favor ingrese el nombre de la unidad';
+        }
+        if (!formData.code) {
+            newErrors.code = 'Por favor ingrese el código';
+        }
+        if (!formData.location) {
+            newErrors.location = 'Por favor ingrese la ubicación';
+        }
+        if (!formData.id_state) {
+            newErrors.id_state = 'Por favor seleccione un estado';
+        }
+        if (!formData.id_user_management) {
+            newErrors.id_user_management = 'Por favor seleccione un Administrador';
+        }
+        if (!formData.established_default) {
+            newErrors.established_default = 'Por favor ingrese la mora establecida';
+        }
+        if (!formData.id_partner_management) {
+            newErrors.id_partner_management = 'Por favor seleccione un Socio';
+        }
+        if (!formData.percentage) {
+            newErrors.percentage = 'Por favor ingrese el porcentaje';
+        }
+
+        const numericPattern = /^\d+$/;
+        if (!numericPattern.test(formData.code)) {
+            newErrors.code = 'El código debe ser un valor numérico';
+        }
+        if (!numericPattern.test(formData.established_default)) {
+            newErrors.established_default = 'La Mora Establecida debe ser un valor numérico';
+        }
+
+        // Validar que el campo "Porcentaje" contenga solo números y esté en el rango adecuado
+        const percentagePattern = /^\d+$/;
+        if (!percentagePattern.test(formData.percentage) || parseFloat(formData.percentage) < 0 || parseFloat(formData.percentage) > 100) {
+            newErrors.percentage = 'El porcentaje debe ser un número entre 0 y 100';
+        }
+
+        // Validar la longitud máxima de los campos de texto
+        const maxFieldLength = {
+            unit: 50,
+            code: 50,
+            location: 50
         };
+        Object.entries(maxFieldLength).forEach(([field, maxLength]) => {
+            if (formData[field].length > maxLength) {
+                newErrors[field] = `Este campo no puede tener más de ${maxLength} caracteres`;
+            }
+        });
 
-        const isNumeric = (value) => {
-            return !isNaN(value);
-        };
-
-        if (!formData.unit || !formData.code || !formData.location || !formData.id_state || !formData.id_user_management || !formData.established_default || !formData.id_partner_management || !formData.percentage) {
-            setErrorMessages(['Por favor complete todos los campos']);
-            return;
-        }
-
-        if (!isNumeric(formData.code)) {
-            setErrorMessages(['El código debe ser un valor numérico']);
-            return;
-        }
-
-        if (!isNumeric(formData.established_default)) {
-            setErrorMessages(['La Mora Establecida debe ser un valor numérico']);
-            return;
-        }
-
-        if (!validatePercentage(formData.percentage)) {
-            setErrorMessages(['El porcentaje debe ser un número entre 0 y 100']);
+        if (Object.keys(newErrors).length > 0) {
+            setErrorMessages(newErrors);
             return;
         }
 
@@ -122,7 +149,6 @@ const CreateUnit = () => {
         }
     };
 
-
     return (
         <div className="home-container">
             <div className="left-h">
@@ -135,14 +161,17 @@ const CreateUnit = () => {
                         <div className="form-group">
                             <label htmlFor="unit">Nombre unidad</label>
                             <input type="text" id="unit" name="unit" placeholder="Ingrese el nombre de la unidad" onChange={handleChange} />
+                            {errorMessages.unit && <p className="error-message">{errorMessages.unit}</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="code">Código</label>
                             <input type="text" id="code" name="code" placeholder="Ingrese el código" onChange={handleChange} />
+                            {errorMessages.code && <p className="error-message">{errorMessages.code}</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="location">Ubicación</label>
                             <input type="text" id="location" name="location" placeholder="Ingrese la ubicación" onChange={handleChange} />
+                            {errorMessages.location && <p className="error-message">{errorMessages.location}</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="id_state">Estado</label>
@@ -152,6 +181,7 @@ const CreateUnit = () => {
                                     <option key={state.id} value={state.id}>{state.name}</option>
                                 ))}
                             </select>
+                            {errorMessages.id_state && <p className="error-message">{errorMessages.id_state}</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="id_user_management">Asignar administrador</label>
@@ -161,10 +191,12 @@ const CreateUnit = () => {
                                     <option key={user.id} value={user.id}>{user.name}</option>
                                 ))}
                             </select>
+                            {errorMessages.id_user_management && <p className="error-message">{errorMessages.id_user_management}</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="established_default">Mora establecida</label>
                             <input type="text" id="established_default" name="established_default" placeholder="Ingrese la mora establecida" onChange={handleChange} />
+                            {errorMessages.established_default && <p className="error-message">{errorMessages.established_default}</p>}
                         </div>
                     </div>
                     <div className="income-header">
@@ -176,23 +208,18 @@ const CreateUnit = () => {
                                     <option key={partner.id} value={partner.id}>{partner.partnert_name}</option>
                                 ))}
                             </select>
+                            {errorMessages.id_partner_management && <p className="error-message">{errorMessages.id_partner_management}</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="percentage">%</label>
                             <input type="text" id="percentage" name="percentage" placeholder="Ingrese el %" onChange={handleChange} />
+                            {errorMessages.percentage && <p className="error-message">{errorMessages.percentage}</p>}
                         </div>
                     </div>
                     <div className="management-buttons">
-                        <button type="submit" className="create-button2 create" onClick={handleSubmit}>Guardar ingreso</button>
+                        <button type="submit" className="create-button2 create">Guardar ingreso</button>
                         <button type="button" className="create-button2 cancel" onClick={() => navigate('/unit-management')}>Cancelar</button>
                     </div>
-                    {errorMessages.length > 0 && (
-                        <div className="error-messages">
-                            {errorMessages.map((message, index) => (
-                                <p key={index}>{message}</p>
-                            ))}
-                        </div>
-                    )}
                 </form>
             </div>
         </div>

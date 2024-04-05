@@ -55,7 +55,7 @@ const CreateUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = {};
-
+    
         if (!formData.name) {
             newErrors.name = 'Por favor ingrese el nombre';
         }
@@ -65,18 +65,33 @@ const CreateUser = () => {
         if (!formData.email) {
             newErrors.email = 'Por favor ingrese el correo';
         }
-        if (!formData.celphone) {
-            newErrors.celphone = 'Por favor ingrese el número de celular';
-        }
         if (!formData.id_unit_management) {
             newErrors.id_unit_management = 'Por favor seleccione una unidad';
         }
-
+    
+        // Validar que el campo "Número de celular" contenga solo números
+        const celphonePattern = /^\d+$/;
+        if (!celphonePattern.test(formData.celphone)) {
+            newErrors.celphone = 'Este campo solo puede contener números';
+        }
+    
+        // Validar la longitud máxima de los campos de texto
+        const maxFieldLength = {
+            name: 50,
+            email: 50,
+            celphone: 50
+        };
+        Object.entries(maxFieldLength).forEach(([field, maxLength]) => {
+            if (formData[field].length > maxLength) {
+                newErrors[field] = `Este campo no puede tener más de ${maxLength} caracteres`;
+            }
+        });
+    
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
-
+    
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_USER_ENDPOINT}`, {
                 method: 'POST',

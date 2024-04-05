@@ -16,7 +16,7 @@ const Income = () => {
     }
 
     const handleCancel = () => {
-        navigate('/client-management'); 
+        navigate('/management-administration'); 
     };
 
     return (
