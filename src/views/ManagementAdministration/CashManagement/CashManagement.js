@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
@@ -14,10 +13,24 @@ const CashManagement = () => {
     const [startDate, setStartDate] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+    const calendarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutsideCalendar = (event) => {
+            if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+                setStartDatePickerActive(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutsideCalendar);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutsideCalendar);
+        };
+    }, []);
 
     const handleBoxSummaryClick = () => {
         navigate('/box-summary');
-    }
+    };
 
     const handleStartDatePickerToggle = () => {
         setStartDatePickerActive(!startDatePickerActive);
@@ -28,12 +41,13 @@ const CashManagement = () => {
         setStartDatePickerActive(false);
     };
 
-    const handleOpenButtonClick = () => {
-        setIsOpen(true);
+    const handleActionButtonClick = (action) => {
+        setIsOpen(action === 'open');
     };
 
-    const handleCloseButtonClick = () => {
-        setIsOpen(false);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Aquí puedes enviar los datos del formulario, como la fecha de apertura y la unidad seleccionada
     };
 
     return (
@@ -45,8 +59,8 @@ const CashManagement = () => {
                 <Header title={pageTitle} backButtonPath="/management-administration" startItem="General" />
                 <div className="income-headerBoxes">
                     <div className="left-title">
-                        <button className={`action-button ${isOpen ? 'selected' : ''}`} onClick={handleOpenButtonClick}>Abrir caja</button>
-                        <button className={`action-button ${!isOpen ? 'selected' : ''}`} onClick={handleCloseButtonClick}>Cerrar caja</button>
+                        <button className={`action-button ${isOpen ? 'selected' : ''}`} onClick={() => handleActionButtonClick('open')}>Abrir caja</button>
+                        <button className={`action-button ${!isOpen ? 'selected' : ''}`} onClick={() => handleActionButtonClick('close')}>Cerrar caja</button>
                     </div>
                     <div className="right-history">
                         <button className="history-button" onClick={handleBoxSummaryClick}>Resumen
@@ -55,39 +69,41 @@ const CashManagement = () => {
                     </div>
                 </div>
                 <div className="income-form">
-                    <div className="date-buttonsBoxes">
-                        <div className="date-inputs">
-                            <div className={`date-input ${isOpen ? '' : 'hidden'}`}>
-                                <p>Fecha de apertura de CNS & UGIS</p>
-                                <button className="date-button" onClick={handleStartDatePickerToggle}>
-                                    {startDate ? `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}` : 'Fecha'}
-                                    <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
-                                </button>
-                                {startDatePickerActive && (
-                                    <div className="calendar-wrapper">
-                                        <Calendar
-                                            onChange={handleStartDateChange}
-                                            value={startDate}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                            <div className={`income-field custom-field ${isOpen ? '' : 'closed'}`}>
-                                <label htmlFor="unit">Unidad</label>
-                                <select id="unit">
-                                    <option value="" disabled selected hidden>Seleccionar unidad</option>
-                                    {/* opciones de UGI Diaria */}
-                                </select>
+                    <form onSubmit={handleSubmit}>
+                        <div className="date-buttonsBoxes">
+                            <div className="date-inputs">
+                                <div className={`date-input ${isOpen ? '' : 'hidden'}`}>
+                                    <p>Fecha de apertura de CNS & UGIS</p>
+                                    <button className="date-button" onClick={handleStartDatePickerToggle}>
+                                        {startDate ? `${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}` : 'Fecha'}
+                                        <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
+                                    </button>
+                                    {startDatePickerActive && (
+                                        <div className="calendar-wrapper" ref={calendarRef}>
+                                            <Calendar
+                                                onChange={handleStartDateChange}
+                                                value={startDate}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                                <div className={`income-field custom-field ${isOpen ? '' : 'closed'}`}>
+                                    <label htmlFor="unit">Unidad</label>
+                                    <select id="unit">
+                                        <option value="" disabled selected hidden>Seleccionar unidad</option>
+                                        {/* opciones de UGI Diaria */}
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="income-buttonsK">
-                        <button className="create-button2 create" style={{marginTop:'20px'}}>{isOpen ? 'Abrir caja' : 'Cerrar caja'}</button>
-                    </div>
+                        <div className="income-buttonsK">
+                            <button type="submit" className="create-button2 create" style={{ marginTop: '20px' }}>{isOpen ? 'Abrir caja' : 'Cerrar caja'}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default CashManagement;

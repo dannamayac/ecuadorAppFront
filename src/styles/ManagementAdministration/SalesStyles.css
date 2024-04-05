@@ -50,26 +50,29 @@
 }
 
 .calendar-wrapper {
+    position: absolute;
     z-index: 1;
     background-color: #fff;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 10px; /* Ajusta el margen superior según sea necesario */
 }
 
 .react-calendar {
     border: none;
+    font-size: 14px; /* Ajusta el tamaño de la fuente según sea necesario */
 }
 
 .react-calendar__tile--active {
-    background-color: var(--green);
+    background-color: var(--green); /* Cambia el color de fondo activo según tu preferencia */
     color: #fff;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-    background-color: var(--aquamarine);
+    background-color: var(--aquamarine); /* Cambia el color de fondo activo al hacer hover según tu preferencia */
 }
 
 .react-calendar__tile--now {
     background-color: #f0f0f0;
-    color: var(--green);
+    color: var(--green); /* Cambia el color del número de día actual según tu preferencia */
 }

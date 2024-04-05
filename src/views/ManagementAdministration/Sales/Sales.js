@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -17,6 +16,36 @@ const Sales = () => {
     const [endDate, setEndDate] = useState(null);
     const [activeSaleTable, setActiveSaleTable] = useState(false);
     const [userSwitch, setUserSwitch] = useState(false);
+    const calendarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutsideCalendar = (event) => {
+            if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+                setStartDatePickerActive(false);
+                setEndDatePickerActive(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutsideCalendar);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutsideCalendar);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (endDatePickerActive) {
+            // Ajustar la posición del calendario de fecha fin si se desborda
+            const calendar = calendarRef.current;
+            if (calendar) {
+                const rect = calendar.getBoundingClientRect();
+                const isOverflowing = rect.right > window.innerWidth;
+                if (isOverflowing) {
+                    calendar.style.left = 'auto';
+                    calendar.style.right = 0;
+                }
+            }
+        }
+    }, [endDatePickerActive]);
 
     const handleSearchToggle = () => {
         setSearchActive(!searchActive);
@@ -102,7 +131,7 @@ const Sales = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="date-buttons">
+                        <div className="date-buttons" style={{marginLeft:'-40px'}}>
                             <div className="date-inputs">
                                 <div className="date-input">
                                     <p>Fecha de inicio</p>
@@ -111,7 +140,7 @@ const Sales = () => {
                                         <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
                                     </button>
                                     {startDatePickerActive && (
-                                        <div className="calendar-wrapper">
+                                        <div className="calendar-wrapper" ref={calendarRef}>
                                             <Calendar
                                                 onChange={handleStartDateChange}
                                                 value={startDate}
@@ -126,7 +155,7 @@ const Sales = () => {
                                         <FontAwesomeIcon icon={faCalendarAlt} className="calendar-icon" />
                                     </button>
                                     {endDatePickerActive && (
-                                        <div className="calendar-wrapper">
+                                        <div className="calendar-wrapper" ref={calendarRef}>
                                             <Calendar
                                                 onChange={handleEndDateChange}
                                                 value={endDate}
