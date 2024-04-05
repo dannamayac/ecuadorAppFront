@@ -102,9 +102,9 @@ const Expenses = () => {
                                 <FontAwesomeIcon icon={faUpload} /> Adjuntar archivos<span>+</span>
                             </button>
                         </div>
-                        <div className="income-buttons">
-                            <button className="create-button create">Guardar gasto</button>
-                            <button className="create-button cancel">Cancelar</button>
+                        <div className="management-buttons">
+                            <button className="create-button2 create">Guardar gasto</button>
+                            <button className="create-button2 cancel">Cancelar</button>
                         </div>
                     </div>
                 </div>

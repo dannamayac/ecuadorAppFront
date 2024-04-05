@@ -82,7 +82,7 @@ const CashManagement = () => {
                         </div>
                     </div>
                     <div className="income-buttonsK">
-                        <button className="create-button create">{isOpen ? 'Abrir caja' : 'Cerrar caja'}</button>
+                        <button className="create-button2 create" style={{marginTop:'20px'}}>{isOpen ? 'Abrir caja' : 'Cerrar caja'}</button>
                     </div>
                 </div>
             </div>

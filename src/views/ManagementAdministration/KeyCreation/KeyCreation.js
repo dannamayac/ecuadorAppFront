@@ -64,7 +64,7 @@ const KeyCreation = () => {
                         </div>
                     </div>
                     <div className="income-buttonsK">
-                        <button className="create-button create">Crear llave</button>
+                        <button className="create-button2 create">Crear llave</button>
                     </div>
                 </div>
             </div>

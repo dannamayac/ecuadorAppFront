@@ -28,7 +28,7 @@ const UserManagement = () => {
     }, []); 
 
     const handleCreateUser = () => {
-        navigate('/user-type');
+        navigate('/create-user');
     };
     const handleEditUser = (userId) => {
         navigate(`/edit-user/${userId}`);

@@ -95,7 +95,7 @@ const CreateUser = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/user-type" startItem="Gestión de usuarios" />
+                <Header title={pageTitle} backButtonPath="/user-management" startItem="Gestión de usuarios" />
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="income-header">
                         <div className="form-group">

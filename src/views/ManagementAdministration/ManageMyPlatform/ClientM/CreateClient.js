@@ -101,7 +101,7 @@ const CreateClient = () => {
     };
 
     const handleCancel = () => {
-        navigate('/client-management'); // Redirige a la vista general al presionar "Cancelar"
+        navigate('/client-management'); 
     };
 
 
@@ -212,7 +212,7 @@ const CreateClient = () => {
                             </label>
                         </div>
                     </div>
-                    <div className="management-buttons">
+                    <div className="management-buttons" style={{marginBottom: '20px'}}>
                         <button type="submit" className="create-button2 create">Crear nuevo cliente</button>
                         <button type="button" className="create-button2 cancel" onClick={handleCancel}>Cancelar</button>
                     </div>

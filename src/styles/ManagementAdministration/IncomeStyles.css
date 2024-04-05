@@ -83,9 +83,9 @@
 }
 
 .history-button-text {
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden; /* Oculta el texto que se desborda del botón */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) cuando el texto es demasiado largo para caber en el botón */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .right-history .history-button {
@@ -198,10 +198,4 @@
 
 .attach-button:focus {
     outline: none;
-}
-
-.income-buttons {
-    display: flex;
-    justify-content: flex-end;
-    width: 50%;
 }

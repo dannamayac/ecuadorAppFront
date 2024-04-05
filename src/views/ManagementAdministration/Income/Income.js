@@ -15,6 +15,10 @@ const Income = () => {
         navigate('/income-history');
     }
 
+    const handleCancel = () => {
+        navigate('/client-management'); 
+    };
+
     return (
         <div className="home-container">
             <div className="left-h">
@@ -91,9 +95,9 @@ const Income = () => {
                                 <FontAwesomeIcon icon={faUpload} /> Adjuntar archivos<span>+</span>
                             </button>
                         </div>
-                        <div className="income-buttons">
-                            <button className="create-button create">Guardar ingreso</button>
-                            <button className="create-button cancel">Cancelar</button>
+                        <div className="management-buttons">
+                            <button type="submit" className="create-button2 create">Guardar ingreso</button>
+                            <button type="button" className="create-button2 cancel" onClick={handleCancel}>Cancelar</button>
                         </div>
                     </div>
                 </div>
