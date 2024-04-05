@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
@@ -10,6 +9,129 @@ import "../../../styles/ManagementAdministration/IncomeStyles.css"
 const Income = () => {
     const [pageTitle] = useState('Ingresos');
     const navigate = useNavigate();
+    const [incomeData, setIncomeData] = useState({
+        id_unit_management:'',
+        cash:'',
+        id_user_management:'',
+        id_income_type:'',
+        value:'',
+        date:'',
+        comment:'',
+        description:''
+    });
+    const [units, setUnits] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [errors, setErrors] = useState({});
+    const [incomeTypes, setIncomeTypes] = useState([]);
+
+    useEffect(() => {
+        const fetchUnits = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_UNITS_LIST_ENDPOINT}`);
+                const data = await response.json();
+                setUnits(data["Gestion de Unidades"]);
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
+        };
+        fetchUnits();
+
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_USERS_LIST_ENDPOINT}`);
+                const data = await response.json();
+                setUsers(data["Gestion de Usuarios"]);
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
+        };
+
+        fetchUsers();
+
+        const fetchIncomeType = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_INCOME_TYPE_LIST_ENDPOINT}`);
+                const data = await response.json();
+                setIncomeTypes(data["Tipo de Ingresos"]);
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
+        };
+        fetchIncomeType();
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const newErrors = {};
+    
+        // if (!incomeData.name) {
+        //     newErrors.name = 'Por favor ingrese el nombre';
+        // }
+        // if (!incomeData.id_rol) {
+        //     newErrors.id_rol = 'Por favor seleccione un rol';
+        // }
+        // if (!incomeData.email) {
+        //     newErrors.email = 'Por favor ingrese el correo';
+        // }
+        // if (!incomeData.id_unit_management) {
+        //     newErrors.id_unit_management = 'Por favor seleccione una unidad';
+        // }
+    
+        // // Validar que el campo "Número de celular" contenga solo números
+        // const celphonePattern = /^\d+$/;
+        // if (!celphonePattern.test(incomeData.celphone)) {
+        //     newErrors.celphone = 'Este campo solo puede contener números';
+        // }
+    
+        // // Validar la longitud máxima de los campos de texto
+        // const maxFieldLength = {
+        //     name: 50,
+        //     email: 50,
+        //     celphone: 50
+        // };
+        // Object.entries(maxFieldLength).forEach(([field, maxLength]) => {
+        //     if (incomeData[field].length > maxLength) {
+        //         newErrors[field] = `Este campo no puede tener más de ${maxLength} caracteres`;
+        //     }
+        // });
+    
+        // if (Object.keys(newErrors).length > 0) {
+        //     setErrors(newErrors);
+        //     return;
+        // }
+    
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_INCOME_ENDPOINT}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(incomeData)
+            });
+            const data = await response.json();
+            if (data.status === 200) {
+                alert('Ingreso creado exitosamente');
+                navigate('/income-history');
+            } else {
+                alert('Error al crear el usuario');
+            }
+        } catch (error) {
+            console.error('Error al enviar el formulario:', error);
+            alert('Error al enviar el formulario');
+        }
+    };
+
+    const handleChange = (e) => {
+        setIncomeData({
+            ...incomeData,
+            [e.target.id]: e.target.value
+        });
+
+        setErrors({
+            ...errors,
+            [e.target.id]: ''
+        });
+    };
 
     const handleExpenseHistoryClick = () => {
         navigate('/income-history');
@@ -39,7 +161,6 @@ const Income = () => {
                             <div className="filter-field">
                                 <select id="filterByUnit" className="filter-select">
                                     <option value="" disabled selected hidden>Todas las unidades:</option>
-                                    {/* Opciones para filtrar por unidad */}
                                 </select>
                             </div>
                         </div>
@@ -53,40 +174,49 @@ const Income = () => {
                         </button>
                     </div>
                 </div>
-                <div className="income-form">
+                <form className="income-form" onSubmit={handleSubmit}>
                     <div className="income-fields">
                         <div className="income-field">
                             <label htmlFor="ugiDiaria">UGI Diaria</label>
-                            <select id="ugiDiaria">
-                                <option value="" disabled selected hidden>Seleccione UGI diaria</option>
-                                {/* opciones de UGI Diaria */}
+                            <select id="id_unit_management" name="id_unit_management" className="management-select" onChange={handleChange} value={incomeData.id_unit_management}>
+                                <option value="">Seleccione una unidad</option>
+                                {units.map(unit => (
+                                    <option key={unit.id} value={unit.id}>{unit.unit}</option>
+                                ))}
                             </select>
+                            {errors.id_unit_management && <span className="error-message">{errors.id_unit_management}</span>}
                         </div>
+                        
                         <div className="income-field">
                             <label htmlFor="trabajador">Trabajador</label>
-                            <select id="trabajador">
+                            <select id="id_user_management" name="id_user_management" classname="management-selec" onChange={handleChange} value={incomeData.id_user_management}>
                                 <option value="" disabled selected hidden>Seleccione trabajador</option>
-                                {/* opciones de Trabajador */}
+                                {users.map(user => (
+                                    <option key={user.id} value={user.id}>{user.user_name}</option>
+                                ))}
                             </select>
                         </div>
                         <div className="income-field">
-                            <label htmlFor="tipoIngreso">Tipo de Ingreso</label>
-                            <select id="tipoIngreso">
+                            <label htmlFor="id_income_type">Tipo de Ingreso</label>
+                            <select id="id_income_type" name="id_income_type" classname="management-selec" onChange={handleChange} value={incomeData.id_income_type}>
                                 <option value="" disabled selected hidden>Seleccione tipo de ingreso</option>
-                                {/* opciones de Tipo de Ingreso */}
+                                {incomeTypes.map(incomeType => (
+                                    <option key={incomeType.id} value={incomeType.id}>{incomeType.name}</option>
+                                ))}
+
                             </select>
                         </div>
                         <div className="income-field">
-                            <label htmlFor="valor">Valor</label>
-                            <input type="text" id="valor" placeholder="Ingrese el valor"/>
+                            <label htmlFor="value">Valor</label>
+                            <input type="text" id="value" name="value" placeholder="Ingrese el valor" onChange={handleChange}/>
                         </div>
                         <div className="income-field">
-                            <label htmlFor="comentario">Comentario</label>
-                            <input type="text" id="comentario" placeholder="Ingrese un comentario"/>
+                            <label htmlFor="comment">Comentario</label>
+                            <input type="text" id="comment" name="comment" placeholder="Ingrese un comentario" onChange={handleChange}/>
                         </div>
                         <div className="income-field">
-                            <label htmlFor="descripcion">Descripción</label>
-                            <input type="text" id="descripcion" placeholder="Ingrese una descripción"/>
+                            <label htmlFor="description">Descripción</label>
+                            <input type="text" id="description" name="description" placeholder="Ingrese una descripción" onChange={handleChange}/>
                         </div>
                     </div>
                     <div className="income-buttons-container">
@@ -100,7 +230,7 @@ const Income = () => {
                             <button type="button" className="create-button2 cancel" onClick={handleCancel}>Cancelar</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
