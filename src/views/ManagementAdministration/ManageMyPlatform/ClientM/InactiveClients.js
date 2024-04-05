@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../../../../components/SideBar'
 import Header from '../../../../components/Header'
 import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
@@ -7,6 +6,8 @@ import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 const InactiveClients = () => {
     const [pageTitle] = useState('Historial de clientes inactivos');
     const [isActiveAll, setIsActiveAll] = useState(false);
+    const [customers,setCustomer] = useState([]);
+
 
     useEffect(() => {
         const fetchCustomers = async () => {
@@ -29,11 +30,11 @@ const InactiveClients = () => {
     const toggleAllSwitches = () => {
         const newState = !isActiveAll;
         setIsActiveAll(newState);
-        setUserStates(userStates.map(user => ({ ...user, isActive: newState })));
+        setCustomer(customers.map(user => ({ ...user, isActive: newState })));
     };
 
     const toggleUserSwitch = (userId) => {
-        setUserStates(userStates.map(user => {
+        setCustomer(customers.map(user => {
             if (user.id === userId) {
                 return { ...user, isActive: !user.isActive };
             }
