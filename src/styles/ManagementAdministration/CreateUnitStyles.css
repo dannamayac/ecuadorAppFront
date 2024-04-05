@@ -27,6 +27,15 @@
   background-color: #ffffff;
 }
 
+/* Estilo para el campo de fecha de nacimiento */
+.form-group input[type="date"] {
+  width: 90%;
+  padding: 7.5px;
+  border: 1px solid #757575;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
 .management-buttons {
     display: flex;
     justify-content: flex-end;

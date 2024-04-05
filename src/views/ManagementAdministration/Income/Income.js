@@ -141,6 +141,28 @@ const Income = () => {
         navigate('/management-administration'); 
     };
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     const newErrors = {};
+
+    //     // Validar que el campo "Valor" contenga solo números
+    //     const numericPattern = /^\d+$/;
+    //     if (!numericPattern.test(formData.valor)) {
+    //         newErrors.valor = 'El valor debe ser numérico';
+    //     }
+
+    //     // Actualizar el estado de los errores
+    //     setErrors(newErrors);
+
+    //     // Si hay errores, no se envía el formulario
+    //     if (Object.keys(newErrors).length > 0) {
+    //         return;
+    //     }
+
+    //     // Aquí puedes enviar el formulario si no hay errores
+    //     // Ejemplo: fetch('URL', { method: 'POST', body: JSON.stringify(formData) })
+    // };
+
     return (
         <div className="home-container">
             <div className="left-h">
@@ -234,6 +256,6 @@ const Income = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Income;

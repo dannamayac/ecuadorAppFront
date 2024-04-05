@@ -21,8 +21,8 @@ import PortfolioRequest from '../views/ManagementAdministration/ManageMyPlatform
 import Income from '../views/ManagementAdministration/Income/Income';
 import Expenses from '../views/ManagementAdministration/Expenses/Expenses.js'
 import Sales from '../views/ManagementAdministration/Sales/Sales';
-import CashManagement from '../views/ManagementAdministration/CashManagement/CashManagement.js';
-import BoxSummary from '../views/ManagementAdministration/CashManagement/BoxSummary.js';
+import BoxManagement from '../views/ManagementAdministration/BoxManagement/BoxManagement.js';
+import BoxSummary from '../views/ManagementAdministration/BoxManagement/BoxSummary.js';
 import KeyCreation from '../views/ManagementAdministration/KeyCreation/KeyCreation.js';
 import KeyCreationHistory from '../views/ManagementAdministration/KeyCreation/KeyCreationHistory.js';
 import OpeningOfBoxes from '../views/ManagementAdministration/OpeningOfBoxes/OpeningOfBoxes.js';
@@ -83,7 +83,7 @@ function Navigation() {
             {/* Ventas */}
             <Route path="/sales" element={<Sales />} />
             {/* Gestión de cajas */}
-            <Route path="/cash-management" element={<CashManagement />} />
+            <Route path="/box-management" element={<BoxManagement />} />
             <Route path="/box-summary" element={<BoxSummary />} />
             {/* Creación de llaves */}
             <Route path="/key-creation" element={<KeyCreation />} />

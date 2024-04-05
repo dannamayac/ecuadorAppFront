@@ -16,6 +16,7 @@ const CreatePartner = () => {
         state: '0'
     });
     const [units, setUnits] = useState([]);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const fetchUnits = async () => {
@@ -43,14 +44,35 @@ const CreatePartner = () => {
             ...formData,
             [e.target.id]: e.target.value
         });
+
+        // Limpiar el mensaje de error al cambiar el valor del campo
+        setErrors({
+            ...errors,
+            [e.target.id]: ''
+        });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.name || !formData.share_percentage || !formData.email) {
-            alert('Por favor complete todos los campos');
+        const newErrors = {};
+
+        if (!formData.name) {
+            newErrors.name = 'Por favor ingrese el nombre';
+        }
+        if (!formData.share_percentage) {
+            newErrors.share_percentage = 'Por favor ingrese el porcentaje accionario';
+        } else if (isNaN(formData.share_percentage)) {
+            newErrors.share_percentage = 'El porcentaje accionario debe ser numérico';
+        }
+        if (!formData.email) {
+            newErrors.email = 'Por favor ingrese el correo';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
             return;
         }
+
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_PARTNER_ENDPOINT}`, {
                 method: 'POST',
@@ -86,10 +108,12 @@ const CreatePartner = () => {
                         <div className="form-group">
                             <label htmlFor="name">Nombre</label>
                             <input type="text" id="name" name="name" placeholder="Ingrese el nombre" onChange={handleChange} />
+                            {errors.name && <p className="error-message">{errors.name}</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Correo</label>
                             <input type="text" id="email" name="email" placeholder="Ingrese el correo" onChange={handleChange} />
+                            {errors.email && <p className="error-message">{errors.email}</p>}
                         </div>
                     </div>
                     <div className="income-header">
@@ -105,6 +129,7 @@ const CreatePartner = () => {
                         <div className="form-group">
                             <label htmlFor="share_percentage">Porcentaje accionario</label>
                             <input type="text" id="share_percentage" name="share_percentage" placeholder="Ingrese el porcentaje accionario" onChange={handleChange} />
+                            {errors.share_percentage && <p className="error-message">{errors.share_percentage}</p>}
                         </div>
                         <div className="form-group">
                             <span className="switch-label">Estado</span>

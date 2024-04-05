@@ -18,11 +18,12 @@ const EditPartner = () => {
         state: '0'
     });
     const [units, setUnits] = useState([]);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const fetchPartnerData = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_PARTNER_INFO_ENDPOINT}/${id}`)
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_PARTNER_INFO_ENDPOINT}/${id}`);
                 if (!response.ok) {
                     throw new Error('No se pudo obtener la información del socio');
                 }
@@ -59,14 +60,35 @@ const EditPartner = () => {
             ...partnerData,
             [e.target.id]: e.target.value
         });
+
+        // Limpiar el mensaje de error al cambiar el valor del campo
+        setErrors({
+            ...errors,
+            [e.target.id]: ''
+        });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!partnerData.name || !partnerData.share_percentage || !partnerData.email) {
-            alert('Por favor complete todos los campos');
+        const newErrors = {};
+
+        if (!partnerData.name) {
+            newErrors.name = 'Por favor ingrese el nombre';
+        }
+        if (!partnerData.share_percentage) {
+            newErrors.share_percentage = 'Por favor ingrese el porcentaje accionario';
+        } else if (isNaN(partnerData.share_percentage)) {
+            newErrors.share_percentage = 'El porcentaje accionario debe ser numérico';
+        }
+        if (!partnerData.email) {
+            newErrors.email = 'Por favor ingrese el correo';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
             return;
         }
+
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_EDIT_PARTNER_ENDPOINT}/${id}`, {
                 method: 'POST',
@@ -87,6 +109,7 @@ const EditPartner = () => {
             alert('Error al enviar el formulario');
         }
     };
+
     const handleCancel = () => {
         navigate('/partner-management');
     };
@@ -100,17 +123,19 @@ const EditPartner = () => {
                 <Header title={pageTitle} backButtonPath="/partner-management" startItem="Gestión de socios" />
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="income-header">
-                    <div className="form-group">
+                        <div className="form-group">
                             <label htmlFor="name">Nombre</label>
                             <input type="text" id="name" name="name" placeholder="Ingrese el nombre" value={partnerData.name} onChange={handleChange} />
+                            {errors.name && <p className="error-message">{errors.name}</p>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Correo</label>
                             <input type="text" id="email" name="email" placeholder="Ingrese el correo" value={partnerData.email} onChange={handleChange} />
+                            {errors.email && <p className="error-message">{errors.email}</p>}
                         </div>
                     </div>
                     <div className="income-header">
-                    <div className="form-group">
+                        <div className="form-group">
                             <label htmlFor="id_unit_management">Unidad Asignada</label>
                             <select id="id_unit_management" name="id_unit_management" className="management-select" onChange={handleChange} value={partnerData.id_unit_management}>
                                 <option value="">Seleccione una unidad</option>
@@ -122,6 +147,7 @@ const EditPartner = () => {
                         <div className="form-group">
                             <label htmlFor="share_percentage">Porcentaje accionario</label>
                             <input type="text" id="share_percentage" name="share_percentage" placeholder="Ingrese el porcentaje accionario" value={partnerData.share_percentage} onChange={handleChange} />
+                            {errors.share_percentage && <p className="error-message">{errors.share_percentage}</p>}
                         </div>
                         <div className="form-group">
                             <span className="switch-label">Estado</span>
@@ -139,6 +165,6 @@ const EditPartner = () => {
             </div>
         </div>
     );
-}
+};
 
 export default EditPartner;
