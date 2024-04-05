@@ -63,7 +63,7 @@ function Navigation() {
               {/* Gestión clientes */}
               <Route path="/client-management" element={<ClientManagement />} />
               <Route path="/create-client" element={<CreateClient />} />
-              <Route path="/edit-client" element={<EditClient />} />
+              <Route path="/edit-client/:id" element={<EditClient />} />
               <Route path="/inactive-clients" element={<InactiveClients />} />
               <Route path="/portfolio-request" element={<PortfolioRequest />} />
               {/* Gestión socios */}
