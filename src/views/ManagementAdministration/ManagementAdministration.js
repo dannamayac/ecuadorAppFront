@@ -23,8 +23,8 @@ const ManagementAdministration = () => {
     const handleSalesClick = () => {
         navigate('/sales');
     }
-    const handleCashManagementClick = () => {
-        navigate('/cash-management');
+    const handleBoxManagementClick = () => {
+        navigate('/box-management');
     }
     const handleKeyCreationClick = () => {
         navigate('/key-creation');
@@ -77,7 +77,7 @@ const ManagementAdministration = () => {
                                 </button>
                             </div>
                             <div className="col">
-                                <button className="small-box" onClick={handleCashManagementClick}>Gestión de caja
+                                <button className="small-box" onClick={handleBoxManagementClick}>Gestión de caja
                                     <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                                 </button>
                             </div>

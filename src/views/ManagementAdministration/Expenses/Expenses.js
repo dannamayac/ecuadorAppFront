@@ -112,8 +112,8 @@ const Expenses = () => {
                         </div>
                         <div className="income-fields">
                             <div className="income-field">
-                                <label htmlFor="ugiDiaria">UGI Diaria</label>
-                                <select id="ugiDiaria" onChange={handleChange} value={formData.ugiDiaria}>
+                                <label htmlFor="cash">UGI Diaria</label>
+                                <select id="cash" onChange={handleChange} value={formData.ugiDiaria}>
                                     <option value="" disabled selected hidden>Seleccione UGI diaria</option>
                                     {/* opciones de UGI Diaria */}
                                 </select>

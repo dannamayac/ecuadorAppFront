@@ -7,7 +7,7 @@ import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import "../../../styles/ManagementAdministration/OpeningOfBoxesStyles.css"
 
-const CashManagement = () => {
+const BoxManagement = () => {
     const [pageTitle] = useState('Gestión de cajas');
     const [startDatePickerActive, setStartDatePickerActive] = useState(false);
     const [startDate, setStartDate] = useState(null);
@@ -106,4 +106,4 @@ const CashManagement = () => {
     );
 };
 
-export default CashManagement;
+export default BoxManagement;
