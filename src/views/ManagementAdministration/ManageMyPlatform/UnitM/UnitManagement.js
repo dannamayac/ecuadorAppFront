@@ -45,7 +45,7 @@ const UnitManagement = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th>Nombre Unidad</th>
+                            <th>Unidad</th>
                             <th>Codigo</th>
                             <th>Ubicacion</th>
                             <th>Estado</th>
@@ -61,7 +61,11 @@ const UnitManagement = () => {
                                 <td>{unit.unit}</td>
                                 <td>{unit.code}</td>
                                 <td>{unit.location}</td>
-                                <td>{unit.id_state}</td>
+                                <td>
+                                    {unit.id_state === 1 && <span className="green-circle" />}
+                                    {unit.id_state === 2 && <span className="yellow-circle" />}
+                                    {unit.id_state === 3 && <span className="red-circle" />}
+                                </td>
                                 <td>{unit.id_user_management}</td>
                                 <td>{unit.established_default}</td>
                                 <td>{unit.id_partner_management}</td>

@@ -7,8 +7,7 @@ import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 const ClientManagement = () => {
     const [pageTitle] = useState('Gestión de clientes');
     const navigate = useNavigate();
-    const [userSwitch, setUserSwitch] = useState(false);
-    const [customers,setCustomer] = useState([]);
+    const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
         const fetchCustomers = async () => {
@@ -19,23 +18,29 @@ const ClientManagement = () => {
                 }
                 const data = await response.json();
                 const customersData = data["Gestion de Clientes"];
-                setCustomer(customersData)
+                setCustomers(customersData);
             } catch (error) {
                 console.error('Error fetching data: ', error);
             }
         };
-    
+
         fetchCustomers();
     }, []);
 
     const handleCreateClient = () => {
         navigate('/create-client');
     };
+
     const handleEditClient = (customerId) => {
         navigate(`/edit-client/${customerId}`);
     };
-    const toggleUserSwitch = () => {
-        setUserSwitch(!userSwitch);
+
+    const toggleUserSwitch = (customerId) => {
+        setCustomers(prevCustomers =>
+            prevCustomers.map(customer =>
+                customer.id === customerId ? { ...customer, state: customer.state === 1 ? 0 : 1 } : customer
+            )
+        );
     };
 
     return (
@@ -55,7 +60,7 @@ const ClientManagement = () => {
                             <th>Nombre</th>
                             <th>Unidad</th>
                             <th>Numero doc</th>
-                            <th>correo</th>
+                            <th>Correo</th>
                             <th>Estado</th>
                             <th>Acción</th>
                         </tr>
@@ -67,14 +72,13 @@ const ClientManagement = () => {
                             <td>{customer.document_number}</td>
                             <td>{customer.id_unit_management}</td>
                             <td>{customer.email}</td>
-                            <td>{customer.state}</td>
                             <td>
-                                <label htmlFor="userActiveSwitch" className="switch2">
+                                <label htmlFor={`userActiveSwitch_${customer.id}`} className="switch2">
                                     <input
                                         type="checkbox"
-                                        id="userActiveSwitch"
-                                        checked={userSwitch}
-                                        onChange={toggleUserSwitch}
+                                        id={`userActiveSwitch_${customer.id}`}
+                                        checked={customer.state === 1}
+                                        onChange={() => toggleUserSwitch(customer.id)}
                                     />
                                     <span className="slider2 round2"></span>
                                 </label>
