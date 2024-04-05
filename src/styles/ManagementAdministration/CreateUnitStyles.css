@@ -186,3 +186,9 @@ input:checked + .slider2:before {
 .slider2.round:before {
   border-radius: 50%;
 }
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}

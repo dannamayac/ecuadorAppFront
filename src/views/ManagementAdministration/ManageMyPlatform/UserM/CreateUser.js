@@ -18,6 +18,7 @@ const CreateUser = () => {
     });
     const [roles, setRoles] = useState([]);
     const [units, setUnits] = useState([]);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         const fetchRoles = async () => {
@@ -51,19 +52,31 @@ const CreateUser = () => {
         });
     };
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.id]: e.target.value
-        });
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.name || !formData.id_rol || !formData.email || !formData.celphone || !formData.id_unit_management) {
-            alert('Por favor complete todos los campos');
+        const newErrors = {};
+
+        if (!formData.name) {
+            newErrors.name = 'Por favor ingrese el nombre';
+        }
+        if (!formData.id_rol) {
+            newErrors.id_rol = 'Por favor seleccione un rol';
+        }
+        if (!formData.email) {
+            newErrors.email = 'Por favor ingrese el correo';
+        }
+        if (!formData.celphone) {
+            newErrors.celphone = 'Por favor ingrese el número de celular';
+        }
+        if (!formData.id_unit_management) {
+            newErrors.id_unit_management = 'Por favor seleccione una unidad';
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
             return;
         }
+
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_USER_ENDPOINT}`, {
                 method: 'POST',
@@ -85,6 +98,19 @@ const CreateUser = () => {
         }
     };
 
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.id]: e.target.value
+        });
+
+        // Limpiar el mensaje de error al cambiar el valor del campo
+        setErrors({
+            ...errors,
+            [e.target.id]: ''
+        });
+    };
+
     const handleCancel = () => {
         navigate('/user-management');
     };
@@ -101,6 +127,7 @@ const CreateUser = () => {
                         <div className="form-group">
                             <label htmlFor="name">Nombre</label>
                             <input type="text" id="name" name="name" placeholder="Ingrese el nombre" onChange={handleChange} />
+                            {errors.name && <span className="error-message">{errors.name}</span>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="id_rol">Tipo de Usuario</label>
@@ -110,14 +137,17 @@ const CreateUser = () => {
                                     <option key={rol.id} value={rol.id}>{rol.name}</option>
                                 ))}
                             </select>
+                            {errors.id_rol && <span className="error-message">{errors.id_rol}</span>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Correo</label>
                             <input type="text" id="email" name="email" placeholder="Ingrese el correo" onChange={handleChange} />
+                            {errors.email && <span className="error-message">{errors.email}</span>}
                         </div>
                         <div className="form-group">
                             <label htmlFor="celphone">Número de celular</label>
                             <input type="text" id="celphone" name="celphone" placeholder="Ingrese el número de celular" onChange={handleChange} />
+                            {errors.celphone && <span className="error-message">{errors.celphone}</span>}
                         </div>
                     </div>
                     <div className="income-header">
@@ -129,6 +159,7 @@ const CreateUser = () => {
                                     <option key={unit.id} value={unit.id}>{unit.unit}</option>
                                 ))}
                             </select>
+                            {errors.id_unit_management && <span className="error-message">{errors.id_unit_management}</span>}
                         </div>
                         <div className="form-group">
                             <span className="switch-label">Estado</span>
