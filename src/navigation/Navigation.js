@@ -71,7 +71,7 @@ function Navigation() {
               {/* Gestión socios */}
               <Route path="/partner-management" element={<PartnerManagement />}/>
               <Route path="/create-partner" element={<CreatePartner />} />
-              <Route path="/edit-partner" element={<EditPartner />} />
+              <Route path="/edit-partner/:id" element={<EditPartner />} />
               {/* Reportes y métricas */}
               <Route path="/reports-metrics" element={<ReportsAndMetrics />}/>
             {/* Ingresos */}

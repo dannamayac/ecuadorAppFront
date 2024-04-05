@@ -40,8 +40,8 @@ const PartnerManagement = () => {
     const handleCreatePartner = () => {
         navigate('/create-partner');
     };
-    const handleEditPartner = () => {
-        navigate('/edit-partner');
+    const handleEditPartner = (partnerId) => {
+        navigate(`/edit-partner/${partnerId}`);
     };
     const toggleUserSwitch = (partnerId) => {
         setPartner(prevPartners =>
@@ -94,7 +94,7 @@ const PartnerManagement = () => {
                                         </label>
                                     </td>
                                     <td>
-                                        <button className='edit-button' onClick={handleEditPartner}>Editar</button>
+                                        <button className='edit-button' onClick={() =>handleEditPartner(partner.id)}>Editar</button>
                                     </td>
                                 </tr>
                             );
