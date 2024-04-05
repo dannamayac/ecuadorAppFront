@@ -31,8 +31,8 @@ const ClientManagement = () => {
     const handleCreateClient = () => {
         navigate('/create-client');
     };
-    const handleEditClient = () => {
-        navigate('/edit-client');
+    const handleEditClient = (customerId) => {
+        navigate(`/edit-client/${customerId}`);
     };
     const toggleUserSwitch = () => {
         setUserSwitch(!userSwitch);
@@ -80,7 +80,7 @@ const ClientManagement = () => {
                                 </label>
                             </td>
                             <td>
-                                <button className='edit-button' onClick={handleEditClient}>Editar</button>
+                                <button className='edit-button' onClick={() =>handleEditClient(customer.id)}>Editar</button>
                             </td>
                         </tr>
                         ))}
