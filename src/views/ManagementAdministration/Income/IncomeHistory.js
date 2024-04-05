@@ -58,7 +58,7 @@ const IncomeHistory = () => {
                                 <th>Unidad</th>
                                 <th>Caja</th>
                                 <th>Trabajador</th>
-                                <th>Tipo de gasto</th>
+                                <th>Tipo de ingreso</th>
                                 <th>Valor</th>
                                 <th>Fecha</th>
                                 <th>Comentario</th>

@@ -63,43 +63,26 @@ const Income = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = {};
-    
-        // if (!incomeData.name) {
-        //     newErrors.name = 'Por favor ingrese el nombre';
-        // }
-        // if (!incomeData.id_rol) {
-        //     newErrors.id_rol = 'Por favor seleccione un rol';
-        // }
-        // if (!incomeData.email) {
-        //     newErrors.email = 'Por favor ingrese el correo';
-        // }
-        // if (!incomeData.id_unit_management) {
-        //     newErrors.id_unit_management = 'Por favor seleccione una unidad';
-        // }
-    
-        // // Validar que el campo "Número de celular" contenga solo números
-        // const celphonePattern = /^\d+$/;
-        // if (!celphonePattern.test(incomeData.celphone)) {
-        //     newErrors.celphone = 'Este campo solo puede contener números';
-        // }
-    
-        // // Validar la longitud máxima de los campos de texto
-        // const maxFieldLength = {
-        //     name: 50,
-        //     email: 50,
-        //     celphone: 50
-        // };
-        // Object.entries(maxFieldLength).forEach(([field, maxLength]) => {
-        //     if (incomeData[field].length > maxLength) {
-        //         newErrors[field] = `Este campo no puede tener más de ${maxLength} caracteres`;
-        //     }
-        // });
-    
-        // if (Object.keys(newErrors).length > 0) {
-        //     setErrors(newErrors);
-        //     return;
-        // }
-    
+
+        if (!incomeData.id_unit_management) {
+            newErrors.id_unit_management = 'Por favor seleccione una unidad';
+        }
+        if (!incomeData.id_user_management) {
+            newErrors.id_user_management = 'Por favor seleccione un trabajador';
+        }
+        if (!incomeData.id_income_type) {
+            newErrors.id_income_type = 'Por favor seleccione un tipo de ingreso';
+        }
+        if (!incomeData.value) {
+            newErrors.value = 'Por favor ingrese el valor';
+        }
+
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length > 0) {
+            return;
+        }
+
         try {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_INCOME_ENDPOINT}`, {
                 method: 'POST',
@@ -113,7 +96,7 @@ const Income = () => {
                 alert('Ingreso creado exitosamente');
                 navigate('/income-history');
             } else {
-                alert('Error al crear el usuario');
+                alert('Error al crear el ingreso');
             }
         } catch (error) {
             console.error('Error al enviar el formulario:', error);
@@ -140,28 +123,6 @@ const Income = () => {
     const handleCancel = () => {
         navigate('/management-administration'); 
     };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     const newErrors = {};
-
-    //     // Validar que el campo "Valor" contenga solo números
-    //     const numericPattern = /^\d+$/;
-    //     if (!numericPattern.test(formData.valor)) {
-    //         newErrors.valor = 'El valor debe ser numérico';
-    //     }
-
-    //     // Actualizar el estado de los errores
-    //     setErrors(newErrors);
-
-    //     // Si hay errores, no se envía el formulario
-    //     if (Object.keys(newErrors).length > 0) {
-    //         return;
-    //     }
-
-    //     // Aquí puedes enviar el formulario si no hay errores
-    //     // Ejemplo: fetch('URL', { method: 'POST', body: JSON.stringify(formData) })
-    // };
 
     return (
         <div className="home-container">
@@ -217,6 +178,7 @@ const Income = () => {
                                     <option key={user.id} value={user.id}>{user.user_name}</option>
                                 ))}
                             </select>
+                            {errors.id_user_management && <span className="error-message">{errors.id_user_management}</span>}
                         </div>
                         <div className="income-field">
                             <label htmlFor="id_income_type">Tipo de Ingreso</label>
@@ -225,12 +187,13 @@ const Income = () => {
                                 {incomeTypes.map(incomeType => (
                                     <option key={incomeType.id} value={incomeType.id}>{incomeType.name}</option>
                                 ))}
-
                             </select>
+                            {errors.id_income_type && <span className="error-message">{errors.id_income_type}</span>}
                         </div>
                         <div className="income-field">
                             <label htmlFor="value">Valor</label>
                             <input type="text" id="value" name="value" placeholder="Ingrese el valor" onChange={handleChange}/>
+                            {errors.value && <span className="error-message">{errors.value}</span>}
                         </div>
                         <div className="income-field">
                             <label htmlFor="comment">Comentario</label>

@@ -38,6 +38,7 @@ import ExpensesApprovals from '../views/Approvals/ExpensesApprovals/ExpensesAppr
 import SalesApprovals from '../views/Approvals/SalesApprovals/SalesApprovals.js';
 import InsuranceApprovals from '../views/Approvals/InsuranceApprovals/InsuranceApprovals.js';
 import Login from '../views/Login/Login.js';
+import CreateKey from '../views/Approvals/KeyApprovals/CreateKey.js';
 
 function Navigation() {
   return (
@@ -99,6 +100,7 @@ function Navigation() {
           <Route path="/approvals" element={<Approvals />} />
             {/* Aprobación de llaves */}
             <Route path="/key-approvals" element={<KeyApprovals />} /> 
+            <Route path="/create-key" element={<CreateKey />} /> 
             {/* Aprobaciones pre-gastos */}
             <Route path="/expenses-approvals" element={<ExpensesApprovals />} />
             {/* Aprobaciones  pre-ventas*/}

@@ -26,6 +26,10 @@ const KeyApprovals = () => {
         navigate('/income-history');
     }
 
+    const handleCreateKeyClick = () => {
+        navigate('/create-key');
+    }
+
     const handleSearchToggle = () => {
         setSearchActive(!searchActive);
     };
@@ -72,7 +76,7 @@ const KeyApprovals = () => {
                                 {/* Opciones para filtrar por unidad */}
                             </select>
                         </div>
-                        <button className="createKey-button" onClick={handleExpenseHistoryClick}>
+                        <button className="createKey-button" onClick={handleCreateKeyClick}>
                             <div className="left-bu">Crear llave</div>
                             <div className="right-bu">&nbsp;&nbsp;&nbsp;&nbsp;+</div>
                         </button>
