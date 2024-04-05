@@ -38,8 +38,8 @@ const EditClient = () => {
                 if (!response.ok) {
                     throw new Error('No se pudo obtener la información del cliente');
                 }
-                const CustomerData = await response.json();
-                setCustomerData(CustomerData);
+                const customerData = await response.json();
+                setCustomerData(customerData);
             } catch (error) {
                 console.error('Error al obtener la información del cliente:', error);
             }
@@ -92,25 +92,60 @@ const EditClient = () => {
             [id]: newValue
         });
     };
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!CustomerData.name) {
+            newErrors.name = 'Por favor ingrese el nombre';
+        }
+        if (!CustomerData.id_unit_management) {
+            newErrors.id_unit_management = 'Por favor seleccione una unidad';
+        }
+        if (!CustomerData.id_document_type) {
+            newErrors.id_document_type = 'Por favor seleccione un tipo de documento';
+        }
+        if (!CustomerData.document_number) {
+            newErrors.document_number = 'Por favor ingrese el número de documento';
+        } else if (isNaN(CustomerData.document_number)) {
+            newErrors.document_number = 'El número de documento debe ser numérico';
+        }
+        if (!CustomerData.phone) {
+            newErrors.phone = 'Por favor ingrese el número de teléfono';
+        } else if (isNaN(CustomerData.phone)) {
+            newErrors.phone = 'El número de teléfono debe ser numérico';
+        }
+        if (!CustomerData.cellphone) {
+            newErrors.cellphone = 'Por favor ingrese el número de celular';
+        } else if (isNaN(CustomerData.cellphone)) {
+            newErrors.cellphone = 'El número de celular debe ser numérico';
+        }
+    
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_EDIT_CUSTOMER_ENDPOINT}/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(CustomerData)
-            });
-            const data = await response.json();
-            if (data.status === 200) {
-                alert('Cliente actualizado exitosamente');
-            } else {
-                alert('Error al actualizar el cliente');
+        
+        if (validateForm()) {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_EDIT_CUSTOMER_ENDPOINT}/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(CustomerData)
+                });
+                const data = await response.json();
+                if (data.status === 200) {
+                    alert('Cliente actualizado exitosamente');
+                } else {
+                    alert('Error al actualizar el cliente');
+                }
+            } catch (error) {
+                console.error('Error al enviar el formulario:', error);
+                alert('Error al enviar el formulario');
             }
-        } catch (error) {
-            console.error('Error al enviar el formulario:', error);
-            alert('Error al enviar el formulario');
         }
     };
 
