@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpload } from '@fortawesome/free-solid-svg-icons'
@@ -10,7 +9,7 @@ import "../../../styles/ManagementAdministration/ExpensesStyles.css"
 const Expenses = () => {
     const [pageTitle] = useState('Gastos');
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
+    const [expensesData, setexpensesData] = useState({
         ugiDiaria: '',
         trabajador: '',
         tipoIngreso: '',
@@ -18,46 +17,107 @@ const Expenses = () => {
         comentario: '',
         descripcion: ''
     });
+    const [units, setUnits] = useState([]);
+    const [users, setUsers] = useState([]);
     const [errors, setErrors] = useState({});
+    const [incomeTypes, setIncomeTypes] = useState([]);
+
+    useEffect(() => {
+        const fetchUnits = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_UNITS_LIST_ENDPOINT}`);
+                const data = await response.json();
+                setUnits(data["Gestion de Unidades"]);
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
+        };
+        fetchUnits();
+
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_USERS_LIST_ENDPOINT}`);
+                const data = await response.json();
+                setUsers(data["Gestion de Usuarios"]);
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
+        };
+
+        fetchUsers();
+
+        const fetchIncomeType = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_INCOME_TYPE_LIST_ENDPOINT}`);
+                const data = await response.json();
+                setIncomeTypes(data["Tipo de Ingresos"]);
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
+        };
+        fetchIncomeType();
+    }, []);
 
     const handleExpenseHistoryClick = () => {
         navigate('/expense-history');
     };
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
+        setexpensesData({
+            ...expensesData,
             [e.target.id]: e.target.value
         });
 
-        // Limpiar el mensaje de error al cambiar el valor del campo
         setErrors({
             ...errors,
             [e.target.id]: ''
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const newErrors = {};
 
-        // Validar que el campo "Valor" contenga solo números
-        const numericPattern = /^\d+$/;
-        if (!numericPattern.test(formData.valor)) {
-            newErrors.valor = 'El valor debe ser numérico';
+        if (!expensesData.id_unit_management) {
+            newErrors.id_unit_management = 'Por favor seleccione una unidad';
+        }
+        if (!expensesData.id_user_management) {
+            newErrors.id_user_management = 'Por favor seleccione un trabajador';
+        }
+        if (!expensesData.id_income_type) {
+            newErrors.id_income_type = 'Por favor seleccione un tipo de ingreso';
+        }
+        if (!expensesData.value) {
+            newErrors.value = 'Por favor ingrese el valor';
         }
 
-        // Actualizar el estado de los errores
         setErrors(newErrors);
 
-        // Si hay errores, no se envía el formulario
         if (Object.keys(newErrors).length > 0) {
             return;
         }
 
-        // Aquí puedes enviar el formulario si no hay errores
-        // Ejemplo: fetch('URL', { method: 'POST', body: JSON.stringify(formData) })
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_INCOME_ENDPOINT}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(expensesData)
+            });
+            const data = await response.json();
+            if (data.status === 200) {
+                alert('Ingreso creado exitosamente');
+                navigate('/income-history');
+            } else {
+                alert('Error al crear el ingreso');
+            }
+        } catch (error) {
+            console.error('Error al enviar el formulario:', error);
+            alert('Error al enviar el formulario');
+        }
     };
+
 
     const handleCancel = () => {
         navigate('/management-administration'); 
@@ -112,38 +172,44 @@ const Expenses = () => {
                         </div>
                         <div className="income-fields">
                             <div className="income-field">
-                                <label htmlFor="ugi_daily">UGI Diaria</label>
-                                <select id="ugi_daily" onChange={handleChange} value={formData.ugiDiaria}>
-                                    <option value="" disabled selected hidden>Seleccione UGI diaria</option>
-                                    {/* opciones de UGI Diaria */}
+                                <label htmlFor="ugiDiaria">UGI Diaria</label>
+                                <select id="id_unit_management" name="id_unit_management" className="management-select" onChange={handleChange} value={expensesData.id_unit_management}>
+                                    <option value="">Seleccione una unidad</option>
+                                    {units.map(unit => (
+                                        <option key={unit.id} value={unit.id}>{unit.unit}</option>
+                                    ))}
                                 </select>
+                                {errors.id_unit_management && <span className="error-message">{errors.id_unit_management}</span>}
                             </div>
                             <div className="income-field">
-                                <label htmlFor="trabajador">Trabajador</label>
-                                <select id="trabajador" onChange={handleChange} value={formData.trabajador}>
-                                    <option value="" disabled selected hidden>Seleccione trabajador</option>
-                                    {/* opciones de Trabajador */}
-                                </select>
+                            <label htmlFor="trabajador">Trabajador</label>
+                            <select id="id_user_management" name="id_user_management" classname="management-selec" onChange={handleChange} value={expensesData.id_user_management}>
+                                <option value="" disabled selected hidden>Seleccione trabajador</option>
+                                {users.map(user => (
+                                    <option key={user.id} value={user.id}>{user.user_name}</option>
+                                ))}
+                            </select>
+                            {errors.id_user_management && <span className="error-message">{errors.id_user_management}</span>}
                             </div>
                             <div className="income-field">
                                 <label htmlFor="tipoIngreso">Tipo de egreso</label>
-                                <select id="tipoIngreso" onChange={handleChange} value={formData.tipoIngreso}>
+                                <select id="tipoIngreso" onChange={handleChange} value={expensesData.tipoIngreso}>
                                     <option value="" disabled selected hidden>Seleccione tipo de egreso</option>
                                     {/* opciones de Tipo de Ingreso */}
                                 </select>
                             </div>
                             <div className="income-field">
                                 <label htmlFor="valor">Valor</label>
-                                <input type="text" id="valor" placeholder="Ingrese el valor" onChange={handleChange} value={formData.valor} />
+                                <input type="text" id="valor" placeholder="Ingrese el valor" onChange={handleChange} value={expensesData.valor} />
                                 {errors.valor && <p className="error-message">{errors.valor}</p>}
                             </div>
                             <div className="income-field">
                                 <label htmlFor="comentario">Comentario</label>
-                                <input type="text" id="comentario" placeholder="Ingrese un comentario" onChange={handleChange} value={formData.comentario} />
+                                <input type="text" id="comentario" placeholder="Ingrese un comentario" onChange={handleChange} value={expensesData.comentario} />
                             </div>
                             <div className="income-field">
                                 <label htmlFor="descripcion">Descripción</label>
-                                <input type="text" id="descripcion" placeholder="Ingrese una descripción" onChange={handleChange} value={formData.descripcion} />
+                                <input type="text" id="descripcion" placeholder="Ingrese una descripción" onChange={handleChange} value={expensesData.descripcion} />
                             </div>
                         </div>
                         <div className="income-buttons-container">
