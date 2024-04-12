@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../../components/SideBar'
 import Header from '../../../../components/Header'
@@ -8,6 +10,8 @@ const CreateUnit = () => {
     const [errorMessages, setErrorMessages] = useState([]);
     const navigate = useNavigate();
     const [pageTitle] = useState('Crear nueva unidad');
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
     const [formData, setFormData] = useState({
         unit: '',
         code: '',
@@ -19,6 +23,24 @@ const CreateUnit = () => {
         percentage: ''
     });
     const [states, setStates] = useState([]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.sidebar') && isMenuVisible) {
+            setIsMenuVisible(false);
+            if (window.innerWidth > 768) {
+              setSidebarExpanded(false);
+            }
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isMenuVisible]);
+
     useEffect(() => {
         const fetchStates = async () => {
             try {
@@ -151,10 +173,17 @@ const CreateUnit = () => {
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar />
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} backButtonPath="/unit-management" startItem="Unidades" />
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="income-header">

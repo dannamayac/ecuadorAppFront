@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,6 +10,8 @@ import "../../../styles/ManagementAdministration/SalesStyles.css"
 
 const Sales = () => {
     const [pageTitle] = useState('Ventas');
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
     const [searchActive, setSearchActive] = useState(false);
     const [startDatePickerActive, setStartDatePickerActive] = useState(false);
     const [endDatePickerActive, setEndDatePickerActive] = useState(false);
@@ -17,6 +20,23 @@ const Sales = () => {
     const [activeSaleTable, setActiveSaleTable] = useState(false);
     const [userSwitch, setUserSwitch] = useState(false);
     const calendarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.sidebar') && isMenuVisible) {
+            setIsMenuVisible(false);
+            if (window.innerWidth > 768) {
+              setSidebarExpanded(false);
+            }
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isMenuVisible]);
 
     useEffect(() => {
         const handleClickOutsideCalendar = (event) => {
@@ -83,10 +103,17 @@ const Sales = () => {
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar />
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} backButtonPath="/management-administration" startItem="General" />
                 <div className="income-header">
                     <div className="left-title">
