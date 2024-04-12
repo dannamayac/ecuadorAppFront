@@ -21,7 +21,7 @@ const KeyHistory = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/approvals" startItem="General" />
+                <Header title={pageTitle} backButtonPath="/key-approvals" startItem="General" />
                 <div className="income-header">
                     <div className='filters filters-approvals'>
                         <div className='search'>

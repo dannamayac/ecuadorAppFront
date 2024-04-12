@@ -84,7 +84,7 @@ const InsuranceHistory = () => {
                 <Sidebar />
             </div>
             <div className="right-h">
-                <Header title={pageTitle} backButtonPath="/approvals" startItem="General" />
+                <Header title={pageTitle} backButtonPath="/insurance-approvals" startItem="General" />
                 <div className="income-header">
                     <div className="left-title">
                         <div className="title-container">
