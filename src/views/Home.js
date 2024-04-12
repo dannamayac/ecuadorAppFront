@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faUserTie, faFileInvoice, faFileCirclePlus, faFileCircleCheck, faLocationDot, faGears } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +11,6 @@ const Home = () =>{
     const navigate = useNavigate();
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [sidebarExpanded, setSidebarExpanded] = useState(true);
-    const sidebarRef = useRef();
   
     useEffect(() => {
       const handleClickOutside = (event) => {
@@ -45,7 +44,7 @@ const Home = () =>{
             <FontAwesomeIcon 
                 icon={faBars} 
                 className="menu-icon" 
-                onClick={() => setIsMenuVisible(!isMenuVisible)} // Manejador para el ícono
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
             />
             <Sidebar
                 isMenuVisible={isMenuVisible}

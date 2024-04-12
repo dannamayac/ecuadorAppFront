@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../../components/SideBar'
 import Header from '../../../../components/Header'
 import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
@@ -7,6 +9,8 @@ import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
 const EditClient = () => {
     const { id } = useParams();
     const [pageTitle] = useState('Editar cliente');
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
     const [isActive, setIsActive] = useState(false);
     const [CustomerData, setCustomerData] = useState({
         id_unit_management: '',
@@ -30,6 +34,23 @@ const EditClient = () => {
     });
     const [units, setUnits] = useState([]);
     const [documentTypes, setDocumentTypes] = useState([]);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.sidebar') && isMenuVisible) {
+            setIsMenuVisible(false);
+            if (window.innerWidth > 768) {
+              setSidebarExpanded(false);
+            }
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isMenuVisible]);
 
     useEffect(() => {
         const fetchCustomerData = async () => {
@@ -151,10 +172,17 @@ const EditClient = () => {
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar />
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} backButtonPath="/client-management" startItem="Gestión de clientes" />
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="income-header">

@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Sidebar from '../../../../components/SideBar';
-import Header from '../../../../components/Header';
-import "../../../../styles/ManagementAdministration/CreateUnitStyles.css";
+import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { useParams } from 'react-router-dom'
+import Sidebar from '../../../../components/SideBar'
+import Header from '../../../../components/Header'
+import "../../../../styles/ManagementAdministration/CreateUnitStyles.css"
 
 const EditUser = () => {
     const { id } = useParams();
     const [pageTitle] = useState('Editar usuario');
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
     const [userData, setUserData] = useState({
         name: '',
         id_rol: '',
@@ -18,6 +22,23 @@ const EditUser = () => {
     const [roles, setRoles] = useState([]);
     const [units, setUnits] = useState([]);
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.sidebar') && isMenuVisible) {
+            setIsMenuVisible(false);
+            if (window.innerWidth > 768) {
+              setSidebarExpanded(false);
+            }
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isMenuVisible]);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -116,10 +137,17 @@ const EditUser = () => {
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar />
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} backButtonPath="/user-management" startItem="Gestión de usuarios" />
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="income-header">

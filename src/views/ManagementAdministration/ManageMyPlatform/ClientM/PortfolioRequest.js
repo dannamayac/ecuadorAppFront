@@ -1,11 +1,14 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../../components/SideBar'
 import Header from '../../../../components/Header'
 import "../../../../styles/ManagementAdministration/UnitManagementStyles.css"
 
 const PortfolioRequest = () => {
     const [pageTitle] = useState('Solicitud de castigo de cartera');
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
     const [isActiveAll, setIsActiveAll] = useState(false);
     const [userStates, setUserStates] = useState([
         { id: 1, isActive: false },
@@ -19,6 +22,23 @@ const PortfolioRequest = () => {
         setUserStates(userStates.map(user => ({ ...user, isActive: newState })));
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.sidebar') && isMenuVisible) {
+            setIsMenuVisible(false);
+            if (window.innerWidth > 768) {
+              setSidebarExpanded(false);
+            }
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isMenuVisible]);
+
     // Función para cambiar el estado de un switch individual en la tabla
     const toggleUserSwitch = (userId) => {
         setUserStates(userStates.map(user => {
@@ -31,10 +51,17 @@ const PortfolioRequest = () => {
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar/>
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} backButtonPath="/client-management" startItem="Clientes" />
                 <button className="create-button" >Inactivar todos &nbsp;&nbsp;
                     <label htmlFor="userActiveSwitch" className="switch2">

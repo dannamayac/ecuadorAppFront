@@ -1,5 +1,6 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
@@ -7,9 +8,28 @@ import "../../../styles/ManagementAdministration/KeyCreationStyles.css"
 
 const KeyCreation = () => {
     const [pageTitle] = useState('Creación de llaves');
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
     const [value, setValue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.sidebar') && isMenuVisible) {
+            setIsMenuVisible(false);
+            if (window.innerWidth > 768) {
+              setSidebarExpanded(false);
+            }
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isMenuVisible]);
 
     const handleKeyCreationHistoryClick = () => {
         navigate('/key-creation-history');
@@ -34,10 +54,17 @@ const KeyCreation = () => {
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar />
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} backButtonPath="/management-administration" startItem="General" />
                 <div className="income-header2">
                     <div className="left-title">
