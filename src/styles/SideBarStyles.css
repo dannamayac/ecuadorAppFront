@@ -112,13 +112,23 @@
 
 .sidebar ul li .active-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
+    height: 35px;
+    top: -8px;
+    left: -20px;
+    right: -8px;
     bottom: 0;
-    width: 100%;
-    height: 30px;
+    z-index: 1; /* Se asegura de que sea más bajo que los otros elementos */
+    background-color: white;
     border-radius: 0 10px 10px 0;
     display: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul li a .text-container,
+.sidebar ul li a .square,
+.sidebar ul li a .circle {
+    position: relative; /* Esto permite que el z-index tenga efecto */
+    z-index: 2; /* Más alto que el del overlay */
 }
 
 .sidebar ul li.active .active-overlay, .sidebar ul li a.active .active-overlay {
