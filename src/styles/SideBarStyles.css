@@ -20,13 +20,6 @@
     transform: translateX(0); /* Muestra el sidebar en la pantalla */
 }
 
-.sidebar.contracted ul li a .circle {
-    /* Ajustamos para que los círculos estén visibles en el borde del sidebar contraído */
-    margin: 0;
-    position: absolute; /* Se posiciona en relación con su elemento padre 'li' */
-    right: 10px; /* O la cantidad necesaria para alinear con el borde visible del sidebar */
-}
-
 /* Estilo para el botón de contraer/expandir el sidebar en pantallas grandes */
 .sidebar-toggle {
     position: fixed; /* Cambiado de relative a fixed */
@@ -127,8 +120,19 @@
 .sidebar ul li a .text-container,
 .sidebar ul li a .square,
 .sidebar ul li a .circle {
-    position: relative; /* Esto permite que el z-index tenga efecto */
-    z-index: 2; /* Más alto que el del overlay */
+    position: relative;
+    z-index: 2; 
+}
+
+.sidebar.contracted ul li a .circle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sidebar.contracted ul li {
+    margin-bottom: 42px; /* Aumenta esto para más espacio entre ítems */
 }
 
 .sidebar ul li.active .active-overlay, .sidebar ul li a.active .active-overlay {
@@ -160,12 +164,13 @@
     height: 12px;
     border-radius: 50%;
     margin-left: auto;
-    transition: background-color 0.3s, margin 0.3s ease; /* Transición suave para cambios de estilo */
+    transition: background-color 0.3s, margin 0.3s ease;
 }
 
 /* Ajuste para los círculos cuando el sidebar está contraído */
 .sidebar.contracted ul li a .circle {
-    margin: 0 auto; /* Centra los círculos en el estado contraído */
+    margin: 0 auto;
+    margin-top: 10px;
 }
 
 /* Estilos para hover y active */
