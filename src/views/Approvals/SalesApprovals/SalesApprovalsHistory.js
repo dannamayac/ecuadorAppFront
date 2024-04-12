@@ -8,8 +8,8 @@ import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import "../../../styles/Approvals/ApprovalsStyle.css"
 
-const InsuranceApprovals = () => {
-    const [pageTitle] = useState('Aprobaciones');
+const SalesApprovalsHistory = () => {
+    const [pageTitle] = useState('Histórico aprobación pre-ventas');
     const [startDatePickerActive, setStartDatePickerActive] = useState(false);
     const [endDatePickerActive, setEndDatePickerActive] = useState(false);
     const [startDate, setStartDate] = useState(null);
@@ -78,10 +78,6 @@ const InsuranceApprovals = () => {
         }
     };
 
-    const handleInsuranceHistoryClick = () => {
-        navigate('/insurance-history');
-    }
-
     return (
         <div className="home-container">
             <div className="left-h">
@@ -89,19 +85,6 @@ const InsuranceApprovals = () => {
             </div>
             <div className="right-h">
                 <Header title={pageTitle} backButtonPath="/approvals" startItem="General" />
-                <div className="income-header">
-                    <div className="left-title">
-                        <div className="title-container">
-                            <h1 className="header-title">Aprobación de seguros</h1>
-                        </div>
-                    </div>
-                    <div className="right-history">
-                        <button className="history-button" onClick={handleInsuranceHistoryClick} style={{ marginTop: '-10px' }}>
-                            <span className="history-button-text">Histórico de aprobación</span>
-                            <div className="sub-button">Ver &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
-                        </button>
-                    </div>
-                </div>
                 <div className="income-header">
                     <div className='filters filters-approvals'>
                         <div className='search'>
@@ -174,7 +157,7 @@ const InsuranceApprovals = () => {
                                 <th>Paquete</th>
                                 <th>Costo</th>
                                 <th>Fecha solicitud</th>
-                                <th>Acción</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -208,4 +191,4 @@ const InsuranceApprovals = () => {
     );
 }
 
-export default InsuranceApprovals;
+export default SalesApprovalsHistory;

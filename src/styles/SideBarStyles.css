@@ -1,11 +1,104 @@
-/* SidebarStyles.css */
+/* Estilos Generales del Sidebar */
 .sidebar {
     background-color: var(--nonBlue);
     padding: 20px;
-    padding: 20px;
     height: 100vh;
+    width: 250px; /* Ancho predeterminado para el sidebar expandido */
+    transition: transform 0.3s ease; /* Transición suave para el cambio de ancho */
+    overflow: hidden;
+    position: fixed; /* Fijo en la pantalla */
+    top: 0;
+    left: 0; /* Ajusta este valor para iniciar fuera de la pantalla si es necesario */
+    z-index: 10;
 }
 
+.sidebar.contracted {
+    transform: translateX(-220px);
+}
+
+.sidebar.expanded {
+    transform: translateX(0); /* Muestra el sidebar en la pantalla */
+}
+
+.sidebar.contracted ul li a .circle {
+    /* Ajustamos para que los círculos estén visibles en el borde del sidebar contraído */
+    margin: 0;
+    position: absolute; /* Se posiciona en relación con su elemento padre 'li' */
+    right: 10px; /* O la cantidad necesaria para alinear con el borde visible del sidebar */
+}
+
+/* Estilo para el botón de contraer/expandir el sidebar en pantallas grandes */
+.sidebar-toggle {
+    position: fixed; /* Cambiado de relative a fixed */
+    top: 30px; /* Ajusta según sea necesario para alinear con el layout */
+    left: auto; /* Ajusta según sea necesario */
+    z-index: 30; /* Asegura que esté sobre otros elementos */
+    color: var(--blue);
+    background-color: var(--lightBlue); /* Corrección de typo */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Para mejorar la indicación de que es un botón clickeable */
+}
+
+.close-sidebar {
+    position: absolute;
+    align-self: flex-end;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+    display: none;
+    z-index: 15;
+    }
+  
+  /* Posicionamiento del botón cuando el sidebar está contraído */
+  .sidebar.contracted .sidebar-toggle {
+    right: 20px; /* O la cantidad que sea necesaria para que sea visible en el borde */
+  }
+
+/* Botón del menú (sideBar) */
+.menu-icon {
+    display: none;
+    position: fixed;
+    margin-top: 50px;
+    margin-left: 25px;
+    z-index: 20; 
+    color: var(--blue);
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+        position: absolute; /* O absolute, según necesites */
+        top: 0;
+        left: 0;
+        z-index: 10; /* Asegúrate de que esté sobre otros elementos */
+        /* Otros estilos para el ícono, como padding, tamaño, color, etc. */
+    }
+
+    .sidebar {
+        width: 80%; /* O el ancho que prefieras para pantallas pequeñas */
+        transform: translateX(-100%); /* Comienza oculto */
+    }
+
+    .sidebar.expanded {
+        transform: translateX(0); /* Muestra el sidebar */
+        display: block; /* Importante para anular el display:none; */
+    }
+    
+}
+/* Ajustes específicos para el sidebar contraído */
+.sidebar.contracted ul li a .square {
+    opacity: 0; /* Los cuadrados se ocultan en estado contraído */
+    transition: opacity 0.3s ease;
+    position: absolute; /* Posicionamiento absoluto para evitar que ocupen espacio */
+}
+
+/* Oculta el texto cuando el sidebar está contraído */
+.sidebar.contracted .text-container {
+    display: none;
+}
+
+/* Ajustes para los ítems del menú */
 .sidebar ul {
     list-style-type: none;
     padding: 0;
@@ -16,69 +109,63 @@
     margin-bottom: 23px;
     position: relative;
 }
+
 .sidebar ul li .active-overlay {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     width: 100%;
-    height:30px;
+    height: 30px;
     border-radius: 0 10px 10px 0;
     display: none;
 }
 
-.sidebar ul li.active .active-overlay {
+.sidebar ul li.active .active-overlay, .sidebar ul li a.active .active-overlay {
     display: block;
+    background-color: white;
 }
 
+/* Estilos de Enlace */
 .sidebar ul li a {
     color: var(--ligthBlue);
     text-decoration: none;
     font-size: 15px;
     display: flex;
     align-items: center;
-}
-.sidebar ul li a.active .active-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% - 40px);
-    height: 30px;
-    background-color: white;
-    border-radius: 0 10px 10px 0;
-}
-
-.sidebar ul li a .text-container {
-    max-width: calc(100% - 40px);
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
+    transition: color 0.3s; /* Transición suave para el cambio de color */
 }
 
 .sidebar ul li a .square {
+    background-color: var(--ligthBlue);
     width: 18px;
     height: 18px;
     margin-right: 10px;
-    background-color: var(--ligthBlue);
-    transition: background-color 0.3s; 
+    transition: background-color 0.3s, opacity 0.3s ease; /* Añade transición para opacidad */
 }
+
 .sidebar ul li a .circle {
+    background-color: var(--ligthBlue);
     width: 12px;
     height: 12px;
-    background-color: var(--ligthBlue);
     border-radius: 50%;
     margin-left: auto;
+    transition: background-color 0.3s, margin 0.3s ease; /* Transición suave para cambios de estilo */
 }
 
-.sidebar ul li a:hover .square,
-.sidebar ul li a.active .square {
+/* Ajuste para los círculos cuando el sidebar está contraído */
+.sidebar.contracted ul li a .circle {
+    margin: 0 auto; /* Centra los círculos en el estado contraído */
+}
+
+/* Estilos para hover y active */
+.sidebar ul li a:hover, .sidebar ul li a.active {
+    color: var(--blue);
+}
+
+.sidebar ul li a:hover .square, 
+.sidebar ul li a.active .square, 
+.sidebar ul li a:hover .circle, 
+.sidebar ul li a.active .circle {
     background-color: var(--blue);
-}
-
-.sidebar ul li a:hover {
-    color: var(--blue);
-}
-
-.sidebar ul li a.active {
-    color: var(--blue);
 }

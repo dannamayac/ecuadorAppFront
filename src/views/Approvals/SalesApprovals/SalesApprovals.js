@@ -8,7 +8,7 @@ import Header from '../../../components/Header'
 import "../../../styles/Approvals/ApprovalsStyle.css"
 
 const SalesApprovals = () => {
-    const [pageTitle] = useState('Aprobación pre-ventas');
+    const [pageTitle] = useState('Aprobaciones');
     const [searchActive, setSearchActive] = useState(false);
     const [user, setUser] = useState({ id: 1, isActive: false });
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ const SalesApprovals = () => {
     };
 
     const handleExpenseHistoryClick = () => {
-        navigate('/income-history');
+        navigate('/sales-approvals-history');
     }
 
     const handleSearchToggle = () => {

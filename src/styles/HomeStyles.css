@@ -3,16 +3,21 @@
     display: flex;
     justify-content: space-between;
     background-color: white;
+    min-height: 100vh;
 }
 
 .left-h {
-    flex: 1;
-    width: 20%;
+    flex: 0 1 250px; /* Flex basis para el sidebar */
+    transition: flex-basis 0.3s ease;
+}
+
+.sidebar.contracted + .right-h {
+    flex-grow: 1; /* Ocupa el espacio disponible cuando el sidebar está contraído */
 }
 
 .right-h {
-    width: 80%;
-    flex: 3;
+    flex-grow: 3;
+    padding: 20px;
 }
 
 .left-in,
@@ -21,23 +26,34 @@
     vertical-align: top;
     width: 45%;
     margin-top: 20px;
+    margin-left: -80px;
+    padding: 0 30px;
 }
 
 .left-in{
-    margin-left: 28px;
+    margin-left: 0px;
 }
 .button-container {
     height: 490px;
     display: flex;
     flex-direction: column;
+    padding: 30px;
 }
+
 .left-bu {
     width: 80%;
     flex: 3;
+    margin-left: 10px;
 }
 
 .right-bu {
-    flex:1;
+    flex-shrink: 0;
+}
+
+.right-bu svg {
+    font-size: 5rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 /* Estilos para el botón "Gestión y Administración" */
@@ -58,24 +74,86 @@
 }
 .gestion .right-bu {
     position: absolute;
-    top: 70%;
-    right: 10%; 
+    top: 75%;
+    right: 3%; 
     transform: translateY(-50%);
 }
 .gestion .right-bu svg {
     font-size: 8.8rem;
     color: #a7a7a7;
 }
-/* Media query para ajustar estilos en dispositivos más pequeños */
-@media (max-width: 768px) {
-    .gestion {
-        position: relative;
-        align-items: center;
+
+/* Se ajusta cuando el sidebar está contraído para pantallas grandes */
+@media (min-width: 769px) {
+    .sidebar.contracted ~ .right-h {
+      margin-left: 70px; /* Deberás ajustar este valor si el ancho visible del sidebar contraído cambia */
     }
+    
+    .sidebar.expanded ~ .right-h {
+      margin-left: 250px; /* El ancho del sidebar expandido */
+    }
+}
+
+/* Media Queries para Responsividad en dispositivos muy pequeños */
+@media (max-width: 768px) {
+    /* Asegura que el sidebar se contraiga correctamente */
+    .sidebar.contracted {
+        width: 40px;
+    }
+    
+    /* Ajusta el contenedor principal para una columna */
+    .home-container {
+        flex-direction: column;
+    }
+
+    /* Ajusta los contenedores izquierdo y derecho para que ocupen el 100% */
+    .left-h, .right-h, .left-in, .right-in {
+        width: 95%;
+        margin-left: 10px;
+        margin-right: 0;
+        margin-top: 15px;
+        padding: 0;
+    }
+    .right-in{
+        margin-top: 0px;
+        margin-bottom: 15px;
+    }
+
+    /* Organiza los botones en una sola columna */
+    .button-container {
+        height: auto;
+        padding: 0;
+    }
+
+    /* Estiliza cada botón para que tenga un ancho completo y organiza su contenido */
+    .custom-button .gestion{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    /* Ajusta el tamaño y la posición del icono */
+    .custom-button .gestion .right-bu {
+        order: -1;
+        align-self: center;
+        margin-bottom: 10px;
+    }
+
+    .custom-button .right-bu svg {
+        font-size: 3rem;
+        margin-top: 0;
+    }
+
+    /* Para el botón específico de 'Gestión y Administración' */
+    .gestion .button-text,
+    .gestion .sub-button {
+        align-self: center;
+        text-align: center;
+    }
+
     .gestion .right-bu {
-        position: relative;
-        top: 18%; 
-        right: 24%;   
+        position: static;
+        transform: none;
     }
 }
 
@@ -123,17 +201,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
-    padding: 10px 20px;
+    text-align: left;
+    align-self: flex-end;
+    position: relative;
+    width: 100%;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
     margin: 8px auto;
-    text-align: left;
-    align-self: flex-end;
-    position: relative;
 }
 
 .custom-button:hover {
@@ -165,3 +243,5 @@
 .left-in .custom-button .right-bu {
     font-size: 4.8em;
 }
+
+

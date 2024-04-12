@@ -1,13 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserTie } from '@fortawesome/free-solid-svg-icons'
-import { faFileInvoice } from '@fortawesome/free-solid-svg-icons'
-import { faFileCirclePlus } from '@fortawesome/free-solid-svg-icons'
-import { faFileCircleCheck } from '@fortawesome/free-solid-svg-icons'
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
-import { faGears } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faUserTie, faFileInvoice, faFileCirclePlus, faFileCircleCheck, faLocationDot, faGears } from '@fortawesome/free-solid-svg-icons'
 import '../styles/HomeStyles.css'
 import Sidebar from '../components/SideBar'
 import Header from '../components/Header'
@@ -15,6 +9,26 @@ import Header from '../components/Header'
 const Home = () =>{
     const [pageTitle] = useState('Home');
     const navigate = useNavigate();
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
+    const sidebarRef = useRef();
+  
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (!event.target.closest('.sidebar') && isMenuVisible) {
+          setIsMenuVisible(false);
+          if (window.innerWidth > 768) {
+            setSidebarExpanded(false);
+          }
+        }
+      };
+  
+      document.addEventListener('mousedown', handleClickOutside);
+  
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [isMenuVisible]);
 
     const handleGestionButtonClick = () => {
         navigate('/management-administration');
@@ -28,10 +42,17 @@ const Home = () =>{
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar/>
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)} // Manejador para el ícono
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} startItem="Inicio"/>
                 <div className="left-in">
                     <div className="button-container">

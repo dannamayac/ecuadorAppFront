@@ -36,9 +36,13 @@ import Approvals from '../views/Approvals/Approvals.js';
 import KeyApprovals from '../views/Approvals/KeyApprovals/KeyApprovals.js';
 import ExpensesApprovals from '../views/Approvals/ExpensesApprovals/ExpensesApprovals.js';
 import SalesApprovals from '../views/Approvals/SalesApprovals/SalesApprovals.js';
+import SalesApprovalsHistory from '../views/Approvals/SalesApprovals/SalesApprovalsHistory.js';
 import InsuranceApprovals from '../views/Approvals/InsuranceApprovals/InsuranceApprovals.js';
+import InsuranceHistory from '../views/Approvals/InsuranceApprovals/InsuranceHistory.js';
 import Login from '../views/Login/Login.js';
 import CreateKey from '../views/Approvals/KeyApprovals/CreateKey.js';
+import ExpensesApprovalsHistory from '../views/Approvals/ExpensesApprovals/ExpensesApprovalsHistory.js';
+import KeyHistory from '../views/Approvals/KeyApprovals/KeyHistory.js';
 
 function Navigation() {
   return (
@@ -101,12 +105,16 @@ function Navigation() {
             {/* Aprobación de llaves */}
             <Route path="/key-approvals" element={<KeyApprovals />} /> 
             <Route path="/create-key" element={<CreateKey />} /> 
+            <Route path="/key-history" element={<KeyHistory />} />
             {/* Aprobaciones pre-gastos */}
             <Route path="/expenses-approvals" element={<ExpensesApprovals />} />
+            <Route path="/expenses-approvals-history" element={<ExpensesApprovalsHistory />} />
             {/* Aprobaciones  pre-ventas*/}
             <Route path="/sales-approvals" element={<SalesApprovals />} />
+            <Route path="/sales-approvals-history" element={<SalesApprovalsHistory />} />
             {/* Aprobaciones */}
             <Route path="/insurance-approvals" element={<InsuranceApprovals />} />
+            <Route path="/insurance-history" element={<InsuranceHistory />} />
         </Routes>
       </div>
     </Router>
