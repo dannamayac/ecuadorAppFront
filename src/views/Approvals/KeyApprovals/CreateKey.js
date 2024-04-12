@@ -105,7 +105,7 @@ const CreateKey = () => {
                     </div>
                     <div className="management-buttons">
                         <button type="submit" className="create-button2 create">Guardar</button>
-                        <button type="button" className="create-button2 cancel" onClick={() => navigate('/unit-management')}>Cancelar</button>
+                        <button type="button" className="create-button2 cancel" onClick={() => navigate('/key-approvals')}>Cancelar</button>
                     </div>
                 </form>
             </div>
