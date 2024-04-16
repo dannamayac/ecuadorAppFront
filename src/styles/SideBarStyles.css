@@ -61,29 +61,28 @@
 @media (max-width: 768px) {
     .menu-icon {
         display: block;
-        position: absolute; /* O absolute, según necesites */
+        position: absolute;
         top: 0;
         left: 0;
-        z-index: 10; /* Asegúrate de que esté sobre otros elementos */
-        /* Otros estilos para el ícono, como padding, tamaño, color, etc. */
+        z-index: 10;
     }
 
     .sidebar {
-        width: 80%; /* O el ancho que prefieras para pantallas pequeñas */
-        transform: translateX(-100%); /* Comienza oculto */
+        width: 80%;
+        transform: translateX(-100%);
     }
 
     .sidebar.expanded {
-        transform: translateX(0); /* Muestra el sidebar */
-        display: block; /* Importante para anular el display:none; */
+        transform: translateX(0);
+        display: block;
     }
     
 }
 /* Ajustes específicos para el sidebar contraído */
 .sidebar.contracted ul li a .square {
-    opacity: 0; /* Los cuadrados se ocultan en estado contraído */
+    opacity: 0;
     transition: opacity 0.3s ease;
-    position: absolute; /* Posicionamiento absoluto para evitar que ocupen espacio */
+    position: absolute;
 }
 
 /* Oculta el texto cuando el sidebar está contraído */
@@ -110,7 +109,7 @@
     left: -20px;
     right: -8px;
     bottom: 0;
-    z-index: 1; /* Se asegura de que sea más bajo que los otros elementos */
+    z-index: 1;
     background-color: white;
     border-radius: 0 10px 10px 0;
     display: none;
@@ -132,7 +131,10 @@
 }
 
 .sidebar.contracted ul li {
-    margin-bottom: 42px; /* Aumenta esto para más espacio entre ítems */
+    margin-bottom: 42px;
+}
+.no-transition {
+    transition: none !important;
 }
 
 .sidebar ul li.active .active-overlay, .sidebar ul li a.active .active-overlay {
@@ -147,7 +149,7 @@
     font-size: 15px;
     display: flex;
     align-items: center;
-    transition: color 0.3s; /* Transición suave para el cambio de color */
+    transition: color 0.3s;
 }
 
 .sidebar ul li a .square {
@@ -155,7 +157,7 @@
     width: 18px;
     height: 18px;
     margin-right: 10px;
-    transition: background-color 0.3s, opacity 0.3s ease; /* Añade transición para opacidad */
+    transition: background-color 0.3s, opacity 0.3s ease;
 }
 
 .sidebar ul li a .circle {

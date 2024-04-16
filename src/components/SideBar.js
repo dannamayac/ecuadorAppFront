@@ -5,7 +5,27 @@ import { faTimes, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-
 import '../styles/SideBarStyles.css'
 
 const SideBar = ({ isMenuVisible, setIsMenuVisible, setParentSidebarExpanded }) => {
-  const [sidebarExpanded, setSidebarExpanded] = useState(true);
+  const [sidebarExpanded, setSidebarExpanded] = useState(window.innerWidth > 768);
+
+  useEffect(() => {
+    const sidebarElement = document.querySelector('.sidebar');
+    // Desactiva las transiciones inmediatamente
+    sidebarElement.style.transition = 'none';
+  
+    // Restablece las transiciones después de la renderización inicial
+    requestAnimationFrame(() => {
+      // Esto asegura que la reinicialización de las transiciones suceda después
+      // de que el navegador haya tenido la oportunidad de pintar la página
+      requestAnimationFrame(() => {
+        sidebarElement.style.transition = '';
+      });
+    });
+  
+    // Asegúrate de limpiar este efecto si el componente se desmonta
+    return () => {
+      sidebarElement.style.transition = '';
+    };
+  }, []);
 
   useEffect(() => {
     // Esto asegura que el sidebar responda al cambio de isMenuVisible en pantallas pequeñas
