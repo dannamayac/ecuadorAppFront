@@ -43,6 +43,8 @@ import Login from '../views/Login/Login.js';
 import CreateKey from '../views/Approvals/KeyApprovals/CreateKey.js';
 import ExpensesApprovalsHistory from '../views/Approvals/ExpensesApprovals/ExpensesApprovalsHistory.js';
 import KeyHistory from '../views/Approvals/KeyApprovals/KeyHistory.js';
+import LoanAsAdmin from '../views/Loans/LoanAsAdmin.js';
+import Map from '../views/Map/Map.js';
 
 function Navigation() {
   return (
@@ -100,6 +102,10 @@ function Navigation() {
             <Route path="/cleaning-payment" element={<CleaningPayment />} />
           {/* Facturación */}
           <Route path="/billing" element={<Billing />} />
+          {/* Nueva venta/préstamo */}
+          <Route path="/loan-as-admin" element={<LoanAsAdmin />} />
+          {/* Mapa */}
+          <Route path="/map" element={<Map />} />
           {/* Aprobaciones */}
           <Route path="/approvals" element={<Approvals />} />
             {/* Aprobación de llaves */}
