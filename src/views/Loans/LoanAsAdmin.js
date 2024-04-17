@@ -110,7 +110,7 @@ const LoanAsAdmin = () => {
                 setParentSidebarExpanded={setSidebarExpanded}
             />
             <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
-                <Header title={pageTitle} backButtonPath="/" startItem="General" />
+                <Header title={pageTitle} backButtonPath="/home" startItem="General" />
                 <div className="income-header">
                     <div className='filters filters-approvals' style={{marginTop:'-10px'}}>
                         <div className='search'>

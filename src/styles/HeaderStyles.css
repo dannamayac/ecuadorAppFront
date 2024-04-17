@@ -72,6 +72,11 @@
 .user-info span {
     font-size: 15px;
 }
+
+.notification-button, .dropdown-icon {
+    cursor: pointer;
+}
+
 .dropdown-icon {
     cursor: pointer;
     margin-right: 30px;
@@ -86,6 +91,8 @@
     right: 0;
     background-color: white;
     border: 1px solid #ccc;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1000;
 }
 
 .dropdown-menu ul {

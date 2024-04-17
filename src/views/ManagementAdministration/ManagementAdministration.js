@@ -68,7 +68,7 @@ const ManagementAdministration = () => {
                 setParentSidebarExpanded={setSidebarExpanded}
             />
             <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
-                <Header title={pageTitle} backButtonPath="/" startItem="Inicio"/>
+                <Header title={pageTitle} backButtonPath="/home" startItem="Inicio"/>
                 <div className="top">
                     <div className="button-container">
                         <button className="adminPlat-button admin-platform" onClick={handleClick}>

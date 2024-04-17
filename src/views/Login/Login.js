@@ -25,7 +25,7 @@ const Login = () => {
             if (response.ok) {
                 localStorage.setItem('authToken', data.token);
 
-                navigate('/');
+                navigate('/home');
             } else {
                 alert('Credenciales incorrectas');
             }

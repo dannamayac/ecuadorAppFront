@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faUserTie, faFileInvoice, faFileCirclePlus, faFileCircleCheck, faLocationDot, faGears } from '@fortawesome/free-solid-svg-icons'
-import '../styles/HomeStyles.css'
-import Sidebar from '../components/SideBar'
-import Header from '../components/Header'
+import '../../styles/HomeStyles.css'
+import Sidebar from '../../components/SideBar'
+import Header from '../../components/Header'
 
 const Home = () =>{
     const [pageTitle] = useState('Home');

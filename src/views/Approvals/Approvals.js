@@ -55,7 +55,7 @@ const Approvals = () => {
                 setParentSidebarExpanded={setSidebarExpanded}
             />
             <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
-                <Header title={pageTitle} backButtonPath="/" startItem="Inicio"/>
+                <Header title={pageTitle} backButtonPath="/home" startItem="Inicio"/>
                 <div className="bottom-buttons">
                         <div className="row">
                             <div className="col">

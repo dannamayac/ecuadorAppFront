@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from '../views/Home'
+import Home from '../views/Home/Home.js';
 import UnitsDisplay from '../views/UnitsDisplay'
 import Dashboard from '../views/Dashboard'
 import ManagementAdministration from '../views/ManagementAdministration/ManagementAdministration';
@@ -52,9 +52,9 @@ function Navigation() {
       <div>
         <Routes>
           {/* Login y register */}
-          <Route index element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           {/* Home */}
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/units-display" element={<UnitsDisplay />} />
           <Route path="/dashboard" element={<Dashboard />} />
           
