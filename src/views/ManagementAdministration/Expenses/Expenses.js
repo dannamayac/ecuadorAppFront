@@ -7,17 +7,19 @@ import Header from '../../../components/Header'
 import "../../../styles/ManagementAdministration/ExpensesStyles.css"
 
 const Expenses = () => {
+    const navigate = useNavigate();
     const [pageTitle] = useState('Gastos');
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [sidebarExpanded, setSidebarExpanded] = useState(true);
-    const navigate = useNavigate();
     const [expensesData, setexpensesData] = useState({
-        ugiDiaria: '',
-        trabajador: '',
-        tipoIngreso: '',
-        valor: '',
-        comentario: '',
-        descripcion: ''
+        id_user_management: '',
+        id_expense_type: '',
+        id_unit_management: '',
+        movement_type: '',
+        value: '',
+        date: '',
+        comment:'',
+        description:''
     });
     const [units, setUnits] = useState([]);
     const [users, setUsers] = useState([]);
@@ -50,9 +52,9 @@ const Expenses = () => {
 
         const fetchIncomeType = async () => {
             try {
-                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_INCOME_TYPE_LIST_ENDPOINT}`);
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_EXPENSES_TYPE_LIST_ENDPOINT}`);
                 const data = await response.json();
-                setIncomeTypes(data["Tipo de Ingresos"]);
+                setIncomeTypes(data["Tipo de Egresos"]);
             } catch (error) {
                 console.error('Error fetching states:', error);
             }
@@ -84,50 +86,35 @@ const Expenses = () => {
     const handleChange = (e) => {
         setexpensesData({
             ...expensesData,
-            [e.target.id]: e.target.value
+            [e.target.name]: e.target.value  
         });
-
+    
         setErrors({
             ...errors,
-            [e.target.id]: ''
+            [e.target.name]: '' 
         });
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newErrors = {};
-
-        if (!expensesData.id_unit_management) {
-            newErrors.id_unit_management = 'Por favor seleccione una unidad';
-        }
-        if (!expensesData.id_user_management) {
-            newErrors.id_user_management = 'Por favor seleccione un trabajador';
-        }
-        if (!expensesData.id_income_type) {
-            newErrors.id_income_type = 'Por favor seleccione un tipo de ingreso';
-        }
-        if (!expensesData.value) {
-            newErrors.value = 'Por favor ingrese el valor';
-        }
-
-        setErrors(newErrors);
-
-        if (Object.keys(newErrors).length > 0) {
-            return;
-        }
-
+        const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    const updatedExpensesData = {
+        ...expensesData,
+        date: formattedDate
+    };
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_CREATE_INCOME_ENDPOINT}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_EXPENSES_CREATE_ENDPOINT}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(expensesData)
+                body: JSON.stringify(updatedExpensesData)
             });
             const data = await response.json();
             if (data.status === 200) {
-                alert('Ingreso creado exitosamente');
-                navigate('/income-history');
+                alert('Gasto creado exitosamente');
+                navigate('/expense-history');
             } else {
                 alert('Error al crear el ingreso');
             }
@@ -190,11 +177,12 @@ const Expenses = () => {
                                 <h2 className="sub-title">Tipo de movimiento</h2>
                             </div>
                             <div className="movement-options">
-                                <input type="radio" id="gasto" name="movementType" value="gasto" />
+                                <input type="radio" id="gasto" name="movement_type" value="gasto" checked={expensesData.movement_type === "gasto"} onChange={handleChange} />
                                 <label htmlFor="gasto">Gasto</label>
-                                <input type="radio" id="retiro" name="movementType" value="retiro" />
+                                <input type="radio" id="retiro" name="movement_type" value="retiro" checked={expensesData.movement_type === "retiro"} onChange={handleChange} />
                                 <label htmlFor="retiro">Retiro</label>
                             </div>
+
                         </div>
                         <div className="income-fields">
                             <div className="income-field">
@@ -219,23 +207,25 @@ const Expenses = () => {
                             </div>
                             <div className="income-field">
                                 <label htmlFor="tipoIngreso">Tipo de egreso</label>
-                                <select id="tipoIngreso" onChange={handleChange} value={expensesData.tipoIngreso}>
+                                <select id="id_expense_type"  name="id_expense_type" classname="management-selec"  onChange={handleChange} value={expensesData.id_expense_type}>
                                     <option value="" disabled selected hidden>Seleccione tipo de egreso</option>
-                                    {/* opciones de Tipo de Ingreso */}
+                                    {incomeTypes.map(incomeType => (
+                                    <option key={incomeType.id} value={incomeType.id}>{incomeType.name}</option>
+                                ))}
                                 </select>
                             </div>
                             <div className="income-field">
                                 <label htmlFor="valor">Valor</label>
-                                <input type="text" id="valor" placeholder="Ingrese el valor" onChange={handleChange} value={expensesData.valor} />
+                                <input type="text" id="value" name="value" placeholder="Ingrese el valor" onChange={handleChange} value={expensesData.valor} />
                                 {errors.valor && <p className="error-message">{errors.valor}</p>}
                             </div>
                             <div className="income-field">
                                 <label htmlFor="comentario">Comentario</label>
-                                <input type="text" id="comentario" placeholder="Ingrese un comentario" onChange={handleChange} value={expensesData.comentario} />
+                                <input type="text" id="comment" name="comment" placeholder="Ingrese un comentario" onChange={handleChange} value={expensesData.comentario} />
                             </div>
                             <div className="income-field">
                                 <label htmlFor="descripcion">Descripción</label>
-                                <input type="text" id="descripcion" placeholder="Ingrese una descripción" onChange={handleChange} value={expensesData.descripcion} />
+                                <input type="text" id="description" name="description" placeholder="Ingrese una descripción" onChange={handleChange} value={expensesData.descripcion} />
                             </div>
                         </div>
                         <div className="income-buttons-container">

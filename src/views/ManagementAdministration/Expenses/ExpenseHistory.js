@@ -10,6 +10,7 @@ const ExpenseHistory = () => {
     const [pageTitle] = useState('Historial de gastos');
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [sidebarExpanded, setSidebarExpanded] = useState(true);
+    const [expense, setExpense] = useState([]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -28,6 +29,24 @@ const ExpenseHistory = () => {
         };
       }, [isMenuVisible]);
     
+      useEffect(() => {
+        const fetchExpense = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_EXPENSES_LIST_ENDPOINT}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log(data);
+                const expenseData = data.Gastos;
+                setExpense(expenseData);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+
+        fetchExpense();
+    }, []); 
 
     return (
         <div className="home-container">
@@ -56,7 +75,6 @@ const ExpenseHistory = () => {
                             <div className="filter-field">
                                 <select id="filterByUnit" className="filter-select">
                                     <option value="" disabled selected hidden>Todas las unidades:</option>
-                                    {/* Opciones para filtrar por unidad */}
                                 </select>
                             </div>
                         </div>
@@ -78,17 +96,19 @@ const ExpenseHistory = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>3923/Unidad/Daniel</td>
-                                <td>Unidad</td>
-                                <td>Daniel</td>
-                                <td>Gasto</td>
-                                <td>$100.000</td>
-                                <td>20/04/2024</td>
-                                <td>Comentario</td>
-                                <td>Descripción</td>
+                        {Array.isArray(expense) && expense.map(expen => (
+                            <tr key={expen.id}>
+                                <td>{expen.id_user_management}</td>
+                                <td>{expen.id_expense_type}</td>
+                                <td>{expen.id_unit_management}</td>
+                                <td>{expen.movement_type}</td>
+                                <td>{expen.value}</td>
+                                <td>{expen.date}</td>
+                                <td>{expen.comment}</td>
+                                <td>{expen.description}</td>
                                 <td>Acciones</td>
                             </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>

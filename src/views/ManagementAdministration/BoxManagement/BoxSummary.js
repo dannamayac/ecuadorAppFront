@@ -10,6 +10,8 @@ const BoxSummary = () => {
     const [pageTitle] = useState('Resumen de cajas');
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [sidebarExpanded, setSidebarExpanded] = useState(true);
+    const [boxSummary, setBoxSummary] = useState([]);
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -27,6 +29,24 @@ const BoxSummary = () => {
           document.removeEventListener('mousedown', handleClickOutside);
         };
       }, [isMenuVisible]);
+
+      useEffect(() => {
+        const fetchBoxSummary = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_BOX_MANAGEMENT_LIST_ENDPOINT}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const boxSummaryData = data["Gestion Cajas"];
+                setBoxSummary(boxSummaryData);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+
+        fetchBoxSummary();
+    }, []); 
 
     return (
         <div className="home-container">
@@ -75,15 +95,17 @@ const BoxSummary = () => {
                             </tr>
                         </thead>
                         <tbody>
+                        {Array.isArray(boxSummary) && boxSummary.map(boxSum => (
                             <tr>
-                                <td>Unidad</td>
-                                <td>Abierta</td>
-                                <td>2</td>
-                                <td>$100.000</td>
-                                <td>$200.000</td>
-                                <td>Ventas</td>
-                                <td>20/04/2024</td>
+                                <td>{boxSum.id_unit_management}</td>
+                                <td>{boxSum.state}</td>
+                                <td>{boxSum.withdrawals}</td>
+                                <td>{boxSum.bills}</td>
+                                <td>{boxSum.income}</td>
+                                <td>{boxSum.sales}</td>
+                                <td>{boxSum.date}</td>
                             </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
