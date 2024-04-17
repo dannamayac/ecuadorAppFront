@@ -1,4 +1,6 @@
 /* make variables */
+@import "~leaflet/dist/leaflet.css";
+
 :root {
   --blue: #1b2f8e;
   --nonBlue: #f4f4fb;

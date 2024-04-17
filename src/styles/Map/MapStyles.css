@@ -1,0 +1,50 @@
+/* MapStyles.css */
+#map-view .form-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#map-view .movement-type {
+    flex-grow: 1;
+}
+
+#map-view .date-buttons {
+    display: flex;
+    align-items: flex;
+    margin-right: 15%;
+    margin-top: 0px;
+}
+
+#map-view .date-input {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+#map-view .date-button {
+    padding: 11px 18px;
+    background-color: #e1e5ea; 
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+}
+
+#map-view .calendar-wrapper {
+    position: absolute;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+#map-view .date-input p {
+    font-size: 0.9rem; /* Disminuye el tamaño de la fuente según tus necesidades */
+    color: #000; /* Cambia el color del texto a negro */
+    margin: 0; /* Elimina los márgenes por defecto si es necesario */
+    padding-bottom: 5px; /* Añade un poco de espacio debajo del párrafo si es necesario */
+}

@@ -38,6 +38,12 @@ const Home = () =>{
     const handleApprovalsButtonClick = () => {
         navigate('/approvals');
     }
+    const handleLoanButtonClick = () => {
+        navigate('/loan-as-admin');
+    }
+    const handleMapButtonClick = () => {
+        navigate('/map');
+    }
 
     return (
         <div className="home-container">
@@ -77,7 +83,7 @@ const Home = () =>{
                 </div>
                 <div className="right-in">
                     <div className="button-container">
-                        <button className="custom-button nueva-venta">
+                        <button className="custom-button nueva-venta" onClick={handleLoanButtonClick}>
                             <div className="left-bu">
                                 Nueva Venta (Nuevo préstamo)
                                 <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
@@ -95,7 +101,7 @@ const Home = () =>{
                                 <FontAwesomeIcon icon={faFileCircleCheck} />
                             </div>
                             </button>
-                        <button className="custom-button mapa">
+                        <button className="custom-button mapa" onClick={handleMapButtonClick}>
                         <div className="left-bu">
                             Mapa
                             <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>

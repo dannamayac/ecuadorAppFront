@@ -1,0 +1,41 @@
+.form-group.percentage-input {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc(25% - 0px); /* Asegúrate de que sea el mismo que .form-group si es necesario */
+    margin-bottom: 30px;
+  }
+  
+  .form-group.percentage-input .input-group {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #757575;
+    border-radius: 5px;
+    width: 94%;
+  }
+  
+  .form-group.percentage-input .input-group input {
+    flex: 1;
+    border: none;
+    padding: 9px; /* Igual que en .form-group input */
+    outline: none;
+  }
+  
+  .form-group.percentage-input .input-group .input-addon {
+    background: #eee;
+    padding: 0.35em;
+    border-left: 1px solid #ccc;
+  }
+
+  .subTitle-container {
+    padding-bottom: 5px; /* O el espacio que desees entre el texto y la línea */
+}
+
+  .subTitle-container h1 {
+    font-size: 15px; /* Ajusta al tamaño de fuente deseado */
+    font-weight: 500; /* Cambia el peso de la fuente si es necesario */
+    color: #666; /* Ajusta al color deseado */
+    margin-bottom: 5px; /* Espacio debajo del subtítulo */
+    margin-top: 1px; /* Espacio arriba del subtítulo si es necesario */
+    text-transform: none; /* Si no quieres transformaciones de texto */
+}
