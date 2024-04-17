@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import Calendar from 'react-calendar'
@@ -9,16 +8,25 @@ import Header from '../../components/Header'
 import MapComponent from '../../components/MapComponent'
 import "../../styles/Map/MapStyles.css"
 
+// Datos de ejemplo para cada tipo de movimiento
+const dataExample = {
+    ventas: [{ lat: 4.60971, lng: -74.08175, info: 'ID Venta: #43532' }],
+    recaudos: [{ lat: 4.70972, lng: -74.08173, info: 'Recaudo en Bogotá' }],
+    // ... otros datos para ingresos y egresos, inicios y cierre de sesión
+  }
+
 const Map = () => {
-    const [pageTitle] = useState('Gastos');
+    const [pageTitle] = useState('Mapa');
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [sidebarExpanded, setSidebarExpanded] = useState(true);
     const [startDatePickerActive, setStartDatePickerActive] = useState(false);
     const [endDatePickerActive, setEndDatePickerActive] = useState(false);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const navigate = useNavigate();
+    const [selectedOption, setSelectedOption] = useState('ventas');
     const calendarRef = useRef(null);
+
+    
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -124,14 +132,41 @@ const Map = () => {
                             <div className="movementType-container">
                                 <h2 className="sub-title">Tipo de movimiento</h2>
                             </div>
-                            <div className="movement-options">
-                                <input type="radio" id="sells" name="movementType" value="sells" />
+                                <input
+                                    type="radio"
+                                    id="sells"
+                                    name="movementType"
+                                    value="sells"
+                                    checked={selectedOption === 'ventas'}
+                                    onChange={() => setSelectedOption('ventas')}
+                                />
                                 <label htmlFor="sells">Ventas</label>
-                                <input type="radio" id="collections" name="movementType" value="collections" />
+                                <input
+                                    type="radio"
+                                    id="collections"
+                                    name="movementType"
+                                    value="collections"
+                                    checked={selectedOption === 'recaudos'}
+                                    onChange={() => setSelectedOption('recaudos')}
+                                />
                                 <label htmlFor="collections">Recaudos</label>
-                                <input type="radio" id="IncomeExpenses" name="movementType" value="IncomeExpenses" />
-                                <label htmlFor="IncomeExpenses">Ingresos y egresos</label>
-                                <input type="radio" id="LogInOut" name="movementType" value="LogInOut" />
+                                <input
+                                    type="radio"
+                                    id="incomeExpenses"
+                                    name="movementType"
+                                    value="incomeExpenses"
+                                    checked={selectedOption === 'ingresosEgresos'}
+                                    onChange={() => setSelectedOption('ingresosEgresos')}
+                                />
+                                <label htmlFor="incomeExpenses">Ingresos y egresos</label>
+                                <input
+                                    type="radio"
+                                    id="logInOut"
+                                    name="movementType"
+                                    value="logInOut"
+                                    checked={selectedOption === 'inicioCierre'}
+                                    onChange={() => setSelectedOption('inicioCierre')}
+                                />
                                 <label htmlFor="LogInOut">Inicios y cierre de sesión</label>
                             </div>
                         </div>
@@ -162,10 +197,9 @@ const Map = () => {
                             </div>
                         </div>
                     </div>
-                    <MapComponent />
+                    <MapComponent data={dataExample[selectedOption]} />
                 </div>
             </div>
-        </div>
     );
 };
 

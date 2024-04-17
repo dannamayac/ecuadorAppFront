@@ -52,7 +52,7 @@ function Navigation() {
       <div>
         <Routes>
           {/* Login y register */}
-          <Route exact path="/login" element={<Login />} />
+          <Route index element={<Login />} />
           {/* Home */}
           <Route path="/" element={<Home />} />
           <Route path="/units-display" element={<UnitsDisplay />} />

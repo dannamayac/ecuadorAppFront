@@ -1,8 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faSearch, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import "../../../styles/Approvals/ApprovalsStyle.css"
@@ -12,6 +11,25 @@ const ExpensesApprovals = () => {
     const [searchActive, setSearchActive] = useState(false);
     const [user, setUser] = useState({ id: 1, isActive: false });
     const navigate = useNavigate();
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.sidebar') && isMenuVisible) {
+            setIsMenuVisible(false);
+            if (window.innerWidth > 768) {
+              setSidebarExpanded(false);
+            }
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isMenuVisible]);
     
 
     const toggleUserSwitch = (userId, action) => {
@@ -32,10 +50,17 @@ const ExpensesApprovals = () => {
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar />
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} backButtonPath="/approvals" startItem="General" />
                 <div className="income-header">
                     <div className="left-title">

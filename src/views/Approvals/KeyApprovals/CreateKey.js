@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import "../../../styles/Approvals/ApprovalsStyle.css"
@@ -21,6 +21,25 @@ const CreateKey = () => {
         paymentDate: '',
         status: { check: false, times: false }
     });
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.sidebar') && isMenuVisible) {
+            setIsMenuVisible(false);
+            if (window.innerWidth > 768) {
+              setSidebarExpanded(false);
+            }
+          }
+        };
+    
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isMenuVisible]);
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -48,10 +67,17 @@ const CreateKey = () => {
 
     return (
         <div className="home-container">
-            <div className="left-h">
-                <Sidebar />
-            </div>
-            <div className="right-h">
+            <FontAwesomeIcon 
+                icon={faBars} 
+                className="menu-icon" 
+                onClick={() => setIsMenuVisible(!isMenuVisible)}
+            />
+            <Sidebar
+                isMenuVisible={isMenuVisible}
+                setIsMenuVisible={setIsMenuVisible}
+                setParentSidebarExpanded={setSidebarExpanded}
+            />
+            <div className={`right-h ${sidebarExpanded ? '' : 'contracted'}`}>
                 <Header title={pageTitle} backButtonPath="/key-approvals" startItem="General" />
                 <form className="form-container" onSubmit={handleSubmit}>
                     <div className="income-header">

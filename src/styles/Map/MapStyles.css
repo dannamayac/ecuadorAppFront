@@ -1,20 +1,37 @@
 /* MapStyles.css */
+#map-view .income-form {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección del flujo principal para apilar verticalmente */
+}
 #map-view .form-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Esta línea debería empujar el .movement-type y .date-buttons a los extremos opuestos */
     align-items: center;
+    flex-wrap: wrap;
+    max-width: 100%;
 }
 
 #map-view .movement-type {
     flex-grow: 1;
 }
 
+#map-view .movement-type label {
+    margin-right: 5px; /* Espacio entre el botón de radio y su etiqueta */
+  }
+
+#map-view .movement-type input { 
+    margin-left: 30px;
+}
+
 #map-view .date-buttons {
     display: flex;
-    align-items: flex;
-    margin-right: 15%;
-    margin-top: 0px;
-}
+    justify-content: flex-end;
+    flex-grow: 0;
+    padding-right: 1em;
+    margin-right: 200px;
+    margin-top: -70px;
+    margin-bottom: 30px;
+  }
 
 #map-view .date-input {
     display: flex;
@@ -43,8 +60,8 @@
 }
 
 #map-view .date-input p {
-    font-size: 0.9rem; /* Disminuye el tamaño de la fuente según tus necesidades */
-    color: #000; /* Cambia el color del texto a negro */
-    margin: 0; /* Elimina los márgenes por defecto si es necesario */
-    padding-bottom: 5px; /* Añade un poco de espacio debajo del párrafo si es necesario */
+    font-size: 0.9rem;
+    color: #000;
+    margin: 0;
+    padding-bottom: 5px;
 }
