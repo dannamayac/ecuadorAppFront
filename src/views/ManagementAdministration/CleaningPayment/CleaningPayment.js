@@ -12,6 +12,8 @@ const CleaningPayment = () => {
     const [searchActive, setSearchActive] = useState(false);
     const [userSwitch, setUserSwitch] = useState(false);
     const [activeButton, setActiveButton] = useState('Ventas activas');
+    const [cleaningPayment, setCleaningPayment] = useState([]);
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -30,6 +32,24 @@ const CleaningPayment = () => {
         };
       }, [isMenuVisible]);
 
+      useEffect(() => {
+        const fetchCleaningPayment = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_COLLECTION_CLEANING_LIST_ENDPOINT}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const cleaningPaymentData = data["Limpieza Cobro"];
+                setCleaningPayment(cleaningPaymentData);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+
+        fetchCleaningPayment();
+    }, []); 
+
     const handleSearchToggle = () => {
         setSearchActive(!searchActive);
     };
@@ -40,6 +60,31 @@ const CleaningPayment = () => {
 
     const handleActiveButtonClick = (button) => {
         setActiveButton(button);
+    };
+
+    const handleExportToExcel = async () => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_COLLECTION_CLEANING_EXPORT_ENDPOINT}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'LimpiezaCobro.xlsx'); 
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } catch (error) {
+            console.error('Error al exportar a Excel: ', error);
+        }
     };
 
     return (
@@ -62,7 +107,7 @@ const CleaningPayment = () => {
                         <button className={`action-button ${activeButton === 'Ventas inactivas' ? 'selected' : ''}`} onClick={() => handleActiveButtonClick('Ventas inactivas')}>Ventas inactivas</button>
                     </div>
                     <div className="right-history">
-                        <button className="history-button">Exportar Excel
+                    <button className="history-button" onClick={handleExportToExcel}>Exportar Excel
                             <FontAwesomeIcon icon={faFileExcel} className="excel-icon"/>
                             <div className="sub-button" style={{ width: '75px' }}>Exportar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                         </button>
@@ -118,17 +163,18 @@ const CleaningPayment = () => {
                             </tr>
                         </thead>
                         <tbody>
+                        {Array.isArray(cleaningPayment) && cleaningPayment.map(cleaningPay => (
                             <tr>
-                                <td>Centro de negocio</td>
-                                <td>123</td>
-                                <td>456</td>
-                                <td>Nombre</td>
-                                <td>12345678</td>
-                                <td>10.000.000</td>
-                                <td>5.000.000</td>
-                                <td>01/23/24</td>
-                                <td>30</td>
-                                <td>31/04/2024</td>
+                                <td>{cleaningPay.business_center}</td>
+                                <td>{cleaningPay.id_unit_management}</td>
+                                <td>{cleaningPay.sale_number}</td>
+                                <td>{cleaningPay.name}</td>
+                                <td>{cleaningPay.document_number}</td>
+                                <td>{cleaningPay.total_sale}</td>
+                                <td>{cleaningPay.pending_balance}</td>
+                                <td>{cleaningPay.sale_date}</td>
+                                <td>{cleaningPay.days_past_due}</td>
+                                <td>{cleaningPay.payment_date}</td>
                                 <td>
                                     {/* Switch de la tabla */}
                                     <label htmlFor="userActiveSwitch" className="switch2">
@@ -142,6 +188,7 @@ const CleaningPayment = () => {
                                     </label>
                                 </td>
                             </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>

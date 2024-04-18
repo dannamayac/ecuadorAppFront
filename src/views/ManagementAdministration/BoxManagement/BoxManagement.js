@@ -16,6 +16,8 @@ const BoxManagement = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const calendarRef = useRef(null);
+    const [units, setUnits] = useState([]);
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -33,6 +35,19 @@ const BoxManagement = () => {
           document.removeEventListener('mousedown', handleClickOutside);
         };
       }, [isMenuVisible]);
+
+      useEffect(() => {
+        const fetchUnits = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_UNITS_LIST_ENDPOINT}`);
+                const data = await response.json();
+                setUnits(data['Gestion de Unidades']);
+            } catch (error) {
+                console.error('Error fetching units:', error);
+            }
+        };
+        fetchUnits();
+    }, []);
 
     useEffect(() => {
         const handleClickOutsideCalendar = (event) => {
@@ -117,7 +132,9 @@ const BoxManagement = () => {
                                     <label htmlFor="unit">Unidad</label>
                                     <select id="unit">
                                         <option value="" disabled selected hidden>Seleccionar unidad</option>
-                                        {/* opciones de UGI Diaria */}
+                                        {units.map(unit => (
+                                    <option key={unit.id} value={unit.id}>{unit.unit}</option>
+                                ))}
                                     </select>
                                 </div>
                             </div>

@@ -105,7 +105,7 @@ const BoxSummary = () => {
                                 <td>{boxSum.sales}</td>
                                 <td>{boxSum.date}</td>
                             </tr>
-                            ))}
+                        ))}
                         </tbody>
                     </table>
                 </div>

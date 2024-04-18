@@ -10,6 +10,7 @@ const KeyCreationHistory = () => {
     const [pageTitle] = useState('Historial de creación de llaves');
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [sidebarExpanded, setSidebarExpanded] = useState(true);
+    const [keyCreation, setKeyCreation] = useState([]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -27,6 +28,24 @@ const KeyCreationHistory = () => {
           document.removeEventListener('mousedown', handleClickOutside);
         };
       }, [isMenuVisible]);
+
+      useEffect(() => {
+        const fetchKeyCreation = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_KEY_CREATION_LIST_ENDPOINT}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const keyCreationData = data["Creacion Llaves"];
+                setKeyCreation(keyCreationData);
+            } catch (error) {
+                console.error('Error fetching data: ', error);
+            }
+        };
+
+        fetchKeyCreation();
+    }, []); 
 
     return (
         <div className="home-container">
@@ -78,18 +97,20 @@ const KeyCreationHistory = () => {
                             </tr>
                         </thead>
                         <tbody>
+                        {Array.isArray(keyCreation) && keyCreation.map(keyCreat => (
                             <tr>
-                                <td>20/04/2024l</td>
-                                <td>12345</td>
-                                <td>20/03/2024</td>
-                                <td>Unidad</td>
-                                <td>Centro de negocios</td>
-                                <td>654789</td>
-                                <td>Movimiento</td>
-                                <td>Venta</td>
-                                <td>12</td>
-                                <td>$100.000</td>
+                                <td>{keyCreat.application_date}</td>
+                                <td>{keyCreat.id_cash_management}</td>
+                                <td>{keyCreat.id_cash_management}</td>
+                                <td>{keyCreat.id_unit_management}</td>
+                                <td>{keyCreat.business_center}</td>
+                                <td>{keyCreat.id_customer_management}</td>
+                                <td>{keyCreat.movement_type}</td>
+                                <td>{keyCreat.sale_type}</td>
+                                <td>{keyCreat.quantity_Fees}</td>
+                                <td>{keyCreat.value}</td>
                             </tr>
+                        ))}
                         </tbody>
                     </table>
                 </div>

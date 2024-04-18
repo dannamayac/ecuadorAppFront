@@ -13,6 +13,8 @@ const KeyCreation = () => {
     const [value, setValue] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const [units, setUnits] = useState([]);
+
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -30,6 +32,19 @@ const KeyCreation = () => {
           document.removeEventListener('mousedown', handleClickOutside);
         };
       }, [isMenuVisible]);
+    
+      useEffect(() => {
+        const fetchUnits = async () => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}${process.env.REACT_APP_UNITS_LIST_ENDPOINT}`);
+                const data = await response.json();
+                setUnits(data['Gestion de Unidades']);
+            } catch (error) {
+                console.error('Error fetching units:', error);
+            }
+        };
+        fetchUnits();
+    }, []);
 
     const handleKeyCreationHistoryClick = () => {
         navigate('/key-creation-history');
@@ -73,8 +88,9 @@ const KeyCreation = () => {
                                 <label htmlFor="filterByIdOrField">Unidad</label>
                                 <select id="filterByIdOrField" className="filter-select">
                                     <option value="" disabled selected hidden>Seleccionar unidad</option>
-                                    <option value="id">Unidad 1</option>
-                                    <option value="field">Unidad 2</option>
+                                    {units.map(unit => (
+                                    <option key={unit.id} value={unit.id}>{unit.unit}</option>
+                                ))}
                                 </select>
                             </div>
                         </div>
