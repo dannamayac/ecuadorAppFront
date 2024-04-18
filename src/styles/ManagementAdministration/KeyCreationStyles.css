@@ -57,7 +57,7 @@
     display: flex;
     justify-content: flex-start;
     margin-top: 25px; 
-    margin-left: 33px; /* Ajusta el margen izquierdo según sea necesario */
+    margin-left: 33px;
 }
 
 .income-fields2 {

@@ -45,6 +45,7 @@ import ExpensesApprovalsHistory from '../views/Approvals/ExpensesApprovals/Expen
 import KeyHistory from '../views/Approvals/KeyApprovals/KeyHistory.js';
 import LoanAsAdmin from '../views/Loans/LoanAsAdmin.js';
 import Map from '../views/Map/Map.js';
+import Notifications from '../views/Notifications/Notifications.js';
 
 function Navigation() {
   return (
@@ -121,6 +122,8 @@ function Navigation() {
             {/* Aprobaciones */}
             <Route path="/insurance-approvals" element={<InsuranceApprovals />} />
             <Route path="/insurance-history" element={<InsuranceHistory />} />
+          {/* Notificaciones */}
+          <Route path="/notifications" element={<Notifications />} />
         </Routes>
       </div>
     </Router>

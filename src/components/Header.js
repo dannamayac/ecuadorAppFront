@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faClock, faKey, faDollarSign, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import '../styles/HeaderStyles.css';
 import userProfileIcon from '../assets/user-profile-icon-free-vector.jpg';
 import { useNavigate } from 'react-router-dom';
@@ -11,12 +11,50 @@ import { useNavigate } from 'react-router-dom';
 const Header = ({ title, backButtonPath, startItem }) => {
     library.add(far);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [showNotificationsDropdown, setShowNotificationsDropdown] = useState(false);
     const navigate = useNavigate();
+    const dropdownRef = useRef(null);
+    const notificationRef = useRef(null);
+
+    useEffect(() => {
+        // Función para verificar si se hizo clic fuera
+        function handleClickOutside(event) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowDropdown(false); // Cierra el dropdown del usuario si está abierto
+            }
+            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+                setShowNotificationsDropdown(false); // Cierra el dropdown de notificaciones si está abierto
+            }
+        }
+
+        // Agregar escuchador de eventos al montar
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Limpiar escuchador de eventos al desmontar
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
     };
 
+    const toggleNotificationsDropdown = () => {
+        setShowNotificationsDropdown(!showNotificationsDropdown);
+    };
+    // Notificaciones simuladas, reemplaza esto con tu estado o prop de notificaciones
+    const notifications = [
+        { id: 1, text: 'Notificación 1', icon: faClock, color: 'red' },
+        { id: 2, text: 'Notificación 2', icon: faKey, color: 'yellow' },
+        { id: 3, text: 'Notificación 3', icon: faDollarSign, color: 'green' },
+    ];
+
+    const removeNotification = (id) => {
+        // Añade la lógica para eliminar la notificación
+        console.log('Eliminar notificación', id);
+    };
+    
     const handleLogout = async () => {
         try {
             // Construir la URL de la API de cierre de sesión
@@ -36,7 +74,7 @@ const Header = ({ title, backButtonPath, startItem }) => {
                 localStorage.removeItem('authToken');
 
                 // Redirigir al usuario a la página de inicio de sesión o la página principal
-                navigate('/login'); // O a cualquier otra ruta según tu estructura de rutas
+                navigate('/'); // O a cualquier otra ruta según tu estructura de rutas
             } else {
                 console.error('Error en el cierre de sesión');
                 alert('Error al cerrar sesión');
@@ -47,10 +85,9 @@ const Header = ({ title, backButtonPath, startItem }) => {
         }
     };
 
-    const handleNotifications = () => {
-        // Aquí maneja la lógica para desplegar las notificaciones
-        console.log('Mostrar notificaciones');
-    };
+    const handleNotificationsButtonClick = () => {
+        navigate('/notifications');
+    }
 
     return (
         <div className="header">
@@ -63,9 +100,24 @@ const Header = ({ title, backButtonPath, startItem }) => {
             </ul>
             <ul className='header-user'>
                 {/* Botón de notificaciones */}
-                <li className='notification-button' onClick={handleNotifications}>
+                <div className='notification-bell-icon' onClick={toggleNotificationsDropdown} ref={notificationRef}>
                     <FontAwesomeIcon icon={['far', 'bell']} style={{ color: 'rgb(118, 117, 117)'}} />
-                </li>
+                    <span className="notification-badge"></span>
+                    {showNotificationsDropdown && (
+                        <div className='notification-dropdown'>
+                             <div className="sub-buttonNotification" onClick={handleNotificationsButtonClick}>Ver todas &nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                             {notifications.slice(0, 3).map(notification => (
+                                <div key={notification.id} className="notification-item">
+                                    <span className={`notification-icon ${notification.color}`}>
+                                        <FontAwesomeIcon icon={notification.icon} />
+                                    </span>
+                                    <span className="notification-text">{notification.text}</span>
+                                    <FontAwesomeIcon icon={faTimes} className="notification-close" onClick={() => removeNotification(notification.id)} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
                 {/* Foto de perfil del usuario */}
                 <li className='user-photo'>
                     <img src={userProfileIcon} alt="Foto de perfil" />
@@ -75,7 +127,7 @@ const Header = ({ title, backButtonPath, startItem }) => {
                     <span className='name'>Nombre</span>
                     <span className='user'>@usuario</span>
                 </li>
-                <FontAwesomeIcon icon={faChevronDown} className='dropdown-icon' onClick={toggleDropdown} />
+                <FontAwesomeIcon icon={faChevronDown} className='dropdown-icon' onClick={toggleDropdown} ref={dropdownRef}/>
                 {showDropdown && (
                     <div className='dropdown-menu'>
                         <ul>

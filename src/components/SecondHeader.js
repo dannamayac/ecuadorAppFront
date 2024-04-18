@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
-import { faSearch, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faTimes, faClock, faKey, faDollarSign, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import '../styles/SecondHeaderStyles.css'
 import userProfileIcon from '../assets/user-profile-icon-free-vector.jpg'
 
@@ -11,10 +11,26 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButton
     library.add(far);
     const [showDropdown, setShowDropdown] = useState(false);
     const [searchActive, setSearchActive] = useState(false);
+    const [showNotificationsDropdown, setShowNotificationsDropdown] = useState(false);
     const navigate = useNavigate();
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
+    };
+
+    const toggleNotificationsDropdown = () => {
+        setShowNotificationsDropdown(!showNotificationsDropdown);
+    };
+    // Notificaciones simuladas, reemplaza esto con tu estado o prop de notificaciones
+    const notifications = [
+        { id: 1, text: 'Notificación 1', icon: faClock, color: 'red' },
+        { id: 2, text: 'Notificación 2', icon: faKey, color: 'yellow' },
+        { id: 3, text: 'Notificación 3', icon: faDollarSign, color: 'green' },
+    ];
+
+    const removeNotification = (id) => {
+        // Añade la lógica para eliminar la notificación
+        console.log('Eliminar notificación', id);
     };
 
     const handleLogout = () => {
@@ -36,6 +52,9 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButton
     const handleRequests = () => {
         navigate('/portfolio-request');
     };
+    const handleNotificationsButtonClick = () => {
+        navigate('/notifications');
+    }
 
   return (
     <div className="header">
@@ -62,9 +81,24 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButton
         </div>
         <ul className='header-user2'>
             {/* Botón de notificaciones */}
-            <li className='notification-button' onClick={handleNotifications}>
-                <FontAwesomeIcon icon={['far', 'bell']} style={{ color: 'rgb(118, 117, 117)'}} />
-            </li>
+            <div className='notification-bell-icon' onClick={toggleNotificationsDropdown}>
+                    <FontAwesomeIcon icon={['far', 'bell']} style={{ color: 'rgb(118, 117, 117)'}} />
+                    <span className="notification-badge"></span>
+                    {showNotificationsDropdown && (
+                        <div className='notification-dropdown'>
+                             <div className="sub-buttonNotification" onClick={handleNotificationsButtonClick}>Ver todas &nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                             {notifications.slice(0, 3).map(notification => (
+                                <div key={notification.id} className="notification-item">
+                                    <span className={`notification-icon ${notification.color}`}>
+                                        <FontAwesomeIcon icon={notification.icon} />
+                                    </span>
+                                    <span className="notification-text">{notification.text}</span>
+                                    <FontAwesomeIcon icon={faTimes} className="notification-close" onClick={() => removeNotification(notification.id)} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
             {/* Foto de perfil del usuario */}
             <li className='user-photo'>
                 <img src={userProfileIcon} alt="Foto de perfil" />
@@ -75,14 +109,14 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButton
                 <span className='user'>@usuario</span>
             </li>
             <FontAwesomeIcon icon={faChevronDown} className='dropdown-icon' onClick={toggleDropdown} />
-                {showDropdown && (
-                    <div className='dropdown-menu'>
-                        <ul>
-                            <li onClick={handleLogout}>Cerrar sesión</li>
-                            {/* Otros elementos del menú desplegable */}
-                        </ul>
-                    </div>
-                )}
+            {showDropdown && (
+                <div className='dropdown-menu'>
+                    <ul>
+                        <li onClick={handleLogout}>Cerrar sesión</li>
+                        {/* Otros elementos del menú desplegable */}
+                    </ul>
+                </div>
+            )}
         </ul>
     </div>
   );
