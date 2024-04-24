@@ -2,17 +2,17 @@
 .home-container{
     display: flex;
     justify-content: space-between;
-    background-color: white;
+    background-color: #fdfdfd;
     min-height: 100vh;
 }
 
 .left-h {
-    flex: 0 1 250px; /* Flex basis para el sidebar */
+    flex: 0 1 250px;
     transition: flex-basis 0.3s ease;
 }
 
 .sidebar.contracted + .right-h {
-    flex-grow: 1; /* Ocupa el espacio disponible cuando el sidebar está contraído */
+    flex-grow: 1;
 }
 
 .right-h {
@@ -50,19 +50,15 @@
     flex-shrink: 0;
 }
 
-.right-bu svg {
-    font-size: 5rem;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
 /* Estilos para el botón "Gestión y Administración" */
 .gestion {
     background: linear-gradient(to right, rgba(240, 240, 240, 0.8), rgba(204, 204, 204, 0.8));
     font-weight: bold;
+    font-size: 18px;
     color: #333333;
     height: 77%;
     position: relative;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 }
 .gestion .button-text {
     position: absolute;
@@ -74,12 +70,12 @@
 }
 .gestion .right-bu {
     position: absolute;
-    top: 75%;
-    right: 3%; 
+    top: 70%;
+    right: 8px; 
     transform: translateY(-50%);
 }
 .gestion .right-bu svg {
-    font-size: 8.8rem;
+    font-size: 12rem;
     color: #a7a7a7;
 }
 
@@ -204,6 +200,8 @@
     text-align: left;
     align-self: flex-end;
     position: relative;
+    overflow: hidden;
+    font-size: 18px;
     width: 100%;
     padding: 10px;
     border: none;
@@ -222,10 +220,10 @@
     background-color: white;
     color: #2a2a2a;
     font-weight: bold;
-    font-size: 11px;
-    width: 80px;
+    font-size: 13px;
+    width: 100px;
     padding: 5px 10px;
-    border-radius: 15px;
+    border-radius: 14px;
     margin-top: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -236,12 +234,41 @@
 .sub-button:hover {
     filter: brightness(95%);
 }
+/* Íconos de botones */
 .custom-button .right-bu {
-    font-size: 4.8em;
+    align-items: center;
+    font-size: 5em;
 }
 
 .left-in .custom-button .right-bu {
-    font-size: 4.8em;
+    align-items: center;
+    font-size: 5em;
+}
+.right-bu svg {
+    top: 50%;
+    right: 50%;
 }
 
+.gestion .right-bu svg {
+    opacity: 0.3;
+}
 
+.facturacion .right-bu svg {
+    opacity: 0.7;
+}
+
+.nueva-venta .right-bu svg {
+    opacity: 0.65;
+}
+
+.aprobaciones .right-bu svg {
+    opacity: 0.65;
+}
+
+.mapa .right-bu svg {
+    opacity: 0.65;
+}
+
+.configuracion .right-bu svg {
+    opacity: 0.65;
+}

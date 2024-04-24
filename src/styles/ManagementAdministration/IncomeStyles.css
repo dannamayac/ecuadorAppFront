@@ -75,7 +75,7 @@
     border-radius: 10px;
     cursor: pointer;
     font-weight: 500;
-    background: linear-gradient(to right, rgba(27, 47, 142), rgba(10, 46, 227, 0.8));
+    background: linear-gradient(to right, rgb(27, 47, 142), rgb(53, 81, 214));
 }
 
 .history-button:hover {

@@ -64,7 +64,7 @@ const Home = () =>{
                         <button className="custom-button gestion" onClick={handleGestionButtonClick}>
                             <div className="left-bu">
                                 <span className="button-text">Gestión y Administración</span>
-                                <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                                <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                             </div>
                             <div className="right-bu">
                                 <FontAwesomeIcon icon={faUserTie} />
@@ -73,7 +73,7 @@ const Home = () =>{
                         <button className="custom-button facturacion" onClick={handleBillingButtonClick}>
                             <div className="left-bu">
                                 Facturación
-                                <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                                <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                             </div>
                             <div className="right-bu">
                                 <FontAwesomeIcon icon={faFileInvoice} />
@@ -86,7 +86,7 @@ const Home = () =>{
                         <button className="custom-button nueva-venta" onClick={handleLoanButtonClick}>
                             <div className="left-bu">
                                 Nueva Venta (Nuevo préstamo)
-                                <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                                <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                             </div>
                             <div className="right-bu">
                                 <FontAwesomeIcon icon={faFileCirclePlus} />
@@ -95,7 +95,7 @@ const Home = () =>{
                         <button className="custom-button aprobaciones" onClick={handleApprovalsButtonClick}>
                             <div className="left-bu">
                                 Aprobaciones
-                                <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                                <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                             </div>
                             <div className="right-bu">
                                 <FontAwesomeIcon icon={faFileCircleCheck} />
@@ -104,7 +104,7 @@ const Home = () =>{
                         <button className="custom-button mapa" onClick={handleMapButtonClick}>
                         <div className="left-bu">
                             Mapa
-                            <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                            <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                             </div>
                             <div className="right-bu">
                             <FontAwesomeIcon icon={faLocationDot} />
@@ -113,7 +113,7 @@ const Home = () =>{
                         <button className="custom-button configuracion">
                         <div className="left-bu">
                             Configuración
-                            <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
+                            <div className="sub-button">Gestionar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</div>
                             </div>
                             <div className="right-bu">
                             <FontAwesomeIcon icon={faGears} />

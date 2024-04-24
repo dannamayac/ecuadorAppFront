@@ -37,11 +37,7 @@ const SecondHeader = ({ title, backButtonPath, startItem, showSearch, showButton
         // Aquí maneja la lógica para cerrar sesión
         console.log('Cerrar sesión');
       };
-
-    const handleNotifications = () => {
-        // Aquí maneja la lógica para desplegar las notificaciones
-        console.log('Mostrar notificaciones');
-    };
+      
     const handleSearchToggle = () => {
         setSearchActive(!searchActive);
     };
