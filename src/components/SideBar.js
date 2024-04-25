@@ -59,7 +59,7 @@ const SideBar = ({ isMenuVisible, setIsMenuVisible, setParentSidebarExpanded }) 
       )}
       <ul>
         <li>
-          <NavLink to="/" exact className="sidebar-link">
+          <NavLink to="/home" exact className="sidebar-link">
             <span className="square"></span>
             <div className="text-container">Home</div>
             <span className="circle"></span>

@@ -6,6 +6,7 @@ import Sidebar from '../../../components/SideBar'
 import Header from '../../../components/Header'
 import ButtonWithAvatars from '../../../components/ButtonWithAvatars'
 import MetricsButton from '../../../components/MetricsButton'
+import MainLineChart from '../../../components/MainLineChart'
 import { LineChartGreen, LineChartRed, LineChartYellow, LineChartAquamarine } from '../../../components/LineChart'
 import "../../../styles/ManagementAdministration/ManagementAdministrationStyles.css"
 import avatar1 from '../../../assets/avatar1.png';
@@ -112,7 +113,7 @@ const ManagePlatform = () => {
                     <div className="bottom-buttons">
                     <MetricsButton
                         title="Reportes y métricas"
-                        mainChart={LineChartAquamarine}
+                        mainChart={MainLineChart}
                         subCharts={[LineChartGreen, LineChartRed, LineChartYellow, LineChartAquamarine]}
                         subSummaries={subSummaries}
                         onClick={handleReportsAndMetricsClick}

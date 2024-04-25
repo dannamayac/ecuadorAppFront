@@ -21,6 +21,7 @@ const createLineChart = (borderColor) => {
         label: '',
         data: [12, 19, 3, 5, 2, 3],
         fill: false,
+        tension: 0.5,
         borderColor: borderColor,
         pointRadius: 0,
         borderWidth: 2,
