@@ -1,0 +1,86 @@
+/* ButtonWithAvatarsStyles.css */
+.button-with-avatars {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    width: auto;
+    height: 140px;
+
+  }
+  
+  .button-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .titleAvatarButton {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 27px;
+  }
+  
+  .avatars {
+    display: flex;
+    align-items: center;
+
+  }
+  
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: -8px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Aplica un z-index decreciente a cada avatar según su orden */
+.avatar:nth-child(1) { z-index: 5; }
+.avatar:nth-child(2) { z-index: 4; }
+.avatar:nth-child(3) { z-index: 3; }
+.avatar:nth-child(4) { z-index: 2; }
+.avatar:nth-child(5) { z-index: 1; }
+  
+  .more-avatars {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #f4f4fb;
+    border-radius: 50%;
+    font-size: 14px;
+    color: var(--blue);
+    font-weight: bold;
+    margin-left: 8px;
+  }
+  
+  .action-button {
+    align-self: start;
+    justify-content: flex-start;
+    background-color: #f4f4fb;
+    color: var(--blue);
+    text-align: start;
+    font-weight:  bolder;
+    padding-left: 16px;
+    width: 120px;
+    padding: 5px 10px;
+    border-radius: 14px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .action-button:hover {
+    filter: brightness(95%);
+  }
+  

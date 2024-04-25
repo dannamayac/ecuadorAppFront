@@ -1,3 +1,4 @@
+/* ManagementButtonStyles.css */
 .small-box {
     display: flex;
     flex-direction: column;
@@ -6,10 +7,17 @@
     border-radius: 10px;
     background-color: white;
     font-weight: bold;
-    border-color: white;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
     height: 100%;
     margin-left: 2px;
+    cursor: pointer;
+}
+
+/* Estilos adicionales cuando se usa la clase .approval-button */
+.approval-button {
+  width: 1000px; /* Ajusta el ancho mínimo */
+  /* Otros estilos específicos para esta vista */
 }
 
 .button-title {
@@ -64,5 +72,6 @@
     font-size: 14px;
     font-weight:  bolder;
     color: var(--blue);
-    background-color: #f7f7fc;
+    background-color: #f4f4fb;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
   }

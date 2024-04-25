@@ -21,7 +21,7 @@ const createLineChart = (borderColor) => {
         label: '',
         data: [12, 19, 3, 5, 2, 3],
         fill: false,
-        borderColor: borderColor, // Usar el color pasado como argumento
+        borderColor: borderColor,
         pointRadius: 0,
         borderWidth: 2,
       },

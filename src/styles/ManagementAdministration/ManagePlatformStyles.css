@@ -1,7 +1,27 @@
-.button-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 25px;
-    margin-left: 33px;
-    margin-right: 30px;
+.top-pl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start; /* o center si quieres centrarlos */
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.top-pl .button-row {
+  flex: 1 0 calc(20% - 15px); /* ajusta para 4 botones en una fila */
+  max-width: calc(20% - 15px); /* igual al flex-basis */
+  box-sizing: border-box;
+  margin-bottom: 20px; /* espacio entre filas de botones */
+}
+
+@media (max-width: 768px) {
+  .top-pl .button-row {
+      flex-basis: 100%; /* en pantallas pequeñas, cada botón ocupa el 100% del ancho */
+      max-width: 100%; /* ancho máximo para pantallas pequeñas */
+  }
+}
+
+.bottom-pl .bottom-buttons {
+  width: calc(100% - 40px);
+  margin-left: 20px;
 }
