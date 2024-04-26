@@ -52,7 +52,7 @@ const createLineChart = (borderColor) => {
   };
 
   return (
-    <div style={{ height: '50px', width: '200px' }}>
+    <div style={{ height: '50px', width: '160px' }}>
       <Line data={data} options={options} />
     </div>
   );
