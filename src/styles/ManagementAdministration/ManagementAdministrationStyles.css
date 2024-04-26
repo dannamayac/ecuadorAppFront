@@ -13,6 +13,7 @@
     overflow: hidden;
     text-align: left;
     position: relative;
+    margin-left: -8px;
     width: 100%;
     color: white;
     font-size: 30px;
